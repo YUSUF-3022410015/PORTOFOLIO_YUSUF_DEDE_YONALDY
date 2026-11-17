@@ -1,253 +1,3183 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="dark scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portofolio | Yusuf Dede Yonaldy</title>
-    <link rel="stylesheet" href="porto.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
-<body>
- 
-    <header class="navbar">
-        <div class="logo">Portofolio.</div>
-        <nav class="nav-links">
-            <a href="#hero">Home</a>
-            <a href="#about">Tentang</a>
-            <a href="#skills">Keahlian</a>
-            <a href="#experience">Pengalaman</a>
-            <a href="#projects">Proyek</a>
-            <a href="#contact">Kontak</a>
-        </nav>
-    </header>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yusuf Dede Yonaldy | Full-Stack AI Developer</title>
+  <meta name="description" content="Portofolio Yusuf Dede Yonaldy, mahasiswa Sistem Informasi yang membangun aplikasi web full-stack dan sistem AI." />
 
-<section id="hero" class="hero-section">
-    <div class="hero-content hidden">
-        <h3 class="greeting">HI, I'M YUSUF DEDE YONALDY</h3>
-        <h1>WEB DESIGNER<br>& DEVELOPER</h1>
-        <p>Information Systems Student & Web Enthusiast. Menggabungkan logika sistem dengan kreativitas visual untuk membangun solusi digital yang fungsional.</p>
-        
-        <div class="hero-buttons">
-                <a href="#" class="btn btn-primary">DOWNLOAD CV</a>
-                <a href="#contact" class="btn btn-outline">HUBUNGI SAYA</a>
-            </div>
+  <!-- Google Fonts: Plus Jakarta Sans, Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            display: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            obsidian: '#070709',
+            surface: 'rgba(15, 15, 19, 0.72)',
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    :root {
+      --bg-obsidian: #070709;
+      --surface-glass: rgba(15, 15, 19, 0.72);
+      --border-hairline: rgba(255, 255, 255, 0.08);
+      --emerald-glow: rgba(16, 185, 129, 0.22);
+      --cyan-glow: rgba(6, 182, 212, 0.22);
+      --spring-ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--bg-obsidian);
+      color: #f4f4f5;
+      overflow-x: hidden;
+    }
+
+    /* Custom Sleek Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #070709;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.14);
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(16, 185, 129, 0.45);
+    }
+
+    /* Ambient Drifting Aurora Blobs */
+    @keyframes auroraDriftA {
+      0%, 100% {
+        transform: translate3d(-4%, -2%, 0) scale(1);
+      }
+      50% {
+        transform: translate3d(6%, 4%, 0) scale(1.08);
+      }
+    }
+    @keyframes auroraDriftB {
+      0%, 100% {
+        transform: translate3d(4%, 2%, 0) scale(1.04);
+      }
+      50% {
+        transform: translate3d(-5%, -4%, 0) scale(0.96);
+      }
+    }
+    .aurora-blob-a {
+      animation: auroraDriftA 22s ease-in-out infinite;
+      will-change: transform;
+    }
+    .aurora-blob-b {
+      animation: auroraDriftB 26s ease-in-out infinite;
+      will-change: transform;
+    }
+
+    /* Glassmorphic Surface & Linear/Raycast Cursor Spotlight Border */
+    .glass-panel {
+      background: var(--surface-glass);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-hairline);
+    }
+
+    .spotlight-card {
+      position: relative;
+      background: rgba(15, 15, 19, 0.72);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      --mx: -500px;
+      --my: -500px;
+      --spot-opacity: 0;
+      transition: border-color 0.25s ease, box-shadow 0.3s ease;
+    }
+
+    /* Inner Radial Light Glow */
+    .spotlight-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(
+        460px circle at var(--mx) var(--my),
+        rgba(16, 185, 129, 0.11),
+        rgba(6, 182, 212, 0.06) 40%,
+        transparent 75%
+      );
+      opacity: var(--spot-opacity);
+      transition: opacity 0.28s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Crisp Hairline Border Spotlight Glow via Mask Composite */
+    .spotlight-card::after {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      border-radius: inherit;
+      padding: 1px;
+      background: radial-gradient(
+        300px circle at var(--mx) var(--my),
+        rgba(52, 211, 153, 0.75),
+        rgba(34, 211, 238, 0.45) 45%,
+        transparent 75%
+      );
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: var(--spot-opacity);
+      transition: opacity 0.28s ease;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .spotlight-card:hover {
+      --spot-opacity: 1;
+      box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.85), 0 0 30px -15px rgba(16, 185, 129, 0.18);
+    }
+
+    /* Hero Blur-to-Sharp Spring Entrance */
+    @keyframes heroBlurIn {
+      0% {
+        opacity: 0;
+        filter: blur(10px);
+        transform: translate3d(0, 18px, 0) scale(0.985);
+      }
+      100% {
+        opacity: 1;
+        filter: blur(0px);
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+    }
+
+    .hero-enter {
+      opacity: 0;
+      animation: heroBlurIn 0.75s var(--spring-ease) forwards;
+      will-change: transform, opacity, filter;
+    }
+    .hero-delay-1 { animation-delay: 0.06s; }
+    .hero-delay-2 { animation-delay: 0.15s; }
+    .hero-delay-3 { animation-delay: 0.24s; }
+    .hero-delay-4 { animation-delay: 0.33s; }
+    .hero-delay-5 { animation-delay: 0.42s; }
+
+    /* Scroll-Triggered Stagger Reveal */
+    .reveal-stagger {
+      opacity: 0;
+      filter: blur(6px);
+      transform: translate3d(0, 22px, 0);
+      transition:
+        opacity 0.65s var(--spring-ease),
+        transform 0.65s var(--spring-ease),
+        filter 0.65s var(--spring-ease);
+      will-change: transform, opacity, filter;
+    }
+    .reveal-stagger.is-visible {
+      opacity: 1;
+      filter: blur(0px);
+      transform: translate3d(0, 0, 0);
+    }
+
+    /* Dual-Row Infinite Kinetic Marquee */
+    @keyframes marqueeLeft {
+      0% { transform: translate3d(0, 0, 0); }
+      100% { transform: translate3d(-50%, 0, 0); }
+    }
+    @keyframes marqueeRight {
+      0% { transform: translate3d(-50%, 0, 0); }
+      100% { transform: translate3d(0, 0, 0); }
+    }
+
+    .marquee-wrapper {
+      mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    }
+
+    .marquee-track-left {
+      display: flex;
+      width: max-content;
+      animation: marqueeLeft 34s linear infinite;
+      will-change: transform;
+    }
+    .marquee-track-right {
+      display: flex;
+      width: max-content;
+      animation: marqueeRight 38s linear infinite;
+      will-change: transform;
+    }
+    .marquee-wrapper:hover .marquee-track-left,
+    .marquee-wrapper:hover .marquee-track-right {
+      animation-play-state: paused;
+    }
+
+    /* Mini Card Live Preview Animations */
+    @keyframes pulseFlow {
+      0%, 100% { opacity: 0.35; transform: scaleX(0.92); }
+      50% { opacity: 1; transform: scaleX(1); }
+    }
+    @keyframes packetSlide {
+      0% { left: 0%; opacity: 0; }
+      15% { opacity: 1; }
+      85% { opacity: 1; }
+      100% { left: calc(100% - 10px); opacity: 0; }
+    }
+    .animate-packet {
+      animation: packetSlide 2.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+    .animate-packet-delayed {
+      animation: packetSlide 2.2s cubic-bezier(0.4, 0, 0.2, 1) 1.1s infinite;
+    }
+
+    /* Modal Spring Scale Transition */
+    .modal-backdrop {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.24s ease;
+    }
+    .modal-backdrop.is-open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .modal-spring-panel {
+      opacity: 0;
+      transform: translate3d(0, 12px, 0) scale(0.95);
+      transition:
+        transform 0.32s var(--spring-ease),
+        opacity 0.24s ease;
+      will-change: transform, opacity;
+    }
+    .modal-backdrop.is-open .modal-spring-panel {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+
+    /* Toast Slide Animation */
+    @keyframes toastEnter {
+      0% {
+        opacity: 0;
+        transform: translate3d(0, 16px, 0) scale(0.96);
+      }
+      100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+    }
+    .toast-enter {
+      animation: toastEnter 0.28s var(--spring-ease) forwards;
+    }
+
+    /* Reduced Motion Guard */
+    @media (prefers-reduced-motion: reduce) {
+      .hero-enter, .reveal-stagger, .marquee-track-left, .marquee-track-right, .aurora-blob-a, .aurora-blob-b {
+        animation: none !important;
+        transition: none !important;
+        opacity: 1 !important;
+        filter: none !important;
+        transform: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-[#070709] text-zinc-100 font-sans antialiased selection:bg-emerald-500/25 selection:text-emerald-300 relative min-h-screen">
+
+  <!-- =====================================================================
+       HAIRLINE GRADIENT SCROLL-PROGRESS BAR (FIXED TOP z-50)
+       ===================================================================== -->
+  <div
+    id="scroll-progress-bar"
+    aria-hidden="true"
+    style="transform: scaleX(0); transform-origin: left;"
+    class="fixed top-0 left-0 right-0 z-50 h-[2px] bg-gradient-to-r from-emerald-400 via-cyan-400 to-indigo-400 pointer-events-none"
+  ></div>
+
+  <!-- =====================================================================
+       LAYER 0: DRIFTING AMBIENT AURORAS & TOGGLEABLE MICRO DOT-GRID
+       ===================================================================== -->
+  <div aria-hidden="true" class="pointer-events-none fixed inset-0 z-0 overflow-hidden">
+    <!-- Emerald / Cyan Top-Left Aurora -->
+    <div
+      class="aurora-blob-a absolute -top-40 -left-32 h-[540px] w-[540px] rounded-full bg-[radial-gradient(circle,rgba(16,185,129,0.11)_0%,rgba(6,182,212,0.04)_45%,transparent_72%)] blur-3xl"
+    ></div>
+    <!-- Indigo / Cyan Bottom-Right Aurora -->
+    <div
+      class="aurora-blob-b absolute top-[35%] -right-40 h-[620px] w-[620px] rounded-full bg-[radial-gradient(circle,rgba(99,102,241,0.09)_0%,rgba(6,182,212,0.05)_45%,transparent_72%)] blur-3xl"
+    ></div>
+  </div>
+
+  <!-- Toggleable Micro Dot-Grid Layer -->
+  <div
+    id="dot-grid-bg"
+    aria-hidden="true"
+    class="pointer-events-none fixed inset-0 z-0 bg-[radial-gradient(rgba(255,255,255,0.08)_1px,transparent_1px)] [background-size:22px_22px] opacity-90 transition-opacity duration-300"
+  ></div>
+
+  <!-- =====================================================================
+       LAYER 20: PROCEDURAL WIREFRAME SPIDER CURSOR CANVAS
+       ===================================================================== -->
+  <canvas
+    id="spider-canvas"
+    aria-hidden="true"
+    class="spider-canvas fixed inset-0 pointer-events-none z-0 opacity-20 transition-opacity duration-300"
+  ></canvas>
+
+  <!-- =====================================================================
+       1. STICKY GLASSMORPHIC TOP WORKSPACE BAR (z-40)
+       ===================================================================== -->
+  <header class="sticky top-0 z-40 w-full border-b border-white/[0.08] bg-[#070709]/80 backdrop-blur-xl">
+    <div class="mx-auto flex h-15 max-w-6xl items-center justify-between gap-2 sm:gap-4 px-4 sm:px-6 py-2.5">
+
+      <!-- Left: Brand Handle + Status Badge -->
+      <div class="flex items-center gap-3 min-w-0">
+        <a
+          href="#top"
+          class="group flex items-center gap-1.5 font-mono text-xs sm:text-sm font-semibold text-zinc-100 hover:text-emerald-400 transition-colors truncate"
+        >
+          <span class="text-emerald-400">&gt;</span>
+          <span class="scramble-hover" data-scramble="yusuf.workspace">yusuf.workspace</span>
+          <span class="text-zinc-600">//</span>
+          <span class="text-cyan-400">v3.0</span>
+          <span class="inline-block h-3.5 w-1.5 bg-emerald-400 animate-pulse rounded-[1px]"></span>
+        </a>
+
+        <span class="hidden xl:inline-block h-4 w-[1px] bg-white/[0.08]"></span>
+
+        <div class="hidden xl:inline-flex items-center gap-2 rounded-full border border-emerald-500/25 bg-emerald-500/10 px-2.5 py-0.5 text-[11px] font-mono text-emerald-300">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
+          </span>
+          <span>Available for collaboration</span>
+        </div>
+      </div>
+
+      <!-- Center: Sliding Morphing Pill Navigation Bar -->
+      <nav
+        id="top-nav-container"
+        aria-label="Workspace Sections"
+        class="relative hidden lg:flex items-center rounded-full border border-white/[0.08] bg-white/[0.03] p-1"
+      >
+        <!-- Sliding Pill Background -->
+        <div
+          id="nav-pill-indicator"
+          aria-hidden="true"
+          class="absolute top-1 bottom-1 left-1 rounded-full bg-white/[0.09] border border-white/[0.1] shadow-sm transition-all duration-300 ease-out pointer-events-none"
+        ></div>
+
+        <a
+          href="#top"
+          data-nav-target="top"
+          class="nav-pill-link relative z-10 rounded-full px-3.5 py-1 text-xs font-medium text-zinc-100 transition-colors"
+        >
+          Workbench
+        </a>
+        <a
+          href="#projects"
+          data-nav-target="projects"
+          class="nav-pill-link relative z-10 rounded-full px-3.5 py-1 text-xs font-medium text-zinc-400 hover:text-zinc-100 transition-colors"
+        >
+          Systems
+        </a>
+        <a
+          href="#stack"
+          data-nav-target="stack"
+          class="nav-pill-link relative z-10 rounded-full px-3.5 py-1 text-xs font-medium text-zinc-400 hover:text-zinc-100 transition-colors"
+        >
+          Ecosystem
+        </a>
+        <a
+          href="#contact"
+          data-nav-target="contact"
+          class="nav-pill-link relative z-10 rounded-full px-3.5 py-1 text-xs font-medium text-zinc-400 hover:text-zinc-100 transition-colors"
+        >
+          Connect
+        </a>
+      </nav>
+
+      <!-- Right: Spider FX Toggle, Dot Grid Toggle & Magnetic Ctrl+K Trigger -->
+      <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
+
+        <!-- Spider FX Toggle Pill -->
+        <button
+          id="toggle-spider-header-btn"
+          type="button"
+          aria-pressed="true"
+          title="Toggle Procedural Spider Cursor Canvas"
+          class="inline-flex items-center gap-1.5 rounded-lg border border-white/[0.08] bg-white/[0.03] px-2.5 py-1.5 font-mono text-[11px] text-zinc-300 hover:border-emerald-500/40 hover:bg-white/[0.06] hover:text-white transition-all cursor-pointer"
+        >
+          <span id="spider-indicator-dot" class="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]"></span>
+          <span class="hidden sm:inline">Spider FX:</span>
+          <span class="inline sm:hidden">Spider:</span>
+          <span id="spider-header-status" class="font-semibold text-emerald-400">ON</span>
+        </button>
+
+        <!-- Dot Grid Toggle Pill -->
+        <button
+          id="toggle-grid-header-btn"
+          type="button"
+          aria-pressed="true"
+          title="Toggle Micro Dot-Grid Background"
+          class="hidden sm:inline-flex items-center gap-1.5 rounded-lg border border-white/[0.08] bg-white/[0.03] px-2.5 py-1.5 font-mono text-[11px] text-zinc-300 hover:border-cyan-500/40 hover:bg-white/[0.06] hover:text-white transition-all cursor-pointer"
+        >
+          <span id="grid-indicator-dot" class="h-1.5 w-1.5 rounded-full bg-cyan-400 shadow-[0_0_8px_#22d3ee]"></span>
+          <span>Dot Grid:</span>
+          <span id="grid-header-status" class="font-semibold text-cyan-400">ON</span>
+        </button>
+
+        <!-- Magnetic Command Palette Button -->
+        <button
+          id="open-cmd-btn"
+          type="button"
+          aria-label="Open Command Palette"
+          class="magnetic-btn group flex items-center gap-2 rounded-lg border border-white/[0.12] bg-white/[0.05] px-2.5 sm:px-3 py-1.5 text-xs text-zinc-300 hover:border-emerald-400/50 hover:bg-white/[0.09] hover:text-white transition-colors cursor-pointer"
+        >
+          <svg class="h-3.5 w-3.5 text-zinc-400 group-hover:text-emerald-400 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m1.85-5.15a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+          <span class="hidden md:inline font-medium">Command</span>
+          <kbd class="inline-flex items-center rounded border border-white/[0.12] bg-[#070709]/90 px-1.5 py-0.5 font-mono text-[10px] font-semibold text-emerald-300">
+            Ctrl K
+          </kbd>
+        </button>
+      </div>
     </div>
 
-    <div class="hero-image hidden"></div> 
-</section>
+    <!-- Compact Sub-bar for Mobile/Tablet -->
+    <div class="flex lg:hidden items-center justify-between border-t border-white/[0.06] bg-[#070709]/90 px-4 py-1.5 text-[11px]">
+      <div class="inline-flex items-center gap-1.5 text-emerald-300 font-mono">
+        <span class="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span>Available for collaboration</span>
+      </div>
+      <div class="flex items-center gap-3 font-mono text-zinc-400">
+        <button id="toggle-grid-mobile-btn" type="button" class="sm:hidden hover:text-zinc-200 cursor-pointer">
+          Grid: <span id="grid-mobile-status" class="text-cyan-400">ON</span>
+        </button>
+        <a href="#projects" class="hover:text-zinc-100">Systems</a>
+        <a href="#stack" class="hover:text-zinc-100">Stack</a>
+        <a href="#contact" class="hover:text-zinc-100">Connect</a>
+      </div>
+    </div>
+  </header>
 
-        <div class="hero-image hidden"></div> 
-    </section>
+  <!-- =====================================================================
+       MAIN WORKSPACE CONTENT (z-10)
+       ===================================================================== -->
+  <main id="top" class="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 pt-10 sm:pt-14 pb-24 space-y-28">
 
-    <section id="about" class="section">
-        <h2 class="section-title hidden">Tentang Saya</h2>
-        <div class="about-content hidden">
-            <p>Perjalanan saya di dunia teknologi cukup unik. Berawal dari latar belakang teknis di <strong>Teknik Kendaraan Ringan Otomotif (TKRO) di SMK PGRI 1 GRESIK</strong>, saya belajar tentang problem dalam mesin kendaraan, solusi pemecahan masalah mesin kendaraan, dan kerja keras. Kini, saya bertransformasi dan mendalami logika komputasi sebagai mahasiswa <strong>Sistem Informasi di Universitas Internasional Semen Indonesia (UISI)</strong>.</p>
-            <p>Transisi ini membuktikan adaptabilitas saya yang tinggi. Saya terbiasa membongkar masalah kompleks, baik itu pada mesin kendaraan maupun pada baris kode dan database, lalu merakitnya kembali menjadi sistem yang efisien dan berjalan mulus.</p>
-            
-            <div class="about-stats">
-                <div class="stat-item">
-                    <h3>3+</h3><p>Proyek Selesai</p>
-                </div>
-                <div class="stat-item">
-                    <h3>5+</h3><p>Sertifikat IT</p>
-                </div>
-                <div class="stat-item">
-                    <h3>100%</h3><p>Dedikasi</p>
-                </div>
-            </div>
+    <!-- ===================================================================
+         2. HERO SECTION + ALIVE TABBED WORKBENCH WIDGET
+         =================================================================== -->
+    <section aria-labelledby="hero-heading" class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+
+      <!-- Left Column: Staggered Blur-to-Sharp Entrance + TextScramble -->
+      <div class="lg:col-span-6 space-y-6">
+
+        <!-- Identity Context Pill -->
+        <div class="hero-enter hero-delay-1 inline-flex flex-wrap items-center gap-2 rounded-full border border-white/[0.1] bg-white/[0.03] px-3.5 py-1.5 font-mono text-xs text-zinc-300 backdrop-blur-md">
+          <span class="h-2 w-2 rounded-full bg-emerald-400"></span>
+          <span id="hero-scramble-badge" class="text-emerald-300 font-medium">INFORMATION_SYSTEMS // SEM_05</span>
         </div>
-    </section>
 
-    <section id="skills" class="section bg-light">
-        <h2 class="section-title hidden">Keahlian</h2>
-        <div class="skills-container">
-            <div class="skill-category hidden">
-                <h3>Core Logic & Web</h3>
-                <div class="skill">
-                    <div class="skill-info"><label>HTML</label><span>60%</span></div>
-                    <progress max="100" value="60"></progress>
-                </div>
-                <div class="skill">
-                    <div class="skill-info"><label>CSS</label><span>50%</span></div>
-                    <progress max="100" value="50"></progress>
-                </div>
-                <div class="skill">
-                    <div class="skill-info"><label>JavaScript</label><span>50%</span></div>
-                    <progress max="100" value="50"></progress>
-                </div>
-                <div class="skill">
-                    <div class="skill-info"><label>Python</label><span>85%</span></div>
-                    <progress max="100" value="85"></progress>
-                </div>
-                <div class="skill">
-                    <div class="skill-info"><label>SQL</label><span>50%</span></div>
-                    <progress max="100" value="50"></progress>
-                </div>
-                <h3>Soft Skills</h3>
-                <div class="skill">
-                    <div class="skill-info"><label>Problem Solving</label><span>90%</span></div>
-                    <progress max="100" value="90"></progress>
-                </div>
-                <div class="skill">
-                    <div class="skill-info"><label>Adaptability</label><span>90%</span></div>
-                    <progress max="100" value="90"></progress>
-                </div>
-                <div class="skill">
-                    <div class="skill-info"><label>Teamwork</label><span>90%</span></div>
-                    <progress max="100" value="90"></progress>
-                </div>
-            </div>
-            <div class="skill-category hidden">
-                <h3>Tools & Design</h3>
-                <div class="skill">
-                    <div class="skill-info"><label>Canva</label><span>80%</span></div>
-                    <progress max="100" value="80"></progress>
-                </div>
-                <div class="skill">
-                    <div class="skill-info"><label>CapCut</label><span>80%</span></div>
-                    <progress max="100" value="80"></progress>
-                </div>
-                <div class="skill">
-                    <div class="skill-info"><label>Figma</label><span>60%</span></div>
-                    <progress max="100" value="60"></progress>
-                </div>
-            </div>
+        <!-- Main Heading with Kinetic Scramble -->
+        <div class="hero-enter hero-delay-2 space-y-3">
+          <h1 id="hero-heading" class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight text-zinc-50 leading-[1.1]">
+            <span id="hero-scramble-name" class="block">Yusuf Dede Yonaldy</span>
+            <span class="block mt-2.5 bg-gradient-to-r from-emerald-300 via-cyan-200 to-zinc-400 bg-clip-text text-transparent text-xl sm:text-2xl font-bold leading-snug">
+              Architecting resilient full-stack systems &amp; multi-LLM AI infrastructure.
+            </span>
+          </h1>
         </div>
-    </section>
 
-    <section id="experience" class="section">
-        <h2 class="section-title hidden">Pendidikan & Pengalaman</h2>
-        <div class="timeline">
-            <div class="timeline-item hidden">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content">
-                    <h3>Maju Bareng AI & JatimDevDay 2026</h3>
-                    <span class="date">2026</span>
-                    <p>Aktif mengikuti workshop, seminar, dan class online pengembangan profesional untuk terus memperbarui pengetahuan di bidang kecerdasan buatan dan pengembangan perangkat lunak.</p>
-                </div>
-            </div>
-            <div class="timeline-item hidden">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content">
-                    <h3>Universitas Internasional Semen Indonesia (UISI)</h3>
-                    <span class="date">Sekarang</span>
-                    <p>Mahasiswa S1 Sistem Informasi. Fokus pada pengembangan web, pemodelan sistem, dan analitik data.</p>
-                </div>
-            </div>
-            <div class="timeline-item hidden">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content">
-                    <h3>SMK PGRI 1 GRESIK</h3>
-                    <span class="date">Lulus</span>
-                    <p>Teknik Kendaraan Ringan Otomotif (TKRO). Membangun fondasi kuat dalam pemecahan masalah teknis dan mekanikal.</p>
-                </div>
-            </div>
+        <!-- Bio Summary -->
+        <p class="hero-enter hero-delay-3 text-sm sm:text-base text-zinc-400 leading-relaxed max-w-xl">
+          Semester 5 <span class="text-zinc-200 font-medium">Information Systems</span> builder combining <span class="text-zinc-200 font-medium">System Dynamics</span> thinking with full-stack engineering—crafting fault-tolerant API gateways, multimodal study engines, and real-time operational platforms.
+        </p>
+
+        <!-- Magnetic CTA Buttons -->
+        <div class="hero-enter hero-delay-4 flex flex-wrap items-center gap-3 pt-1">
+          <a
+            href="#projects"
+            class="magnetic-btn group inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-emerald-400 to-cyan-400 px-5 py-2.5 text-sm font-semibold text-zinc-950 shadow-[0_0_25px_-5px_rgba(16,185,129,0.45)] hover:shadow-[0_0_35px_-3px_rgba(34,211,238,0.6)] transition-shadow"
+          >
+            <span>Explore Systems</span>
+            <svg class="h-4 w-4 transition-transform duration-200 group-hover:translate-y-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </a>
+
+          <button
+            id="copy-email-hero-btn"
+            type="button"
+            class="magnetic-btn inline-flex items-center justify-center gap-2 rounded-xl border border-white/[0.1] bg-white/[0.04] px-4 py-2.5 text-sm font-medium text-zinc-200 hover:border-emerald-400/40 hover:bg-white/[0.08] transition-colors cursor-pointer"
+          >
+            <svg class="h-4 w-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+            </svg>
+            <span>Copy Email</span>
+          </button>
+
+          <a
+            href="https://github.com/MasYusuf06"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub Profile"
+            class="magnetic-btn inline-flex items-center justify-center gap-2 rounded-xl border border-white/[0.1] bg-white/[0.03] px-3.5 py-2.5 text-sm font-medium text-zinc-300 hover:border-white/[0.22] hover:text-white transition-colors"
+          >
+            <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+            </svg>
+            <span>GitHub</span>
+          </a>
         </div>
-    </section>
 
-    <section id="projects" class="section bg-light">
-        <h2 class="section-title hidden">Portofolio</h2>
-        <div class="projects-grid">
-            <div class="project-card hidden">
-                <div class="project-image">
-                    <img src="assets\photo-1555066931-4365d14bab8c.avif" alt="Task Manager">
-                    <div class="project-overlay"><a href="#" class="view-btn"><i class="fas fa-link"></i> Lihat Proyek</a></div>
-                </div>
-                <div class="project-info">
-                    <h3>Aplikasi Task Manager</h3>
-                    <p>Aplikasi manajemen tugas berbasis web menggunakan DOM manipulation dan Local Storage dengan JS murni.</p>
-                    <span class="tag">JavaScript</span> <span class="tag">DOM</span>
-                </div>
-            </div>
-            
-            <div class="project-card hidden">
-                <div class="project-image">
-                    <img src="assets\photo-1551288049-bebda4e38f71.avif" alt="Analytics">
-                    <div class="project-overlay"><a href="#" class="view-btn"><i class="fas fa-link"></i> Lihat Proyek</a></div>
-                </div>
-                <div class="project-info">
-                    <h3>Student Analytics v2</h3>
-                    <p>Dashboard interaktif untuk memvisualisasikan performa siswa dan pengolahan data real-time.</p>
-                    <span class="tag">Python</span> <span class="tag">Streamlit</span>
-                </div>
-            </div>
-
-            <div class="project-card hidden">
-                <div class="project-image">
-                    <img src="assets\photo-1544716278-ca5e3f4abd8c.avif" alt="E-book">
-                    <div class="project-overlay"><a href="#" class="view-btn"><i class="fas fa-link"></i> Lihat Proyek</a></div>
-                </div>
-                <div class="project-info">
-                    <h3>E-book Puisi Islam</h3>
-                    <p>Buku digital 80+ halaman menyoroti tipografi dan layouting dokumen estetis.</p>
-                    <span class="tag">Canva</span> <span class="tag">Design</span>
-                </div>
-            </div>
+        <!-- Tactile Hint Line -->
+        <div class="hero-enter hero-delay-5 flex flex-wrap items-center gap-2 font-mono text-xs text-zinc-500">
+          <span class="text-emerald-400">~</span>
+          <span>Guide the wireframe spiders with your cursor, or hit</span>
+          <kbd class="rounded border border-white/[0.12] bg-white/[0.04] px-1.5 py-0.5 text-[11px] text-zinc-300">Ctrl+K</kbd>
         </div>
-    </section>
+      </div>
 
-    <section id="contact" class="section">
-        <h2 class="section-title hidden">Hubungi Saya</h2>
-        <div class="contact-wrapper">
-            <div class="contact-text hidden">
-                <p>Mencari peluang untuk berkembang dan berkontribusi secara profesional. Saya sangat tertarik untuk berkarir dan membawa dampak positif di area industri Gresik, seperti <strong>Kawasan Industri Gresik (KIG)</strong>, <strong>Java Integrated Industrial and Port Estate (JIIPE)</strong> dan <strong>Petrokimia Gresik</strong>.</p>
-                <p>Mari terhubung dan diskusikan peluang kolaborasi!</p>
+      <!-- Right Column: Interactive Tabbed Workbench Widget -->
+      <div id="workbench-widget" class="hero-enter hero-delay-3 lg:col-span-6 min-w-0">
+        <div class="spotlight-card rounded-2xl shadow-2xl overflow-hidden">
+
+          <!-- Workbench Window Chrome + Sliding Pill Tabs -->
+          <div class="relative z-10 flex flex-wrap items-center justify-between gap-2 border-b border-white/[0.08] bg-white/[0.02] px-4 py-3">
+            <!-- Window Dots -->
+            <div class="flex items-center gap-1.5">
+              <span class="h-2.5 w-2.5 rounded-full bg-rose-500/70"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-amber-400/70"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-emerald-400/80"></span>
             </div>
-            <form id="contactForm" class="contact-form hidden">
-                <div class="form-group">
-                    <label for="name">Nama Lengkap</label>
-                    <input type="text" id="name" placeholder="Masukkan nama Anda">
-                    <span class="error-msg" id="nameError">Nama wajib diisi.</span>
-                </div>
-                <div class="form-group">
-                    <label for="email">Alamat Email</label>
-                    <input type="email" id="email" placeholder="contoh@email.com">
-                    <span class="error-msg" id="emailError">Format email tidak valid.</span>
-                </div>
-                <div class="form-group">
-                    <label for="message">Pesan</label>
-                    <textarea id="message" rows="5" placeholder="Tulis pesan Anda di sini..."></textarea>
-                    <span class="error-msg" id="messageError">Pesan tidak boleh kosong.</span>
-                </div>
-                <button type="submit" class="btn btn-primary">Kirim Pesan</button>
+
+            <!-- Sliding Pill Tab Switcher -->
+            <div
+              id="wb-tab-bar"
+              role="tablist"
+              aria-label="Developer Workbench Tabs"
+              class="relative flex items-center rounded-lg border border-white/[0.08] bg-[#070709]/80 p-0.5 font-mono text-xs"
+            >
+              <!-- Sliding Pill Indicator -->
+              <div
+                id="wb-tab-pill"
+                aria-hidden="true"
+                class="absolute top-0.5 bottom-0.5 left-0.5 rounded-md bg-white/[0.1] border border-white/[0.1] transition-all duration-300 ease-out pointer-events-none"
+              ></div>
+
+              <button
+                type="button"
+                role="tab"
+                aria-selected="true"
+                data-wb-tab="terminal"
+                class="wb-tab-btn relative z-10 rounded-md px-2.5 py-1 text-emerald-300 font-medium transition-colors cursor-pointer"
+              >
+                terminal.sh
+              </button>
+              <button
+                type="button"
+                role="tab"
+                aria-selected="false"
+                data-wb-tab="profile"
+                class="wb-tab-btn relative z-10 rounded-md px-2.5 py-1 text-zinc-400 hover:text-zinc-200 transition-colors cursor-pointer"
+              >
+                profile.json
+              </button>
+              <button
+                type="button"
+                role="tab"
+                aria-selected="false"
+                data-wb-tab="telemetry"
+                class="wb-tab-btn relative z-10 rounded-md px-2.5 py-1 text-zinc-400 hover:text-zinc-200 transition-colors cursor-pointer"
+              >
+                telemetry
+              </button>
+            </div>
+          </div>
+
+          <!-- TAB 1: INTERACTIVE TERMINAL (terminal.sh) -->
+          <div id="wb-panel-terminal" role="tabpanel" class="relative z-10 p-4 sm:p-5 space-y-3 font-mono text-xs">
+            <!-- Quick Preset Command Chips -->
+            <div class="flex flex-wrap items-center gap-1.5 pb-1">
+              <span class="text-[11px] text-zinc-500 mr-1">presets:</span>
+              <button type="button" data-term-cmd="whoami" class="term-preset-btn rounded-md border border-white/[0.08] bg-white/[0.03] px-2 py-0.5 text-[11px] text-emerald-300 hover:border-emerald-400/40 hover:bg-emerald-500/10 transition-colors cursor-pointer">
+                whoami
+              </button>
+              <button type="button" data-term-cmd="stack --core" class="term-preset-btn rounded-md border border-white/[0.08] bg-white/[0.03] px-2 py-0.5 text-[11px] text-cyan-300 hover:border-cyan-400/40 hover:bg-cyan-500/10 transition-colors cursor-pointer">
+                stack --core
+              </button>
+              <button type="button" data-term-cmd="projects --list" class="term-preset-btn rounded-md border border-white/[0.08] bg-white/[0.03] px-2 py-0.5 text-[11px] text-zinc-300 hover:border-white/25 hover:bg-white/[0.07] transition-colors cursor-pointer">
+                projects --list
+              </button>
+              <button type="button" data-term-cmd="ping --status" class="term-preset-btn rounded-md border border-white/[0.08] bg-white/[0.03] px-2 py-0.5 text-[11px] text-zinc-300 hover:border-white/25 hover:bg-white/[0.07] transition-colors cursor-pointer">
+                ping --status
+              </button>
+            </div>
+
+            <!-- Scrollable Terminal Output Feed -->
+            <div
+              id="terminal-output"
+              class="h-[225px] overflow-y-auto rounded-xl border border-white/[0.06] bg-[#050507]/90 p-3.5 space-y-2.5 leading-relaxed text-zinc-300"
+            >
+              <!-- Populated on load with initial whoami boot output -->
+            </div>
+
+            <!-- Interactive Command Prompt Input -->
+            <form id="terminal-form" class="flex items-center gap-2 rounded-xl border border-white/[0.08] bg-[#050507] px-3 py-2 focus-within:border-emerald-400/50 transition-colors">
+              <span class="text-emerald-400 font-semibold select-none">yusuf@dev:~$</span>
+              <input
+                id="terminal-input"
+                type="text"
+                autocomplete="off"
+                spellcheck="false"
+                placeholder="Type command (whoami, stack --core, projects --list, clear)..."
+                aria-label="Interactive terminal input"
+                class="w-full bg-transparent text-xs text-zinc-100 placeholder-zinc-600 focus:outline-none"
+              />
+              <button
+                type="submit"
+                class="rounded bg-white/[0.06] px-2 py-0.5 text-[10px] text-zinc-400 hover:text-emerald-300 transition-colors cursor-pointer"
+              >
+                RUN
+              </button>
             </form>
+          </div>
+
+          <!-- TAB 2: SYNTAX-HIGHLIGHTED profile.json -->
+          <div id="wb-panel-profile" role="tabpanel" class="hidden relative z-10 p-4 sm:p-5 space-y-3 font-mono text-xs">
+            <div class="flex items-center justify-between">
+              <div class="inline-flex items-center gap-2 text-[11px] text-emerald-300">
+                <span class="h-2 w-2 rounded-full bg-emerald-400 animate-ping"></span>
+                <span>status: "Available for collaboration"</span>
+              </div>
+              <button
+                id="copy-json-btn"
+                type="button"
+                class="inline-flex items-center gap-1.5 rounded-lg border border-white/[0.1] bg-white/[0.04] px-2.5 py-1 text-[11px] text-zinc-200 hover:border-emerald-400/50 hover:text-emerald-300 transition-colors cursor-pointer"
+              >
+                <svg class="h-3.5 w-3.5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+                <span>Copy JSON</span>
+              </button>
+            </div>
+
+            <div class="h-[268px] overflow-auto rounded-xl border border-white/[0.06] bg-[#050507]/90 p-3.5 leading-relaxed">
+              <pre id="profile-json-code" class="text-zinc-300"><code><span class="text-zinc-500">{</span>
+  <span class="text-cyan-300">"name"</span><span class="text-zinc-500">:</span> <span class="text-emerald-300">"Yusuf Dede Yonaldy"</span><span class="text-zinc-500">,</span>
+  <span class="text-cyan-300">"handle"</span><span class="text-zinc-500">:</span> <span class="text-emerald-300">"@MasYusuf06"</span><span class="text-zinc-500">,</span>
+  <span class="text-cyan-300">"education"</span><span class="text-zinc-500">: {</span>
+    <span class="text-cyan-300">"major"</span><span class="text-zinc-500">:</span> <span class="text-emerald-300">"Information Systems"</span><span class="text-zinc-500">,</span>
+    <span class="text-cyan-300">"semester"</span><span class="text-zinc-500">:</span> <span class="text-amber-300">5</span><span class="text-zinc-500">,</span>
+    <span class="text-cyan-300">"focus"</span><span class="text-zinc-500">:</span> <span class="text-emerald-300">"Full-Stack Web &amp; AI Systems"</span>
+  <span class="text-zinc-500">},</span>
+  <span class="text-cyan-300">"coreStack"</span><span class="text-zinc-500">: [</span>
+    <span class="text-emerald-300">"Next.js"</span><span class="text-zinc-500">,</span> <span class="text-emerald-300">"TypeScript"</span><span class="text-zinc-500">,</span> <span class="text-emerald-300">"Supabase"</span><span class="text-zinc-500">,</span>
+    <span class="text-emerald-300">"CatatKu"</span><span class="text-zinc-500">,</span> <span class="text-emerald-300">"Hermes CLI"</span><span class="text-zinc-500">,</span> <span class="text-emerald-300">"System Dynamics"</span>
+  <span class="text-zinc-500">],</span>
+  <span class="text-cyan-300">"availability"</span><span class="text-zinc-500">:</span> <span class="text-emerald-300">"Available for collaboration"</span><span class="text-zinc-500">,</span>
+  <span class="text-cyan-300">"timezone"</span><span class="text-zinc-500">:</span> <span class="text-emerald-300">"UTC+7 (WIB)"</span>
+<span class="text-zinc-500">}</span></code></pre>
+            </div>
+          </div>
+
+          <!-- TAB 3: LIVE TELEMETRY & SPARKLINE -->
+          <div id="wb-panel-telemetry" role="tabpanel" class="hidden relative z-10 p-4 sm:p-5 space-y-3.5 font-mono text-xs">
+            <!-- Top Metric Tiles -->
+            <div class="grid grid-cols-2 gap-2.5">
+              <div class="rounded-xl border border-white/[0.06] bg-[#050507]/90 p-3">
+                <div class="text-[10px] uppercase tracking-wider text-zinc-500">Local Time (UTC+7 / WIB)</div>
+                <div id="wib-live-clock" class="mt-1 text-base sm:text-lg font-bold text-cyan-300 tabular-nums">
+                  18:00:00 WIB
+                </div>
+              </div>
+              <div class="rounded-xl border border-white/[0.06] bg-[#050507]/90 p-3">
+                <div class="text-[10px] uppercase tracking-wider text-zinc-500">CatatKu Gateway Latency</div>
+                <div class="mt-1 flex items-baseline gap-2">
+                  <span id="telemetry-latency-val" class="text-base sm:text-lg font-bold text-emerald-300 tabular-nums">14.2 ms</span>
+                  <span class="text-[10px] text-emerald-400">OPTIMAL</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Animated SVG Latency / Throughput Sparkline -->
+            <div class="rounded-xl border border-white/[0.06] bg-[#050507]/90 p-3 space-y-2">
+              <div class="flex items-center justify-between text-[11px]">
+                <span class="text-zinc-400">Inference &amp; Edge Throughput Sparkline</span>
+                <span id="telemetry-rps-val" class="text-cyan-300 tabular-nums">128 req/m</span>
+              </div>
+              <svg id="telemetry-sparkline-svg" viewBox="0 0 360 74" class="w-full h-16 overflow-visible">
+                <defs>
+                  <linearGradient id="sparkGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#34d399" stop-opacity="0.35" />
+                    <stop offset="100%" stop-color="#34d399" stop-opacity="0.0" />
+                  </linearGradient>
+                </defs>
+                <!-- Subtle Horizontal Grid Lines -->
+                <line x1="0" y1="18" x2="360" y2="18" stroke="rgba(255,255,255,0.05)" stroke-dasharray="3 3" />
+                <line x1="0" y1="42" x2="360" y2="42" stroke="rgba(255,255,255,0.05)" stroke-dasharray="3 3" />
+                <line x1="0" y1="66" x2="360" y2="66" stroke="rgba(255,255,255,0.05)" />
+                <!-- Area & Line Updated Live via JS -->
+                <path id="sparkline-area" fill="url(#sparkGrad)" d="" />
+                <path id="sparkline-line" fill="none" stroke="#34d399" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="" />
+                <circle id="sparkline-dot" cx="356" cy="36" r="3.5" fill="#22d3ee" />
+              </svg>
+            </div>
+
+            <!-- Active Stack Health Badges -->
+            <div class="grid grid-cols-3 gap-2 text-[11px]">
+              <div class="flex items-center justify-between rounded-lg border border-white/[0.06] bg-white/[0.02] px-2.5 py-1.5">
+                <span class="text-zinc-400">CatatKu</span>
+                <span class="text-emerald-400 font-semibold">● UP</span>
+              </div>
+              <div class="flex items-center justify-between rounded-lg border border-white/[0.06] bg-white/[0.02] px-2.5 py-1.5">
+                <span class="text-zinc-400">Supabase</span>
+                <span class="text-emerald-400 font-semibold">● 18ms</span>
+              </div>
+              <div class="flex items-center justify-between rounded-lg border border-white/[0.06] bg-white/[0.02] px-2.5 py-1.5">
+                <span class="text-zinc-400">Vercel</span>
+                <span class="text-cyan-400 font-semibold">● EDGE</span>
+              </div>
+            </div>
+          </div>
+
         </div>
+      </div>
     </section>
 
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-brand hidden">
-                <h2>Yusuf Dede Yonaldy</h2>
-                <p>Membangun solusi digital yang fungsional dan estetis. Based in Gresik, Indonesia.</p>
-            </div>
-            
-            <div class="footer-links hidden">
-                <h3>Quick Links</h3>
-                <ul>
-                    <li><a href="#hero">Home</a></li>
-                    <li><a href="#about">Tentang Saya</a></li>
-                    <li><a href="#skills">Keahlian</a></li>
-                    <li><a href="#projects">Portofolio</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-social hidden">
-                <h3>Terhubung</h3>
-                <div class="social-icons-footer">
-                    <a href="#" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-                    <a href="#" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#contact" title="Email"><i class="fas fa-envelope"></i></a>
+    <!-- ===================================================================
+         3. DUAL-ROW INFINITE KINETIC TECH STACK MARQUEE
+         =================================================================== -->
+    <section id="stack" aria-labelledby="stack-heading" class="scroll-mt-24 reveal-stagger space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+        <div>
+          <div class="font-mono text-xs text-cyan-400">01 // STACK_AND_INFRASTRUCTURE</div>
+          <h2 id="stack-heading" class="mt-1 font-display text-2xl sm:text-3xl font-bold tracking-tight text-zinc-50">
+            Kinetic Engineering Ecosystem
+          </h2>
+        </div>
+        <p class="font-mono text-xs text-zinc-400">
+          Hover any module to pause stream &amp; inspect architectural role.
+        </p>
+      </div>
+
+      <!-- Dual-Row Marquee Container -->
+      <div class="marquee-wrapper relative space-y-3 py-2 overflow-hidden">
+        <!-- Row 1: Leftward Stream -->
+        <div id="marquee-row-1" class="marquee-track-left gap-3">
+          <!-- Populated & duplicated seamlessly via JS -->
+        </div>
+
+        <!-- Row 2: Rightward Stream -->
+        <div id="marquee-row-2" class="marquee-track-right gap-3">
+          <!-- Populated & duplicated seamlessly via JS -->
+        </div>
+      </div>
+
+      <!-- Live Interactive Stack Tooltip Bar -->
+      <div class="flex items-center justify-between rounded-xl border border-white/[0.07] bg-white/[0.02] px-4 py-2.5 font-mono text-xs">
+        <div class="flex items-center gap-2 min-w-0">
+          <span class="text-emerald-400 shrink-0">inspect://</span>
+          <span id="stack-tooltip-text" class="text-zinc-300 truncate">
+            Hover any technology badge above to view how it powers Yusuf's production systems.
+          </span>
+        </div>
+        <span class="hidden sm:inline text-[11px] text-zinc-500 shrink-0">10 core modules</span>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         4. 4 FEATURED SYSTEMS WITH SLIDING PILL FILTER, 3D TILT & LIVE PREVIEWS
+         =================================================================== -->
+    <section id="projects" aria-labelledby="projects-heading" class="scroll-mt-24 reveal-stagger space-y-7">
+
+      <!-- Section Header + Sliding Morphing Filter Tabs -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-white/[0.08] pb-5">
+        <div>
+          <div class="font-mono text-xs text-emerald-400">02 // FEATURED_SYSTEMS</div>
+          <h2 id="projects-heading" class="mt-1 font-display text-2xl sm:text-3xl font-bold tracking-tight text-zinc-50">
+            Production Architectures &amp; AI Systems
+          </h2>
+        </div>
+
+        <!-- Sliding Morphing Pill Filter Bar -->
+        <div
+          id="project-filter-bar"
+          role="tablist"
+          aria-label="Filter projects by category"
+          class="relative inline-flex items-center self-start md:self-auto rounded-xl border border-white/[0.08] bg-white/[0.03] p-1 font-mono text-xs"
+        >
+          <!-- Animated Sliding Pill -->
+          <div
+            id="filter-pill-indicator"
+            aria-hidden="true"
+            class="absolute top-1 bottom-1 left-1 rounded-lg bg-gradient-to-r from-emerald-500/20 to-cyan-500/20 border border-emerald-400/35 transition-all duration-300 ease-out pointer-events-none"
+          ></div>
+
+          <button
+            type="button"
+            role="tab"
+            aria-selected="true"
+            data-filter="all"
+            class="filter-tab-btn relative z-10 rounded-lg px-3 py-1.5 text-zinc-100 font-medium transition-colors cursor-pointer"
+          >
+            All Systems
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected="false"
+            data-filter="ai-routing"
+            class="filter-tab-btn relative z-10 rounded-lg px-3 py-1.5 text-zinc-400 hover:text-zinc-200 transition-colors cursor-pointer"
+          >
+            AI &amp; Routing
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected="false"
+            data-filter="fullstack-web"
+            class="filter-tab-btn relative z-10 rounded-lg px-3 py-1.5 text-zinc-400 hover:text-zinc-200 transition-colors cursor-pointer"
+          >
+            Full-Stack Web
+          </button>
+        </div>
+      </div>
+
+      <!-- 2x2 Project Cards Grid with Spotlight, Damped 3D Tilt & Live Micro-Animations -->
+      <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <!-- PROJECT 1: StudyMate AI -->
+        <article
+          data-project-id="studymate-ai"
+          data-categories="ai-routing fullstack-web"
+          role="button"
+          tabindex="0"
+          aria-label="Inspect System Architecture for StudyMate AI"
+          class="project-card spotlight-card tilt-card group relative flex flex-col justify-between rounded-2xl p-6 cursor-pointer focus:outline-none focus:ring-2 focus:ring-emerald-400/50"
+        >
+          <div class="relative z-10 space-y-4">
+            <!-- Header -->
+            <div class="flex items-start justify-between gap-3">
+              <div>
+                <div class="flex items-center gap-2 font-mono text-[11px] text-emerald-400">
+                  <span>SYS_01</span>
+                  <span class="text-zinc-600">•</span>
+                  <span>Multimodal EdTech AI</span>
                 </div>
+                <h3 class="mt-1 font-display text-xl font-bold text-zinc-50 group-hover:text-emerald-300 transition-colors">
+                  StudyMate AI
+                </h3>
+                <p class="text-xs font-mono text-zinc-400">Multimodal AI Learning Assistant</p>
+              </div>
+              <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-emerald-400/25 bg-emerald-500/10 text-emerald-300 group-hover:scale-105 transition-transform">
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                </svg>
+              </span>
             </div>
+
+            <!-- Live Animated Mini Multimodal Token-Stream Visual -->
+            <div class="rounded-xl border border-white/[0.07] bg-[#070709]/90 p-3 font-mono text-[11px] space-y-2">
+              <div class="flex items-center justify-between text-[10px] text-zinc-400">
+                <span class="inline-flex items-center gap-1.5 text-emerald-300">
+                  <span class="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+                  MULTIMODAL_INGEST
+                </span>
+                <span class="text-cyan-300">Gemini 2.5 Flash</span>
+              </div>
+              <div class="grid grid-cols-12 items-center gap-2">
+                <div class="col-span-4 rounded border border-white/[0.08] bg-white/[0.03] px-2 py-1 text-[10px] text-zinc-300 truncate">
+                  PDF + Notes
+                </div>
+                <div class="col-span-4 relative h-1.5 rounded-full bg-white/[0.06] overflow-hidden">
+                  <span class="animate-packet absolute top-0 h-1.5 w-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]"></span>
+                </div>
+                <div class="col-span-4 rounded border border-emerald-400/25 bg-emerald-500/10 px-2 py-1 text-[10px] text-emerald-300 truncate">
+                  Quiz &amp; Outline
+                </div>
+              </div>
+              <div class="space-y-1 pt-0.5">
+                <div class="h-1 w-full rounded-full bg-gradient-to-r from-emerald-400/50 via-cyan-400/40 to-transparent animate-pulse"></div>
+                <div class="h-1 w-3/4 rounded-full bg-gradient-to-r from-cyan-400/40 to-transparent animate-pulse"></div>
+              </div>
+            </div>
+
+            <p class="text-sm text-zinc-400 leading-relaxed">
+              Synthesizes lecture PDFs, handwritten diagrams, and study notes into structured conceptual outlines, adaptive active-recall quizzes, and citation-grounded Q&amp;A.
+            </p>
+          </div>
+
+          <!-- Footer Tech Pills + Inspect Trigger -->
+          <div class="relative z-10 mt-6 pt-4 border-t border-white/[0.07] flex flex-wrap items-center justify-between gap-3">
+            <div class="flex flex-wrap gap-1.5 font-mono text-[11px]">
+              <span class="rounded-md border border-white/[0.08] bg-white/[0.03] px-2 py-0.5 text-zinc-300">Next.js</span>
+              <span class="rounded-md border border-white/[0.08] bg-white/[0.03] px-2 py-0.5 text-zinc-300">Gemini API</span>
+              <span class="rounded-md border border-white/[0.08] bg-white/[0.03] px-2 py-0.5 text-zinc-300">Supabase</span>
+              <span class="rounded-md border border-white/[0.08] bg-white/[0.03] px-2 py-0.5 text-zinc-300">Vercel</span>
+            </div>
+            <span class="inline-flex items-center gap-1 font-mono text-xs text-cyan-300 group-hover:translate-x-1 transition-transform">
+              <span>Inspect Flow</span>
+              <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </span>
+          </div>
+        </article>
+
+        <!-- PROJECT 2: CatatKu -->
+        <article
+          data-project-id="9router"
+          data-categories="ai-routing"
+          role="button"
+          tabindex="0"
+          aria-label="Inspect System Architecture for CatatKu"
+          class="project-card spotlight-card tilt-card group relative flex flex-col justify-between rounded-2xl p-6 cursor-pointer focus:outline-none focus:ring-2 focus:ring-cyan-400/50"
+        >
+          <div class="relative z-10 space-y-4">
+            <div class="flex items-start justify-between gap-3">
+              <div>
+                <div class="flex items-center gap-2 font-mono text-[11px] text-cyan-400">
+                  <span>SYS_02</span>
+                  <span class="text-zinc-600">•</span>
+                  <span>Local AI API Gateway</span>
+                </div>
+                <h3 class="mt-1 font-display text-xl font-bold text-zinc-50 group-hover:text-cyan-300 transition-colors">
+                  CatatKu
+                </h3>
+                <p class="text-xs font-mono text-zinc-400">Smart LLM Fallback Router &amp; Custom Combos</p>
+              </div>
+              <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-cyan-400/25 bg-cyan-500/10 text-cyan-300 group-hover:scale-105 transition-transform">
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                </svg>
+              </span>
+            </div>
+
+            <!-- Live Animated Multi-Provider Packet-Routing Visualizer -->
+            <div class="rounded-xl border border-white/[0.07] bg-[#070709]/90 p-3 font-mono text-[11px] space-y-2">
+              <div class="flex items-center justify-between text-[10px]">
+                <span class="text-cyan-300">combo: <span class="text-emerald-300">gacor-dev</span> / <span class="text-indigo-300">free-agent</span></span>
+                <span class="text-emerald-400">0ms failover</span>
+              </div>
+              <div class="grid grid-cols-12 items-center gap-2">
+                <div class="col-span-3 rounded border border-white/[0.08] bg-white/[0.03] px-2 py-1 text-[10px] text-zinc-300 text-center">
+                  :9090
+                </div>
+                <div class="col-span-5 relative h-1.5 rounded-full bg-white/[0.06] overflow-hidden">
+                  <span class="animate-packet absolute top-0 h-1.5 w-2.5 rounded-full bg-cyan-400 shadow-[0_0_8px_#22d3ee]"></span>
+                  <span class="animate-packet-delayed absolute top-0 h-1.5 w-2 rounded-full bg-emerald-400"></span>
+                </div>
+                <div class="col-span-4 flex flex-col gap-1">
+                  <span class="rounded border border-emerald-400/30 bg-emerald-500/10 px-1.5 py-0.5 text-[9px] text-emerald-300 truncate">
+                    ✓ gacor-dev
+                  </span>
+                  <span class="rounded border border-white/[0.07] bg-white/[0.02] px-1.5 py-0.5 text-[9px] text-zinc-400 truncate">
+                    ↻ free-agent
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <p class="text-sm text-zinc-400 leading-relaxed">
+              Local OpenAI-compatible AI API gateway orchestrating custom model combos (<code class="text-cyan-300">gacor-dev</code>, <code class="text-emerald-300">free-agent</code>) with instant HTTP 429 fallback across cloud &amp; local LLMs.
+            </p>
+          </div>
+
+          <div class="relative z-10 mt-6 pt-4 border-t border-white/[0.07] flex flex-wrap items-center justify-between gap-3">
+            <div class="flex flex-wrap gap-1.5 font-mono text-[11px]">
+              <span class="rounded-md border border-white/[0.08] bg-white/[0.03] px-2 py-0.5 text-zinc-300">Node.js</span>
+              <span class="rounded-md border border-white/[0.08] bg-white/[0.03] px-2 py-0.5 text-zinc-300">TypeScript</span>
+              <span class="rounded-md border border-white/[0.08] bg-white/[0.03] px-2 py-0.5 text-zinc-300">SSE Stream</span>
+              <span class="rounded-md border border-white/[0.08] bg-white/[0.03] px-2 py-0.5 text-zinc-300">Hermes CLI</span>
+            </div>
+            <span class="inline-flex items-center gap-1 font-mono text-xs text-cyan-300 group-hover:translate-x-1 transition-transform">
+              <span>Inspect Flow</span>
+              <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </span>
+          </div>
+        </article>
+
+        <!-- PROJECT 3: Dashboard Customer Service dengan AI Chat -->
+        <article
+          data-project-id="ai-cs-dashboard"
+          data-categories="ai-routing fullstack-web"
+          role="button"
+          tabindex="0"
+          aria-label="Inspect System Architecture for Dashboard Customer Service dengan AI Chat"
+          class="project-card spotlight-card tilt-card group relative flex flex-col justify-between rounded-2xl p-6 cursor-pointer focus:outline-none focus:ring-2 focus:ring-emerald-400/50"
+        >
+          <div class="relative z-10 space-y-4">
+            <div class="flex items-start justify-between gap-3">
+              <div>
+                <div class="flex items-center gap-2 font-mono text-[11px] text-emerald-400">
+                  <span>SYS_03</span>
+                  <span class="text-zinc-600">•</span>
+                  <span>Realtime Omnichannel Support</span>
+                </div>
+                <h3 class="mt-1 font-display text-xl font-bold text-zinc-50 group-hover:text-emerald-300 transition-colors">
+                  Dashboard Customer Service dengan AI Chat
+                </h3>
+                <p class="text-xs font-mono text-zinc-400">Real-time Support &amp; AI Auto-Triage</p>
+              </div>
+              <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-emerald-400/25 bg-emerald-500/10 text-emerald-300 group-hover:scale-105 transition-transform">
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                </svg>
+              </span>
+            </div>
+
+            <!-- Live Animated Chat Triage Stream -->
+            <div class="rounded-xl border border-white/[0.07] bg-[#070709]/90 p-3 font-mono text-[11px] space-y-1.5">
+              <div class="flex items-center justify-between text-[10px]">
+                <span class="text-zinc-400">ws://supabase-realtime</span>
+                <span class="rounded bg-emerald-500/15 px-1.5 py-0.5 text-[9px] text-emerald-300">AI TRIAGE: 96%</span>
+              </div>
+              <div class="flex items-center gap-2 text-[10px] text-zinc-300">
+                <span class="text-cyan-400">[User]</span>
+                <span class="truncate">"Cek status invoice #INV-209?"</span>
+              </div>
+              <div class="flex items-center justify-between gap-2 text-[10px] text-emerald-300">
+                <span class="truncate">[AI Agent] Resolved via KB • Handoff Ready</span>
+                <span class="inline-flex gap-0.5 shrink-0">
+                  <span class="h-1 w-1 rounded-full bg-emerald-400 animate-bounce"></span>
+                  <span class="h-1 w-1 rounded-full bg-emerald-400 animate-bounce" style="animation-delay:0.15s"></span>
+                  <span class="h-1 w-1 rounded-full bg-emerald-400 animate-bounce" style="animation-delay:0.3s"></span>
+                </span>
+              </div>
+            </div>
+
+            <p class="text-sm text-zinc-400 leading-relaxed">
+              Real-time support workspace combining an automated AI triage agent with sentiment detection, instant knowledge-base resolution, and one-click human operator handoff.
+            </p>
+          </div>
+
+          <div class="relative z-10 mt-6 pt-4 border-t border-white/[0.07] flex flex-wrap items-center justify-between gap-3">
+            <div class="flex flex-wrap gap-1.5 font-mono text-[11px]">
+              <span class="rounded-md border border-white/[0.08] bg-white/[0.03] px-2 py-0.5 text-zinc-300">Next.js</span>
+              <span class="rounded-md border border-white/[0.08] bg-white/[0.03] px-2 py-0.5 text-zinc-300">Supabase Realtime</span>
+              <span class="rounded-md border border-white/[0.08] bg-white/[0.03] px-2 py-0.5 text-zinc-300">LLM Triage</span>
+            </div>
+            <span class="inline-flex items-center gap-1 font-mono text-xs text-cyan-300 group-hover:translate-x-1 transition-transform">
+              <span>Inspect Flow</span>
+              <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </span>
+          </div>
+        </article>
+
+        <!-- PROJECT 4: Aplikasi CRM -->
+        <article
+          data-project-id="operational-crm"
+          data-categories="fullstack-web"
+          role="button"
+          tabindex="0"
+          aria-label="Inspect System Architecture for Aplikasi CRM"
+          class="project-card spotlight-card tilt-card group relative flex flex-col justify-between rounded-2xl p-6 cursor-pointer focus:outline-none focus:ring-2 focus:ring-cyan-400/50"
+        >
+          <div class="relative z-10 space-y-4">
+            <div class="flex items-start justify-between gap-3">
+              <div>
+                <div class="flex items-center gap-2 font-mono text-[11px] text-cyan-400">
+                  <span>SYS_04</span>
+                  <span class="text-zinc-600">•</span>
+                  <span>Enterprise Information System</span>
+                </div>
+                <h3 class="mt-1 font-display text-xl font-bold text-zinc-50 group-hover:text-cyan-300 transition-colors">
+                  Aplikasi CRM
+                </h3>
+                <p class="text-xs font-mono text-zinc-400">Aplikasi pengelolaan pelanggan dan pipeline</p>
+              </div>
+              <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-cyan-400/25 bg-cyan-500/10 text-cyan-300 group-hover:scale-105 transition-transform">
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
+                </svg>
+              </span>
+            </div>
+
+            <!-- Live Animated Pipeline Stage Sync Bar -->
+            <div class="rounded-xl border border-white/[0.07] bg-[#070709]/90 p-3 font-mono text-[11px] space-y-2">
+              <div class="flex items-center justify-between text-[10px]">
+                <span class="text-cyan-300">POSTGRESQL_RLS // RBAC_ACTIVE</span>
+                <span class="text-emerald-400">AUDIT_SYNCED</span>
+              </div>
+              <div class="grid grid-cols-4 gap-1.5 text-[9px] text-center">
+                <div class="rounded border border-white/[0.08] bg-white/[0.04] py-1 text-zinc-300">Lead (42)</div>
+                <div class="rounded border border-cyan-400/25 bg-cyan-500/10 py-1 text-cyan-300">Qual (27)</div>
+                <div class="rounded border border-indigo-400/25 bg-indigo-500/10 py-1 text-indigo-300">Prop (15)</div>
+                <div class="rounded border border-emerald-400/30 bg-emerald-500/15 py-1 text-emerald-300 font-semibold">Won (11)</div>
+              </div>
+              <div class="relative h-1 w-full rounded-full bg-white/[0.06] overflow-hidden">
+                <div class="h-full w-4/5 rounded-full bg-gradient-to-r from-cyan-400 via-indigo-400 to-emerald-400 animate-pulse"></div>
+              </div>
+            </div>
+
+            <p class="text-sm text-zinc-400 leading-relaxed">
+              Relational customer relationship and operations suite featuring normalized PostgreSQL schemas, strict Role-Based Auth &amp; Row-Level Security, and immutable audit trails.
+            </p>
+          </div>
+
+          <div class="relative z-10 mt-6 pt-4 border-t border-white/[0.07] flex flex-wrap items-center justify-between gap-3">
+            <div class="flex flex-wrap gap-1.5 font-mono text-[11px]">
+              <span class="rounded-md border border-white/[0.08] bg-white/[0.03] px-2 py-0.5 text-zinc-300">Full-Stack Web</span>
+              <span class="rounded-md border border-white/[0.08] bg-white/[0.03] px-2 py-0.5 text-zinc-300">Relational DB</span>
+              <span class="rounded-md border border-white/[0.08] bg-white/[0.03] px-2 py-0.5 text-zinc-300">Role-Based Auth</span>
+            </div>
+            <span class="inline-flex items-center gap-1 font-mono text-xs text-cyan-300 group-hover:translate-x-1 transition-transform">
+              <span>Inspect Flow</span>
+              <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </span>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         5. SYSTEM DYNAMICS & ENGINEERING PRINCIPLES BENTO
+         =================================================================== -->
+    <section aria-labelledby="principles-heading" class="reveal-stagger space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+        <div>
+          <div class="font-mono text-xs text-cyan-400">03 // SYSTEM_DYNAMICS_APPROACH</div>
+          <h2 id="principles-heading" class="mt-1 font-display text-2xl sm:text-3xl font-bold tracking-tight text-zinc-50">
+            How Systems Are Modeled &amp; Shipped
+          </h2>
         </div>
-        
-        <div class="footer-bottom">
-            <p>&copy; 2026 Yusuf Dede Yonaldy. All Rights Reserved.</p>
+        <span class="font-mono text-xs text-zinc-400">Information Systems Rigor × AI Speed</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="spotlight-card rounded-2xl p-5 space-y-2.5">
+          <div class="relative z-10 flex items-center justify-between font-mono text-xs">
+            <span class="text-emerald-400 font-semibold">LOOP_01 // DATA_INTEGRITY</span>
+            <span class="text-zinc-500">ERD + RLS</span>
+          </div>
+          <h3 class="relative z-10 font-display text-base font-bold text-zinc-100">
+            Relational Schemas &amp; Guardrails
+          </h3>
+          <p class="relative z-10 text-xs sm:text-sm text-zinc-400 leading-relaxed">
+            Every application begins with normalized entity-relationship modeling, deterministic state transitions, and database-enforced access control.
+          </p>
         </div>
+
+        <div class="spotlight-card rounded-2xl p-5 space-y-2.5">
+          <div class="relative z-10 flex items-center justify-between font-mono text-xs">
+            <span class="text-cyan-400 font-semibold">LOOP_02 // RESILIENT_AI</span>
+            <span class="text-zinc-500">CatatKu</span>
+          </div>
+          <h3 class="relative z-10 font-display text-base font-bold text-zinc-100">
+            Offline-first Local Data
+          </h3>
+          <p class="relative z-10 text-xs sm:text-sm text-zinc-400 leading-relaxed">
+            Eliminating single-provider bottlenecks by routing inference across priority combos with automatic quota detection and sub-second failover.
+          </p>
+        </div>
+
+        <div class="spotlight-card rounded-2xl p-5 space-y-2.5">
+          <div class="relative z-10 flex items-center justify-between font-mono text-xs">
+            <span class="text-indigo-400 font-semibold">LOOP_03 // KINETIC_UX</span>
+            <span class="text-zinc-500">60fps UI</span>
+          </div>
+          <h3 class="relative z-10 font-display text-base font-bold text-zinc-100">
+            Responsive Web Interfaces
+          </h3>
+          <p class="relative z-10 text-xs sm:text-sm text-zinc-400 leading-relaxed">
+            Designing low-latency interfaces where real-time streams, command palettes, and responsive micro-interactions make complex workflows effortless.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         6. WORKSPACE FOOTER & DIRECT CONTACT
+         =================================================================== -->
+    <footer id="contact" class="scroll-mt-24 reveal-stagger border-t border-white/[0.08] pt-12">
+      <div class="spotlight-card rounded-2xl p-6 sm:p-8">
+        <div class="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div class="space-y-2">
+            <div class="inline-flex items-center gap-2 font-mono text-xs text-emerald-400">
+              <span class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span>READY_FOR_COLLABORATION</span>
+            </div>
+            <h2 class="font-display text-2xl font-bold text-zinc-50">
+              Let's build resilient web &amp; AI systems together.
+            </h2>
+            <p class="text-sm text-zinc-400 max-w-lg">
+              Available for full-stack software engineering roles, AI gateway/agent integrations, and technical product collaborations.
+            </p>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-3">
+            <button
+              id="copy-email-footer-btn"
+              type="button"
+              class="magnetic-btn inline-flex items-center gap-2 rounded-xl border border-emerald-400/35 bg-emerald-500/10 px-4 py-2.5 font-mono text-xs sm:text-sm text-emerald-300 hover:bg-emerald-500/20 transition-colors cursor-pointer"
+            >
+              <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              <span>dedey627@gmail.com</span>
+            </button>
+
+            <a
+              href="https://github.com/MasYusuf06"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="magnetic-btn inline-flex items-center gap-2 rounded-xl border border-white/[0.1] bg-white/[0.04] px-4 py-2.5 font-mono text-xs sm:text-sm text-zinc-200 hover:border-white/25 hover:text-white transition-colors"
+            >
+              <span>github.com/MasYusuf06</span>
+              <svg class="h-3.5 w-3.5 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-8 flex flex-col sm:flex-row items-center justify-between gap-3 font-mono text-[11px] text-zinc-500">
+        <div>&copy; <span id="current-year">2026</span> Yusuf Dede Yonaldy • Information Systems (Sem 5)</div>
+        <div class="flex flex-wrap items-center gap-3 sm:gap-4">
+          <button id="toggle-spider-footer-btn" type="button" class="hover:text-zinc-300 transition-colors cursor-pointer">
+            Spider FX: <span id="spider-footer-status" class="text-emerald-400">ON</span>
+          </button>
+          <span>•</span>
+          <button id="toggle-grid-footer-btn" type="button" class="hover:text-zinc-300 transition-colors cursor-pointer">
+            Dot Grid: <span id="grid-footer-status" class="text-cyan-400">ON</span>
+          </button>
+          <span>•</span>
+          <button id="open-cmd-footer-btn" type="button" class="hover:text-zinc-300 transition-colors cursor-pointer">
+            Command Palette [Ctrl+K]
+          </button>
+        </div>
+      </div>
     </footer>
 
-    <script src="porto.js"></script>
+  </main>
+
+  <!-- =====================================================================
+       ANIMATED SYSTEM ARCHITECTURE MODAL (z-50)
+       ===================================================================== -->
+  <div
+    id="architecture-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="arch-modal-title"
+    class="modal-backdrop fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md"
+  >
+    <div
+      id="architecture-modal-panel"
+      class="modal-spring-panel relative w-full max-w-3xl max-h-[90vh] flex flex-col rounded-2xl border border-white/[0.12] bg-[#0a0a0e]/95 shadow-2xl overflow-hidden"
+    >
+      <!-- Top Spectrum Accent Line -->
+      <div class="h-[2px] w-full bg-gradient-to-r from-emerald-400 via-cyan-400 to-indigo-400"></div>
+
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between border-b border-white/[0.08] bg-white/[0.02] px-5 py-4">
+        <div class="min-w-0 pr-4">
+          <div class="flex items-center gap-2 font-mono text-xs text-cyan-400">
+            <span>SYSTEM_TOPOLOGY</span>
+            <span class="text-zinc-600">//</span>
+            <span id="arch-modal-category" class="text-emerald-400">Architecture</span>
+          </div>
+          <h3 id="arch-modal-title" class="mt-0.5 font-display text-lg sm:text-xl font-bold text-zinc-50 truncate">
+            Project Title
+          </h3>
+        </div>
+        <button
+          id="close-arch-modal-btn"
+          type="button"
+          aria-label="Close System Architecture Modal"
+          class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-white/[0.1] bg-white/[0.04] text-zinc-400 hover:border-white/25 hover:text-zinc-100 transition-colors cursor-pointer"
+        >
+          <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Scrollable Modal Content -->
+      <div class="overflow-y-auto p-5 sm:p-6 space-y-6 text-sm">
+
+        <!-- 01. Animated SVG Data-Flow Topology Diagram -->
+        <section class="space-y-2.5">
+          <div class="flex items-center justify-between font-mono text-xs font-semibold text-cyan-400">
+            <span>01 // LIVE_DATA_FLOW_TOPOLOGY</span>
+            <span class="inline-flex items-center gap-1.5 text-[11px] text-emerald-400">
+              <span class="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+              <span>packets streaming</span>
+            </span>
+          </div>
+
+          <div class="rounded-xl border border-white/[0.08] bg-[#050507] p-3 sm:p-4 overflow-x-auto">
+            <div id="arch-modal-svg-container" class="min-w-[540px]">
+              <!-- Animated SVG Diagram injected dynamically per project -->
+            </div>
+          </div>
+        </section>
+
+        <!-- 02. Problem Statement -->
+        <section class="space-y-2">
+          <div class="font-mono text-xs font-semibold text-emerald-400">
+            02 // PROBLEM_STATEMENT
+          </div>
+          <p id="arch-modal-problem" class="text-zinc-300 leading-relaxed rounded-xl border border-white/[0.07] bg-white/[0.02] p-4">
+            Problem statement text.
+          </p>
+        </section>
+
+        <!-- 03. Key Engineering Decisions -->
+        <section class="space-y-2">
+          <div class="font-mono text-xs font-semibold text-cyan-400">
+            03 // KEY_ENGINEERING_DECISIONS
+          </div>
+          <ul id="arch-modal-decisions" class="space-y-2 rounded-xl border border-white/[0.07] bg-white/[0.02] p-4 text-xs sm:text-sm text-zinc-300">
+            <!-- Populated dynamically via JS -->
+          </ul>
+        </section>
+
+        <!-- 04. Tech Stack Pills -->
+        <section class="space-y-2.5">
+          <div class="font-mono text-xs font-semibold text-emerald-400">
+            04 // TECH_STACK_SPECIFICATION
+          </div>
+          <div id="arch-modal-stack" class="flex flex-wrap gap-2 font-mono text-xs">
+            <!-- Populated dynamically via JS -->
+          </div>
+        </section>
+
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="flex flex-wrap items-center justify-between gap-3 border-t border-white/[0.08] bg-white/[0.02] px-5 py-3.5">
+        <span class="font-mono text-[11px] text-zinc-500">
+          Press <kbd class="rounded border border-white/[0.12] bg-[#070709] px-1.5 py-0.5 text-zinc-300">Esc</kbd> to return to workspace
+        </span>
+        <a
+          id="arch-modal-github-link"
+          href="https://github.com/MasYusuf06"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 rounded-lg border border-emerald-400/35 bg-emerald-500/10 px-3.5 py-2 font-mono text-xs font-medium text-emerald-300 hover:bg-emerald-500/20 transition-colors"
+        >
+          <span>Inspect Source on GitHub</span>
+          <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       ENHANCED CTRL+K / CMD+K COMMAND PALETTE WITH SLIDING SELECTION HIGHLIGHT
+       ===================================================================== -->
+  <div
+    id="command-palette-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Command Palette"
+    class="modal-backdrop fixed inset-0 z-50 flex items-start justify-center pt-[11vh] sm:pt-[14vh] px-4 bg-black/80 backdrop-blur-md"
+  >
+    <div
+      id="command-palette-panel"
+      class="modal-spring-panel w-full max-w-xl rounded-2xl border border-white/[0.12] bg-[#0a0a0e]/95 shadow-2xl overflow-hidden"
+    >
+      <!-- Top Spectrum Line -->
+      <div class="h-[2px] w-full bg-gradient-to-r from-emerald-400 via-cyan-400 to-indigo-400"></div>
+
+      <!-- Fuzzy Search Input -->
+      <div class="flex items-center gap-3 border-b border-white/[0.08] bg-white/[0.02] px-4 py-3.5">
+        <svg class="h-4 w-4 shrink-0 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m1.85-5.15a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+        <input
+          id="cmd-search-input"
+          type="text"
+          autocomplete="off"
+          spellcheck="false"
+          placeholder="Search systems, run terminal commands, or toggle workspace FX..."
+          aria-label="Search commands"
+          aria-controls="cmd-results-list"
+          class="w-full bg-transparent text-sm text-zinc-100 placeholder-zinc-500 focus:outline-none font-sans"
+        />
+        <button
+          id="close-cmd-btn"
+          type="button"
+          class="rounded border border-white/[0.12] bg-[#070709] px-1.5 py-0.5 font-mono text-[10px] text-zinc-400 hover:text-zinc-200 cursor-pointer"
+        >
+          ESC
+        </button>
+      </div>
+
+      <!-- Relative Results Container with Sliding Highlight Pill -->
+      <div class="relative max-h-[54vh] overflow-y-auto p-2" id="cmd-scroll-container">
+        <!-- Sliding Active Selection Highlight -->
+        <div
+          id="cmd-active-highlight"
+          aria-hidden="true"
+          class="pointer-events-none absolute left-2 right-2 rounded-xl bg-white/[0.08] border border-emerald-400/30 transition-all duration-200 ease-out opacity-0"
+        ></div>
+
+        <div
+          id="cmd-results-list"
+          role="listbox"
+          aria-label="Command Results"
+          class="relative z-10 space-y-1"
+        >
+          <!-- Command items injected dynamically via JS -->
+        </div>
+      </div>
+
+      <!-- Footer Shortcuts Legend -->
+      <div class="flex flex-wrap items-center justify-between gap-2 border-t border-white/[0.08] bg-white/[0.02] px-4 py-2.5 font-mono text-[11px] text-zinc-500">
+        <div class="flex items-center gap-3">
+          <span class="inline-flex items-center gap-1">
+            <kbd class="rounded border border-white/[0.12] bg-[#070709] px-1.5 py-0.5 text-zinc-300">↑</kbd>
+            <kbd class="rounded border border-white/[0.12] bg-[#070709] px-1.5 py-0.5 text-zinc-300">↓</kbd>
+            <span>Move</span>
+          </span>
+          <span class="inline-flex items-center gap-1">
+            <kbd class="rounded border border-white/[0.12] bg-[#070709] px-1.5 py-0.5 text-zinc-300">Enter</kbd>
+            <span>Select</span>
+          </span>
+        </div>
+        <span class="text-emerald-400/80">yusuf.workspace // cmd</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       TOAST NOTIFICATION CONTAINER (z-50, ZERO alert() CALLS)
+       ===================================================================== -->
+  <div
+    id="toast-container"
+    aria-live="polite"
+    aria-atomic="true"
+    class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none max-w-[90vw]"
+  ></div>
+
+  <!-- =====================================================================
+       APPLICATION JAVASCRIPT ARCHITECTURE
+       ===================================================================== -->
+  <script>
+    (function () {
+      'use strict';
+
+      // ===================================================================
+      // 1. PROCEDURAL WIREFRAME SPIDER CURSOR CANVAS (#spider-canvas)
+      // ===================================================================
+      const spiderCanvas = document.getElementById('spider-canvas');
+      const ctx = spiderCanvas.getContext('2d');
+
+      let w = 0;
+      let h = 0;
+      let isSpiderFxEnabled = true;
+      let spiderAnimFrameId = null;
+
+      const rnd = (x = 1, dx = 0) => Math.random() * x + dx;
+      const lerp = (a, b, t) => a + (b - a) * t;
+      const many = (n, f) => Array.from({ length: n }, (_, i) => f(i));
+
+      function drawCircle(x, y, r) {
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      let pts = [];
+      let ambientStars = [];
+
+      function populateAnchorField(width, height) {
+        pts = many(320, () => ({
+          x: rnd(width),
+          y: rnd(height),
+          len: 0,
+          r: 0
+        }));
+
+        ambientStars = many(105, () => ({
+          x: rnd(width),
+          y: rnd(height),
+          r: rnd(0.65, 0.4),
+          alpha: rnd(0.24, 0.08)
+        }));
+      }
+
+      function spawn(spiderIndex) {
+        const seed = rnd(100, 10);
+        const pts2 = many(9, (i) => {
+          const baseAngle = (i / 9) * Math.PI * 2 + rnd(0.25, -0.125);
+          const reach = rnd(32, 62);
+          return {
+            x: Math.cos(baseAngle) * reach,
+            y: Math.sin(baseAngle) * reach,
+            angle: baseAngle,
+            reach: reach,
+            strands: many(4, () => ({
+              kneeJitterX: rnd(14, -7),
+              kneeJitterY: rnd(14, -7),
+              footJitterX: rnd(5, -2.5),
+              footJitterY: rnd(5, -2.5),
+              alpha: rnd(0.42, 0.32),
+              width: rnd(0.55, 0.5)
+            }))
+          };
+        });
+
+        const initX = window.innerWidth * 0.52 + (spiderIndex === 0 ? -40 : 48);
+        const initY = window.innerHeight * 0.4 + (spiderIndex === 0 ? -28 : 32);
+
+        let x = initX;
+        let y = initY;
+        let tx = initX;
+        let ty = initY;
+
+        return {
+          follow(clientX, clientY) {
+            const offsetRadius = spiderIndex === 0 ? 18 : 34;
+            const offsetAngle = seed + spiderIndex * Math.PI * 0.85;
+            tx = clientX + Math.cos(offsetAngle) * offsetRadius;
+            ty = clientY + Math.sin(offsetAngle) * offsetRadius;
+          },
+
+          tick(t) {
+            const selfMoveX = Math.cos(t * 1.45 + seed) * 16;
+            const selfMoveY = Math.sin(t * 1.2 + seed * 1.35) * 16;
+            const followRate = spiderIndex === 0 ? 0.085 : 0.058;
+
+            x = lerp(x, tx + selfMoveX, followRate);
+            y = lerp(y, ty + selfMoveY, followRate);
+
+            const reachRadius = 165;
+
+            for (let i = 0; i < pts.length; i++) {
+              const pt = pts[i];
+              const dx = pt.x - x;
+              const dy = pt.y - y;
+              const dist = Math.hypot(dx, dy);
+
+              if (dist < reachRadius) {
+                const proximity = 1 - dist / reachRadius;
+                pt.len = lerp(pt.len, 1, 0.14);
+                pt.r = lerp(pt.r, 1.25 + proximity * 1.85, 0.16);
+
+                ctx.fillStyle = `rgba(255, 255, 255, ${(0.32 + proximity * 0.58).toFixed(3)})`;
+                drawCircle(pt.x, pt.y, pt.r);
+              } else if (pt.r > 0.05) {
+                pt.len = lerp(pt.len, 0, 0.08);
+                pt.r = lerp(pt.r, 0, 0.09);
+                if (pt.r > 0.15) {
+                  ctx.fillStyle = 'rgba(255, 255, 255, 0.22)';
+                  drawCircle(pt.x, pt.y, pt.r);
+                }
+              }
+            }
+
+            const usedIndices = new Set();
+
+            for (let j = 0; j < pts2.length; j++) {
+              const leg = pts2[j];
+              const dynamicAngle = leg.angle + Math.sin(t * 1.8 + seed + j) * 0.08;
+              const idealX = x + Math.cos(dynamicAngle) * leg.reach;
+              const idealY = y + Math.sin(dynamicAngle) * leg.reach;
+
+              let bestPt = null;
+              let bestIdx = -1;
+              let bestDist = Infinity;
+
+              for (let i = 0; i < pts.length; i++) {
+                if (usedIndices.has(i)) continue;
+                const pt = pts[i];
+                const bodyDist = Math.hypot(pt.x - x, pt.y - y);
+                if (bodyDist > reachRadius) continue;
+
+                const d = Math.hypot(pt.x - idealX, pt.y - idealY);
+                if (d < bestDist) {
+                  bestDist = d;
+                  bestPt = pt;
+                  bestIdx = i;
+                }
+              }
+
+              if (bestPt && bestDist < 125) {
+                usedIndices.add(bestIdx);
+
+                const midX = (x + bestPt.x) * 0.5;
+                const midY = (y + bestPt.y) * 0.5;
+                const legSpan = Math.hypot(bestPt.x - x, bestPt.y - y);
+                const archLift = Math.min(36, legSpan * 0.34);
+
+                const kneeX = midX + Math.cos(dynamicAngle) * (archLift * 0.35);
+                const kneeY = midY - archLift;
+
+                for (let s = 0; s < leg.strands.length; s++) {
+                  const strand = leg.strands[s];
+                  const wave = Math.sin(t * 3.2 + seed + j + s) * 1.6;
+
+                  ctx.beginPath();
+                  ctx.moveTo(x, y);
+                  ctx.quadraticCurveTo(
+                    kneeX + strand.kneeJitterX + wave,
+                    kneeY + strand.kneeJitterY - wave,
+                    bestPt.x + strand.footJitterX,
+                    bestPt.y + strand.footJitterY
+                  );
+                  ctx.strokeStyle = `rgba(255, 255, 255, ${strand.alpha.toFixed(2)})`;
+                  ctx.lineWidth = strand.width;
+                  ctx.stroke();
+                }
+
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.88)';
+                drawCircle(bestPt.x, bestPt.y, 1.75);
+              }
+            }
+
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+            drawCircle(x, y, 2.3);
+
+            ctx.beginPath();
+            ctx.arc(x, y, 5.0, 0, Math.PI * 2);
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+            ctx.lineWidth = 0.8;
+            ctx.stroke();
+          }
+        };
+      }
+
+      const spiders = many(2, spawn);
+
+      window.addEventListener(
+        'pointermove',
+        (e) => {
+          if (!isSpiderFxEnabled) return;
+          spiders.forEach((spider) => spider.follow(e.clientX, e.clientY));
+        },
+        { passive: true }
+      );
+
+      function anim(t) {
+        if (!isSpiderFxEnabled) return;
+
+        if (w !== window.innerWidth || h !== window.innerHeight) {
+          w = spiderCanvas.width = window.innerWidth;
+          h = spiderCanvas.height = window.innerHeight;
+          populateAnchorField(w, h);
+        }
+
+        ctx.clearRect(0, 0, w, h);
+
+        for (let i = 0; i < ambientStars.length; i++) {
+          const star = ambientStars[i];
+          ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
+          drawCircle(star.x, star.y, star.r);
+        }
+
+        const timeInSeconds = t / 1000;
+        spiders.forEach((spider) => spider.tick(timeInSeconds));
+
+        spiderAnimFrameId = requestAnimationFrame(anim);
+      }
+
+      function startSpiderAnimation() {
+        if (spiderAnimFrameId) cancelAnimationFrame(spiderAnimFrameId);
+        spiderCanvas.classList.remove('opacity-0');
+        spiderCanvas.classList.add('opacity-85');
+        spiderAnimFrameId = requestAnimationFrame(anim);
+      }
+
+      function stopSpiderAnimation() {
+        if (spiderAnimFrameId) {
+          cancelAnimationFrame(spiderAnimFrameId);
+          spiderAnimFrameId = null;
+        }
+        spiderCanvas.classList.remove('opacity-85');
+        spiderCanvas.classList.add('opacity-0');
+        ctx.clearRect(0, 0, w, h);
+      }
+
+      // ===================================================================
+      // 2. KINETIC TEXT SCRAMBLE CLASS
+      // ===================================================================
+      class TextScramble {
+        constructor(el) {
+          this.el = el;
+          this.chars = '/_#01<>[]{}*+';
+          this.update = this.update.bind(this);
+        }
+
+        setText(newText) {
+          const oldText = this.el.innerText;
+          const length = Math.max(oldText.length, newText.length);
+          const promise = new Promise((resolve) => (this.resolve = resolve));
+          this.queue = [];
+          for (let i = 0; i < length; i++) {
+            const from = oldText[i] || '';
+            const to = newText[i] || '';
+            const start = Math.floor(Math.random() * 14);
+            const end = start + Math.floor(Math.random() * 16) + 6;
+            this.queue.push({ from, to, start, end });
+          }
+          cancelAnimationFrame(this.frameRequest);
+          this.frame = 0;
+          this.update();
+          return promise;
+        }
+
+        update() {
+          let output = '';
+          let complete = 0;
+          for (let i = 0, n = this.queue.length; i < n; i++) {
+            let { from, to, start, end, char } = this.queue[i];
+            if (this.frame >= end) {
+              complete++;
+              output += to;
+            } else if (this.frame >= start) {
+              if (!char || Math.random() < 0.32) {
+                char = this.chars[Math.floor(Math.random() * this.chars.length)];
+                this.queue[i].char = char;
+              }
+              output += `<span class="text-emerald-400/90 font-mono">${char}</span>`;
+            } else {
+              output += from;
+            }
+          }
+          this.el.innerHTML = output;
+          if (complete === this.queue.length) {
+            this.resolve();
+          } else {
+            this.frameRequest = requestAnimationFrame(this.update);
+            this.frame++;
+          }
+        }
+      }
+
+      // ===================================================================
+      // 3. CURSOR RADIAL SPOTLIGHT, DAMPED 3D TILT & MAGNETIC BUTTONS
+      // ===================================================================
+      function initSpotlightAndTilt() {
+        // Cursor Radial Spotlight Tracking
+        const spotlightCards = document.querySelectorAll('.spotlight-card');
+        spotlightCards.forEach((card) => {
+          card.addEventListener(
+            'pointermove',
+            (e) => {
+              const rect = card.getBoundingClientRect();
+              const mx = e.clientX - rect.left;
+              const my = e.clientY - rect.top;
+              card.style.setProperty('--mx', `${mx}px`);
+              card.style.setProperty('--my', `${my}px`);
+            },
+            { passive: true }
+          );
+        });
+
+        // Damped 3D Card Tilt on Project Cards
+        const tiltCards = document.querySelectorAll('.tilt-card');
+        tiltCards.forEach((card) => {
+          let targetRx = 0;
+          let targetRy = 0;
+          let currentRx = 0;
+          let currentRy = 0;
+          let isHovering = false;
+          let tiltRaf = null;
+
+          function animateTilt() {
+            currentRx = lerp(currentRx, targetRx, 0.12);
+            currentRy = lerp(currentRy, targetRy, 0.12);
+
+            if (!isHovering && Math.abs(currentRx) < 0.03 && Math.abs(currentRy) < 0.03) {
+              card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0)';
+              tiltRaf = null;
+              return;
+            }
+
+            card.style.transform = `perspective(1000px) rotateX(${currentRx.toFixed(2)}deg) rotateY(${currentRy.toFixed(2)}deg) translateZ(0)`;
+            tiltRaf = requestAnimationFrame(animateTilt);
+          }
+
+          card.addEventListener(
+            'pointermove',
+            (e) => {
+              if (window.innerWidth < 768) return;
+              const rect = card.getBoundingClientRect();
+              const normX = (e.clientX - rect.left) / rect.width - 0.5;
+              const normY = (e.clientY - rect.top) / rect.height - 0.5;
+              targetRx = -normY * 6.5;
+              targetRy = normX * 6.5;
+              if (!isHovering) {
+                isHovering = true;
+                if (!tiltRaf) tiltRaf = requestAnimationFrame(animateTilt);
+              }
+            },
+            { passive: true }
+          );
+
+          card.addEventListener('pointerleave', () => {
+            isHovering = false;
+            targetRx = 0;
+            targetRy = 0;
+            if (!tiltRaf) tiltRaf = requestAnimationFrame(animateTilt);
+          });
+        });
+
+        // Magnetic Cursor Attraction on Primary CTA & Action Buttons
+        const magneticButtons = document.querySelectorAll('.magnetic-btn');
+        magneticButtons.forEach((btn) => {
+          btn.style.transition = 'transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease, background-color 0.2s ease, border-color 0.2s ease';
+
+          btn.addEventListener(
+            'pointermove',
+            (e) => {
+              if (window.innerWidth < 768) return;
+              const rect = btn.getBoundingClientRect();
+              const dx = (e.clientX - (rect.left + rect.width / 2)) * 0.22;
+              const dy = (e.clientY - (rect.top + rect.height / 2)) * 0.26;
+              btn.style.transform = `translate3d(${dx.toFixed(1)}px, ${dy.toFixed(1)}px, 0)`;
+            },
+            { passive: true }
+          );
+
+          btn.addEventListener('pointerleave', () => {
+            btn.style.transform = 'translate3d(0px, 0px, 0)';
+          });
+        });
+      }
+
+      // ===================================================================
+      // 4. SCROLL PROGRESS BAR & STAGGERED VIEWPORT REVEALS
+      // ===================================================================
+      function initScrollEffects() {
+        const progressBar = document.getElementById('scroll-progress-bar');
+
+        function updateScrollProgress() {
+          const scrollTop = window.scrollY || document.documentElement.scrollTop;
+          const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+          const ratio = docHeight > 0 ? Math.min(1, Math.max(0, scrollTop / docHeight)) : 0;
+          if (progressBar) {
+            progressBar.style.transform = `scaleX(${ratio.toFixed(4)})`;
+          }
+        }
+
+        window.addEventListener('scroll', updateScrollProgress, { passive: true });
+        updateScrollProgress();
+
+        // IntersectionObserver for Stagger Reveals
+        const revealEls = document.querySelectorAll('.reveal-stagger');
+        if ('IntersectionObserver' in window) {
+          const observer = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add('is-visible');
+                  observer.unobserve(entry.target);
+                }
+              });
+            },
+            { threshold: 0.12 }
+          );
+          revealEls.forEach((el) => observer.observe(el));
+        } else {
+          revealEls.forEach((el) => el.classList.add('is-visible'));
+        }
+      }
+
+      // ===================================================================
+      // 5. SLIDING PILL HELPER (TOP NAV, WORKBENCH TABS, PROJECT FILTERS)
+      // ===================================================================
+      function positionSlidingPill(pillEl, targetBtn) {
+        if (!pillEl || !targetBtn) return;
+        const offsetLeft = targetBtn.offsetLeft;
+        const width = targetBtn.offsetWidth;
+        pillEl.style.width = `${width}px`;
+        pillEl.style.transform = `translate3d(${offsetLeft}px, 0, 0)`;
+      }
+
+      function initTopNavPill() {
+        const navContainer = document.getElementById('top-nav-container');
+        const navPill = document.getElementById('nav-pill-indicator');
+        const navLinks = Array.from(document.querySelectorAll('.nav-pill-link'));
+        if (!navContainer || !navPill || navLinks.length === 0) return;
+
+        let activeLink = navLinks[0];
+        positionSlidingPill(navPill, activeLink);
+
+        function setActiveNav(link) {
+          activeLink = link;
+          navLinks.forEach((item) => {
+            if (item === link) {
+              item.classList.remove('text-zinc-400');
+              item.classList.add('text-zinc-100');
+            } else {
+              item.classList.remove('text-zinc-100');
+              item.classList.add('text-zinc-400');
+            }
+          });
+          positionSlidingPill(navPill, link);
+        }
+
+        navLinks.forEach((link) => {
+          link.addEventListener('click', () => setActiveNav(link));
+          link.addEventListener('mouseenter', () => positionSlidingPill(navPill, link));
+        });
+
+        navContainer.addEventListener('mouseleave', () => {
+          positionSlidingPill(navPill, activeLink);
+        });
+
+        // Update active pill smoothly on scroll
+        const sections = ['top', 'projects', 'stack', 'contact']
+          .map((id) => document.getElementById(id))
+          .filter(Boolean);
+
+        window.addEventListener(
+          'scroll',
+          () => {
+            const scrollPos = window.scrollY + 180;
+            let currentId = 'top';
+            for (const sec of sections) {
+              if (sec.offsetTop <= scrollPos) {
+                currentId = sec.id;
+              }
+            }
+            const matched = navLinks.find((l) => l.getAttribute('data-nav-target') === currentId);
+            if (matched && matched !== activeLink) {
+              setActiveNav(matched);
+            }
+          },
+          { passive: true }
+        );
+
+        window.addEventListener('resize', () => positionSlidingPill(navPill, activeLink));
+      }
+
+      // ===================================================================
+      // 6. ALIVE WORKBENCH WIDGET (TERMINAL + PROFILE.JSON + TELEMETRY)
+      // ===================================================================
+      const TERMINAL_COMMANDS = {
+        whoami: [
+          '<span class="text-emerald-300 font-semibold">Yusuf Dede Yonaldy</span> (@MasYusuf06)',
+          'Role   : Information Systems Student (Semester 5)',
+          'Focus  : Full-Stack Web Applications &amp; Multi-LLM AI Systems',
+          'Status : <span class="text-emerald-400">● Available for collaboration</span>'
+        ],
+        'stack --core': [
+          '<span class="text-cyan-300">[Frontend]</span>   Next.js, TypeScript, Tailwind CSS, Kinetic Canvas',
+          '<span class="text-emerald-300">[Backend]</span>    Supabase, PostgreSQL (RLS), Node.js, Edge APIs',
+          '<span class="text-indigo-300">[AI / CLI]</span>   CatatKu Gateway (gacor-dev / free-agent), Hermes CLI',
+          '<span class="text-amber-300">[Systems]</span>    System Dynamics Modeling, ERD, RBAC Architecture'
+        ],
+        'projects --list': [
+          '01. <span class="text-emerald-300">StudyMate AI</span> — Multimodal AI Learning Assistant (Gemini API + Next.js)',
+          '02. <span class="text-cyan-300">CatatKu</span>      — Offline-first PWA untuk pencatatan data',
+          '03. <span class="text-emerald-300">IKTA</span>   — Sistem monitoring kolam ikan berbasis ESP32',
+          '04. <span class="text-cyan-300">Aplikasi CRM</span>      — Aplikasi pengelolaan pelanggan dan pipeline'
+        ],
+        'ping --status': [
+          'PING 9router.local (127.0.0.1:9090): 56 data bytes',
+          '64 bytes from combo[gacor-dev]: seq=1 ttl=64 time=<span class="text-emerald-300">13.8 ms</span>',
+          '64 bytes from supabase.edge:    seq=2 ttl=64 time=<span class="text-cyan-300">18.1 ms</span>',
+          '--- All 4 workspace systems operational (0% packet loss) ---'
+        ],
+        help: [
+          'Available commands:',
+          '  <span class="text-emerald-300">whoami</span>          — Display developer identity &amp; academic track',
+          '  <span class="text-cyan-300">stack --core</span>    — Inspect core engineering &amp; AI toolchain',
+          '  <span class="text-emerald-300">projects --list</span> — List 4 featured production systems',
+          '  <span class="text-cyan-300">ping --status</span>   — Check live gateway &amp; edge latency',
+          '  <span class="text-zinc-400">clear</span>           — Clear terminal output buffer'
+        ]
+      };
+
+      let switchWorkbenchTabFn = null;
+      let runTerminalCommandFn = null;
+
+      function initWorkbenchWidget() {
+        const tabPill = document.getElementById('wb-tab-pill');
+        const tabBtns = Array.from(document.querySelectorAll('.wb-tab-btn'));
+        const panels = {
+          terminal: document.getElementById('wb-panel-terminal'),
+          profile: document.getElementById('wb-panel-profile'),
+          telemetry: document.getElementById('wb-panel-telemetry')
+        };
+
+        let activeTabKey = 'terminal';
+        const initialBtn = tabBtns.find((b) => b.getAttribute('data-wb-tab') === 'terminal');
+        positionSlidingPill(tabPill, initialBtn);
+
+        function switchTab(tabKey) {
+          activeTabKey = tabKey;
+          tabBtns.forEach((btn) => {
+            const isTarget = btn.getAttribute('data-wb-tab') === tabKey;
+            btn.setAttribute('aria-selected', String(isTarget));
+            if (isTarget) {
+              btn.classList.remove('text-zinc-400');
+              btn.classList.add('text-emerald-300', 'font-medium');
+              positionSlidingPill(tabPill, btn);
+            } else {
+              btn.classList.remove('text-emerald-300', 'font-medium');
+              btn.classList.add('text-zinc-400');
+            }
+          });
+
+          Object.keys(panels).forEach((key) => {
+            if (panels[key]) {
+              if (key === tabKey) {
+                panels[key].classList.remove('hidden');
+              } else {
+                panels[key].classList.add('hidden');
+              }
+            }
+          });
+        }
+
+        switchWorkbenchTabFn = switchTab;
+
+        tabBtns.forEach((btn) => {
+          btn.addEventListener('click', () => switchTab(btn.getAttribute('data-wb-tab')));
+        });
+
+        window.addEventListener('resize', () => {
+          const currentBtn = tabBtns.find((b) => b.getAttribute('data-wb-tab') === activeTabKey);
+          positionSlidingPill(tabPill, currentBtn);
+        });
+
+        // Interactive Terminal Logic
+        const termOutput = document.getElementById('terminal-output');
+        const termForm = document.getElementById('terminal-form');
+        const termInput = document.getElementById('terminal-input');
+        const presetBtns = document.querySelectorAll('.term-preset-btn');
+
+        function appendCommandLines(cmdRaw, animate = true) {
+          const cmd = cmdRaw.trim();
+          if (!cmd) return;
+
+          if (cmd.toLowerCase() === 'clear') {
+            termOutput.innerHTML = '';
+            return;
+          }
+
+          const promptBlock = document.createElement('div');
+          promptBlock.className = 'space-y-1';
+          promptBlock.innerHTML = `<div class="text-zinc-400"><span class="text-emerald-400">yusuf@dev:~$</span> <span class="text-zinc-100">${escapeHtml(cmd)}</span></div>`;
+          termOutput.appendChild(promptBlock);
+
+          const matchedLines =
+            TERMINAL_COMMANDS[cmd.toLowerCase()] || [
+              `<span class="text-amber-300">zsh: command not found:</span> ${escapeHtml(cmd)}. Try <span class="text-emerald-300">help</span>, <span class="text-emerald-300">whoami</span>, or <span class="text-cyan-300">stack --core</span>.`
+            ];
+
+          matchedLines.forEach((htmlLine, idx) => {
+            const lineEl = document.createElement('div');
+            lineEl.className = 'pl-2 text-[11px] sm:text-xs text-zinc-300';
+            if (animate) {
+              lineEl.style.opacity = '0';
+              lineEl.style.transform = 'translateY(4px)';
+              lineEl.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
+              setTimeout(() => {
+                lineEl.innerHTML = htmlLine;
+                promptBlock.appendChild(lineEl);
+                requestAnimationFrame(() => {
+                  lineEl.style.opacity = '1';
+                  lineEl.style.transform = 'translateY(0)';
+                });
+                termOutput.scrollTop = termOutput.scrollHeight;
+              }, idx * 75);
+            } else {
+              lineEl.innerHTML = htmlLine;
+              promptBlock.appendChild(lineEl);
+            }
+          });
+
+          termOutput.scrollTop = termOutput.scrollHeight;
+        }
+
+        runTerminalCommandFn = (cmd) => {
+          switchTab('terminal');
+          appendCommandLines(cmd, true);
+        };
+
+        // Initial boot message
+        appendCommandLines('whoami', false);
+
+        presetBtns.forEach((btn) => {
+          btn.addEventListener('click', () => {
+            const cmd = btn.getAttribute('data-term-cmd');
+            appendCommandLines(cmd, true);
+          });
+        });
+
+        termForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const val = termInput.value;
+          if (!val.trim()) return;
+          termInput.value = '';
+          appendCommandLines(val, true);
+        });
+
+        // Copy JSON button
+        const copyJsonBtn = document.getElementById('copy-json-btn');
+        if (copyJsonBtn) {
+          copyJsonBtn.addEventListener('click', () => {
+            const jsonText = JSON.stringify(
+              {
+                name: 'Yusuf Dede Yonaldy',
+                handle: '@MasYusuf06',
+                education: {
+                  major: 'Information Systems',
+                  semester: 5,
+                  focus: 'Full-Stack Web & AI Systems'
+                },
+                coreStack: ['Next.js', 'TypeScript', 'Supabase', 'CatatKu', 'Hermes CLI', 'System Dynamics'],
+                availability: 'Available for collaboration',
+                timezone: 'UTC+7 (WIB)'
+              },
+              null,
+              2
+            );
+            copyTextToClipboard(jsonText, 'profile.json copied to clipboard', 'JSON payload ready');
+          });
+        }
+
+        // Live Telemetry: UTC+7 (WIB) Clock & Animated SVG Sparkline
+        const wibClockEl = document.getElementById('wib-live-clock');
+        const latencyValEl = document.getElementById('telemetry-latency-val');
+        const rpsValEl = document.getElementById('telemetry-rps-val');
+        const sparkLinePath = document.getElementById('sparkline-line');
+        const sparkAreaPath = document.getElementById('sparkline-area');
+        const sparkDot = document.getElementById('sparkline-dot');
+
+        const sparkPoints = [38, 34, 41, 29, 32, 24, 28, 22, 26, 19, 25, 21, 18, 23, 20];
+
+        function renderSparkline() {
+          if (!sparkLinePath || !sparkAreaPath || !sparkDot) return;
+          const width = 356;
+          const height = 66;
+          const stepX = width / (sparkPoints.length - 1);
+
+          let d = '';
+          sparkPoints.forEach((val, i) => {
+            const x = i * stepX;
+            const y = Math.max(8, Math.min(height - 6, val));
+            d += i === 0 ? `M ${x.toFixed(1)} ${y.toFixed(1)}` : ` L ${x.toFixed(1)} ${y.toFixed(1)}`;
+          });
+
+          const lastX = (sparkPoints.length - 1) * stepX;
+          const lastY = sparkPoints[sparkPoints.length - 1];
+          sparkLinePath.setAttribute('d', d);
+          sparkAreaPath.setAttribute('d', `${d} L ${lastX.toFixed(1)} ${height} L 0 ${height} Z`);
+          sparkDot.setAttribute('cx', lastX.toFixed(1));
+          sparkDot.setAttribute('cy', lastY.toFixed(1));
+        }
+
+        function tickTelemetry() {
+          // UTC+7 (Asia/Jakarta) Live Clock
+          try {
+            const now = new Date();
+            const wibStr = new Intl.DateTimeFormat('en-GB', {
+              timeZone: 'Asia/Jakarta',
+              hour: '2-digit',
+              minute: '2-digit',
+              second: '2-digit',
+              hour12: false
+            }).format(now);
+            if (wibClockEl) wibClockEl.textContent = `${wibStr} WIB`;
+          } catch (err) {
+            if (wibClockEl) wibClockEl.textContent = 'UTC+7 LIVE';
+          }
+
+          // Update Sparkline Series
+          const nextLatency = (12.4 + Math.random() * 4.8).toFixed(1);
+          const nextRps = Math.floor(118 + Math.random() * 28);
+          if (latencyValEl) latencyValEl.textContent = `${nextLatency} ms`;
+          if (rpsValEl) rpsValEl.textContent = `${nextRps} req/m`;
+
+          sparkPoints.shift();
+          sparkPoints.push(Math.floor(14 + Math.random() * 34));
+          renderSparkline();
+        }
+
+        renderSparkline();
+        tickTelemetry();
+        setInterval(tickTelemetry, 1400);
+      }
+
+      // ===================================================================
+      // 7. DUAL-ROW INFINITE KINETIC TECH STACK MARQUEE
+      // ===================================================================
+      function initKineticMarquee() {
+        const row1 = document.getElementById('marquee-row-1');
+        const row2 = document.getElementById('marquee-row-2');
+        const tooltipText = document.getElementById('stack-tooltip-text');
+        if (!row1 || !row2) return;
+
+        const stackRow1 = [
+          { name: 'Next.js', color: 'text-zinc-100', dot: 'bg-zinc-200', desc: 'App Router, Server Actions & streaming RSC interfaces.' },
+          { name: 'TypeScript', color: 'text-cyan-300', dot: 'bg-cyan-400', desc: 'End-to-end type safety across gateways, schemas & UI.' },
+          { name: 'Supabase', color: 'text-emerald-300', dot: 'bg-emerald-400', desc: 'PostgreSQL, Auth, Row-Level Security & Realtime WebSockets.' },
+          { name: 'Vercel', color: 'text-zinc-100', dot: 'bg-white', desc: 'Zero-config edge deployments & preview CI/CD pipelines.' },
+          { name: 'CatatKu', color: 'text-cyan-300', dot: 'bg-cyan-400', desc: 'Local multi-LLM proxy gateway with gacor-dev & free-agent combos.' }
+        ];
+
+        const stackRow2 = [
+          { name: 'Hermes CLI', color: 'text-emerald-300', dot: 'bg-emerald-400', desc: 'Terminal-native AI agent automation paired with local routing.' },
+          { name: 'Tailwind CSS', color: 'text-cyan-300', dot: 'bg-cyan-400', desc: 'Precision utility design systems & responsive obsidian layouts.' },
+          { name: 'PostgreSQL', color: 'text-indigo-300', dot: 'bg-indigo-400', desc: 'Normalized relational schemas, triggers & immutable audit logs.' },
+          { name: 'System Dynamics', color: 'text-amber-300', dot: 'bg-amber-400', desc: 'Feedback-loop modeling for resilient operational workflows.' },
+          { name: 'GitHub', color: 'text-zinc-200', dot: 'bg-zinc-300', desc: 'Versioned architecture specs, PR reviews & automated workflows.' }
+        ];
+
+        function buildRowItems(items) {
+          // Duplicate array 3x so seamless infinite scroll covers ultra-wide screens
+          const repeated = [...items, ...items, ...items];
+          return repeated
+            .map(
+              (item) => `
+              <div
+                data-stack-desc="${escapeHtml(item.name + ' — ' + item.desc)}"
+                class="marquee-badge group flex items-center gap-2.5 rounded-xl border border-white/[0.08] bg-white/[0.03] px-4 py-2.5 font-mono text-xs sm:text-sm hover:border-emerald-400/45 hover:bg-white/[0.07] transition-all cursor-default select-none"
+              >
+                <span class="h-2 w-2 rounded-full ${item.dot} group-hover:scale-125 transition-transform"></span>
+                <span class="${item.color} font-medium">${escapeHtml(item.name)}</span>
+              </div>
+            `
+            )
+            .join('');
+        }
+
+        row1.innerHTML = buildRowItems(stackRow1);
+        row2.innerHTML = buildRowItems(stackRow2);
+
+        const allBadges = document.querySelectorAll('.marquee-badge');
+        allBadges.forEach((badge) => {
+          badge.addEventListener('mouseenter', () => {
+            if (tooltipText) {
+              tooltipText.textContent = badge.getAttribute('data-stack-desc');
+              tooltipText.classList.add('text-emerald-300');
+            }
+          });
+          badge.addEventListener('mouseleave', () => {
+            if (tooltipText) {
+              tooltipText.classList.remove('text-emerald-300');
+            }
+          });
+        });
+      }
+
+      // ===================================================================
+      // 8. PROJECT CATEGORY FILTER WITH SLIDING MORPHING PILL
+      // ===================================================================
+      function initProjectFilters() {
+        const filterPill = document.getElementById('filter-pill-indicator');
+        const filterBtns = Array.from(document.querySelectorAll('.filter-tab-btn'));
+        const projectCards = Array.from(document.querySelectorAll('.project-card'));
+        if (!filterPill || filterBtns.length === 0) return;
+
+        let activeFilter = 'all';
+        positionSlidingPill(filterPill, filterBtns[0]);
+
+        function applyFilter(filterKey, clickedBtn) {
+          activeFilter = filterKey;
+          filterBtns.forEach((btn) => {
+            const isSelected = btn === clickedBtn;
+            btn.setAttribute('aria-selected', String(isSelected));
+            if (isSelected) {
+              btn.classList.remove('text-zinc-400');
+              btn.classList.add('text-zinc-100', 'font-medium');
+            } else {
+              btn.classList.remove('text-zinc-100', 'font-medium');
+              btn.classList.add('text-zinc-400');
+            }
+          });
+
+          positionSlidingPill(filterPill, clickedBtn);
+
+          projectCards.forEach((card) => {
+            const categories = (card.getAttribute('data-categories') || '').split(' ');
+            const shouldShow = filterKey === 'all' || categories.includes(filterKey);
+
+            if (shouldShow) {
+              card.classList.remove('hidden');
+              requestAnimationFrame(() => {
+                card.style.opacity = '1';
+                card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+              });
+            } else {
+              card.style.opacity = '0';
+              card.style.transform = 'scale(0.96)';
+              setTimeout(() => {
+                if (activeFilter !== 'all' && !categories.includes(activeFilter)) {
+                  card.classList.add('hidden');
+                }
+              }, 180);
+            }
+          });
+        }
+
+        filterBtns.forEach((btn) => {
+          btn.addEventListener('click', () => {
+            applyFilter(btn.getAttribute('data-filter'), btn);
+          });
+        });
+
+        window.addEventListener('resize', () => {
+          const currentBtn = filterBtns.find((b) => b.getAttribute('data-filter') === activeFilter);
+          positionSlidingPill(filterPill, currentBtn);
+        });
+      }
+
+      // ===================================================================
+      // 9. SYSTEM ARCHITECTURE MODAL WITH ANIMATED SVG DATA-FLOW TOPOLOGY
+      // ===================================================================
+      const PROJECTS_DATA = {
+        'studymate-ai': {
+          title: 'StudyMate AI — Multimodal AI Learning Assistant',
+          category: 'Multimodal EdTech AI',
+          problem:
+            'Students struggle to consolidate dense lecture PDFs, handwritten notes, and whiteboard diagrams into structured study guides and active-recall practice tests without losing source accuracy.',
+          decisions: [
+            'Built a unified multimodal ingestion layer that parses PDF text blocks and visual diagrams into structured semantic chunks.',
+            'Integrated Gemini API streaming responses with strict source-grounding prompts so summaries and quizzes cite exact lecture sections.',
+            'Persisted user study sessions, generated flashcards, and quiz mastery scores in Supabase PostgreSQL with instant Vercel edge delivery.'
+          ],
+          stack: ['Next.js', 'TypeScript', 'Gemini API', 'Supabase', 'Tailwind CSS', 'Vercel'],
+          githubUrl: 'https://github.com/MasYusuf06',
+          svgTopology: `
+            <svg viewBox="0 0 640 165" class="w-full h-auto font-mono">
+              <defs>
+                <linearGradient id="smGrad" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="#34d399" />
+                  <stop offset="100%" stop-color="#22d3ee" />
+                </linearGradient>
+              </defs>
+              <!-- Curved Data Paths -->
+              <path id="sm-p1" d="M 155 52 C 195 52, 205 82, 245 82" fill="none" stroke="rgba(52,211,153,0.35)" stroke-width="2" />
+              <path id="sm-p2" d="M 155 118 C 195 118, 205 82, 245 82" fill="none" stroke="rgba(34,211,238,0.35)" stroke-width="2" />
+              <path id="sm-p3" d="M 395 82 C 435 82, 445 52, 485 52" fill="none" stroke="rgba(52,211,153,0.4)" stroke-width="2" />
+              <path id="sm-p4" d="M 395 82 C 435 82, 445 118, 485 118" fill="none" stroke="rgba(129,140,248,0.4)" stroke-width="2" />
+
+              <!-- Glowing Traveling Packets -->
+              <circle r="4" fill="#34d399">
+                <animateMotion dur="2s" repeatCount="indefinite"><mpath href="#sm-p1" /></animateMotion>
+              </circle>
+              <circle r="4" fill="#22d3ee">
+                <animateMotion dur="2.2s" begin="0.4s" repeatCount="indefinite"><mpath href="#sm-p2" /></animateMotion>
+              </circle>
+              <circle r="4" fill="#34d399">
+                <animateMotion dur="1.9s" begin="0.8s" repeatCount="indefinite"><mpath href="#sm-p3" /></animateMotion>
+              </circle>
+              <circle r="4" fill="#818cf8">
+                <animateMotion dur="2.1s" begin="1s" repeatCount="indefinite"><mpath href="#sm-p4" /></animateMotion>
+              </circle>
+
+              <!-- Nodes -->
+              <rect x="15" y="28" width="140" height="46" rx="10" fill="#0d0d12" stroke="rgba(52,211,153,0.45)" />
+              <text x="85" y="48" text-anchor="middle" fill="#a7f3d0" font-size="11" font-weight="600">Lecture PDFs</text>
+              <text x="85" y="63" text-anchor="middle" fill="#71717a" font-size="9">Text &amp; Slides</text>
+
+              <rect x="15" y="94" width="140" height="46" rx="10" fill="#0d0d12" stroke="rgba(34,211,238,0.45)" />
+              <text x="85" y="114" text-anchor="middle" fill="#a5f3fc" font-size="11" font-weight="600">Notes &amp; Diagrams</text>
+              <text x="85" y="129" text-anchor="middle" fill="#71717a" font-size="9">Vision Multimodal</text>
+
+              <rect x="245" y="54" width="150" height="56" rx="12" fill="#101318" stroke="url(#smGrad)" stroke-width="1.5" />
+              <text x="320" y="78" text-anchor="middle" fill="#f4f4f5" font-size="11" font-weight="700">Gemini AI Engine</text>
+              <text x="320" y="95" text-anchor="middle" fill="#34d399" font-size="9">Context + Synthesis</text>
+
+              <rect x="485" y="28" width="140" height="46" rx="10" fill="#0d0d12" stroke="rgba(52,211,153,0.45)" />
+              <text x="555" y="48" text-anchor="middle" fill="#a7f3d0" font-size="11" font-weight="600">Adaptive Quiz UI</text>
+              <text x="555" y="63" text-anchor="middle" fill="#71717a" font-size="9">Streaming Next.js</text>
+
+              <rect x="485" y="94" width="140" height="46" rx="10" fill="#0d0d12" stroke="rgba(129,140,248,0.45)" />
+              <text x="555" y="114" text-anchor="middle" fill="#c7d2fe" font-size="11" font-weight="600">Supabase Store</text>
+              <text x="555" y="129" text-anchor="middle" fill="#71717a" font-size="9">Decks &amp; Progress</text>
+            </svg>
+          `
+        },
+        '9router': {
+          title: 'CatatKu — Local AI API Gateway & Smart Fallback Router',
+          category: 'AI Infrastructure & Routing',
+          problem:
+            'Relying on a single LLM endpoint exposes developer tools and web apps to abrupt HTTP 429 rate limits, token quota exhaustion, and latency spikes.',
+          decisions: [
+            'Designed an OpenAI-compatible local proxy gateway (:9090) supporting named model combos (gacor-dev for high-reasoning coding, free-agent for high-throughput autonomous CLI loops).',
+            'Implemented sub-15ms upstream health evaluation and automatic failover without terminating active Server-Sent Events (SSE) token streams.',
+            'Added seamless compatibility with terminal workflows like Hermes CLI and local Next.js clients.'
+          ],
+          stack: ['Node.js', 'TypeScript', 'OpenAI Spec Proxy', 'SSE Streaming', 'gacor-dev', 'free-agent', 'Hermes CLI'],
+          githubUrl: 'https://github.com/MasYusuf06',
+          svgTopology: `
+            <svg viewBox="0 0 640 165" class="w-full h-auto font-mono">
+              <!-- Curved Paths -->
+              <path id="r9-p1" d="M 155 82 C 195 82, 205 82, 240 82" fill="none" stroke="rgba(34,211,238,0.4)" stroke-width="2" />
+              <path id="r9-p2" d="M 395 68 C 435 68, 445 34, 485 34" fill="none" stroke="rgba(52,211,153,0.45)" stroke-width="2" />
+              <path id="r9-p3" d="M 395 82 C 435 82, 445 82, 485 82" fill="none" stroke="rgba(34,211,238,0.35)" stroke-width="2" stroke-dasharray="4 3" />
+              <path id="r9-p4" d="M 395 96 C 435 96, 445 132, 485 132" fill="none" stroke="rgba(129,140,248,0.35)" stroke-width="2" stroke-dasharray="4 3" />
+
+              <!-- Traveling Packets -->
+              <circle r="4" fill="#22d3ee">
+                <animateMotion dur="1.5s" repeatCount="indefinite"><mpath href="#r9-p1" /></animateMotion>
+              </circle>
+              <circle r="4" fill="#34d399">
+                <animateMotion dur="1.7s" begin="0.3s" repeatCount="indefinite"><mpath href="#r9-p2" /></animateMotion>
+              </circle>
+              <circle r="3.5" fill="#22d3ee">
+                <animateMotion dur="2.3s" begin="0.9s" repeatCount="indefinite"><mpath href="#r9-p3" /></animateMotion>
+              </circle>
+              <circle r="3.5" fill="#818cf8">
+                <animateMotion dur="2.6s" begin="1.3s" repeatCount="indefinite"><mpath href="#r9-p4" /></animateMotion>
+              </circle>
+
+              <!-- Client Node -->
+              <rect x="15" y="54" width="140" height="56" rx="10" fill="#0d0d12" stroke="rgba(34,211,238,0.45)" />
+              <text x="85" y="78" text-anchor="middle" fill="#a5f3fc" font-size="11" font-weight="600">App / Hermes CLI</text>
+              <text x="85" y="94" text-anchor="middle" fill="#71717a" font-size="9">localhost:9090/v1</text>
+
+              <!-- CatatKu Core -->
+              <rect x="240" y="50" width="155" height="64" rx="12" fill="#101318" stroke="#22d3ee" stroke-width="1.5" />
+              <text x="317" y="76" text-anchor="middle" fill="#f4f4f5" font-size="12" font-weight="700">CatatKu Core</text>
+              <text x="317" y="94" text-anchor="middle" fill="#34d399" font-size="9">Combo + 429 Failover</text>
+
+              <!-- Provider Targets -->
+              <rect x="485" y="14" width="140" height="38" rx="9" fill="#0d0d12" stroke="rgba(52,211,153,0.55)" />
+              <text x="555" y="31" text-anchor="middle" fill="#6ee7b7" font-size="10" font-weight="600">Combo: gacor-dev</text>
+              <text x="555" y="44" text-anchor="middle" fill="#71717a" font-size="8.5">Primary Priority</text>
+
+              <rect x="485" y="63" width="140" height="38" rx="9" fill="#0d0d12" stroke="rgba(34,211,238,0.4)" />
+              <text x="555" y="80" text-anchor="middle" fill="#67e8f9" font-size="10" font-weight="600">Combo: free-agent</text>
+              <text x="555" y="93" text-anchor="middle" fill="#71717a" font-size="8.5">Zero-Cost Fallback</text>
+
+              <rect x="485" y="112" width="140" height="38" rx="9" fill="#0d0d12" stroke="rgba(129,140,248,0.4)" />
+              <text x="555" y="129" text-anchor="middle" fill="#c7d2fe" font-size="10" font-weight="600">Local Ollama</text>
+              <text x="555" y="142" text-anchor="middle" fill="#71717a" font-size="8.5">Offline Air-Gap</text>
+            </svg>
+          `
+        },
+        'ai-cs-dashboard': {
+          title: 'Dashboard Customer Service dengan AI Chat',
+          category: 'Realtime Omnichannel Support',
+          problem:
+            'Customer support queues become bottlenecked by repetitive FAQ tickets while static bots fail to smoothly transfer nuanced issues to human agents.',
+          decisions: [
+            'Architected a dual-mode messaging bus on Supabase Realtime for sub-100ms bi-directional message synchronization.',
+            'Built an AI auto-triage worker that scores intent, drafts KB-grounded replies, and triggers human escalation when confidence drops below threshold.',
+            'Created a live operator cockpit displaying AI-generated thread summaries so human agents resolve escalated tickets immediately.'
+          ],
+          stack: ['Next.js', 'TypeScript', 'Supabase Realtime', 'PostgreSQL', 'LLM Integration', 'Tailwind CSS'],
+          githubUrl: 'https://github.com/MasYusuf06',
+          svgTopology: `
+            <svg viewBox="0 0 640 165" class="w-full h-auto font-mono">
+              <path id="cs-p1" d="M 155 82 C 195 82, 205 82, 240 82" fill="none" stroke="rgba(52,211,153,0.4)" stroke-width="2" />
+              <path id="cs-p2" d="M 395 68 C 435 68, 445 45, 485 45" fill="none" stroke="rgba(34,211,238,0.45)" stroke-width="2" />
+              <path id="cs-p3" d="M 395 96 C 435 96, 445 120, 485 120" fill="none" stroke="rgba(52,211,153,0.45)" stroke-width="2" />
+
+              <circle r="4" fill="#34d399">
+                <animateMotion dur="1.7s" repeatCount="indefinite"><mpath href="#cs-p1" /></animateMotion>
+              </circle>
+              <circle r="4" fill="#22d3ee">
+                <animateMotion dur="1.9s" begin="0.4s" repeatCount="indefinite"><mpath href="#cs-p2" /></animateMotion>
+              </circle>
+              <circle r="4" fill="#34d399">
+                <animateMotion dur="2.1s" begin="0.9s" repeatCount="indefinite"><mpath href="#cs-p3" /></animateMotion>
+              </circle>
+
+              <rect x="15" y="54" width="140" height="56" rx="10" fill="#0d0d12" stroke="rgba(52,211,153,0.45)" />
+              <text x="85" y="78" text-anchor="middle" fill="#a7f3d0" font-size="11" font-weight="600">Customer Chat</text>
+              <text x="85" y="94" text-anchor="middle" fill="#71717a" font-size="9">Omnichannel Widget</text>
+
+              <rect x="240" y="50" width="155" height="64" rx="12" fill="#101318" stroke="#34d399" stroke-width="1.5" />
+              <text x="317" y="76" text-anchor="middle" fill="#f4f4f5" font-size="11" font-weight="700">Supabase Realtime</text>
+              <text x="317" y="94" text-anchor="middle" fill="#22d3ee" font-size="9">WebSocket Event Bus</text>
+
+              <rect x="485" y="22" width="140" height="46" rx="10" fill="#0d0d12" stroke="rgba(34,211,238,0.45)" />
+              <text x="555" y="42" text-anchor="middle" fill="#a5f3fc" font-size="11" font-weight="600">AI Auto-Triage</text>
+              <text x="555" y="57" text-anchor="middle" fill="#71717a" font-size="9">KB RAG + Sentiment</text>
+
+              <rect x="485" y="96" width="140" height="46" rx="10" fill="#0d0d12" stroke="rgba(52,211,153,0.45)" />
+              <text x="555" y="116" text-anchor="middle" fill="#a7f3d0" font-size="11" font-weight="600">Agent Cockpit</text>
+              <text x="555" y="131" text-anchor="middle" fill="#71717a" font-size="9">1-Click Human Handoff</text>
+            </svg>
+          `
+        },
+        'operational-crm': {
+          title: 'Aplikasi CRM — End-to-End Customer & Pipeline Management',
+          category: 'Enterprise Information System',
+          problem:
+            'Disconnected spreadsheets cause lost sales leads, unclear team ownership, and zero audit visibility across operational deal stages.',
+          decisions: [
+            'Normalized the relational schema across Organizations, Contacts, Deals, Tasks, and Activity Audit Logs with referential integrity.',
+            'Enforced Role-Based Auth (Admin, Sales Lead, Operations Staff) via PostgreSQL Row-Level Security (RLS) policies.',
+            'Automated stage-velocity KPI aggregations and immutable audit triggers on every pipeline transition.'
+          ],
+          stack: ['Full-Stack Web', 'Next.js', 'TypeScript', 'PostgreSQL', 'Supabase RLS', 'Role-Based Auth', 'Vercel'],
+          githubUrl: 'https://github.com/MasYusuf06',
+          svgTopology: `
+            <svg viewBox="0 0 640 165" class="w-full h-auto font-mono">
+              <path id="crm-p1" d="M 155 82 C 195 82, 205 82, 240 82" fill="none" stroke="rgba(34,211,238,0.4)" stroke-width="2" />
+              <path id="crm-p2" d="M 395 68 C 435 68, 445 45, 485 45" fill="none" stroke="rgba(52,211,153,0.45)" stroke-width="2" />
+              <path id="crm-p3" d="M 395 96 C 435 96, 445 120, 485 120" fill="none" stroke="rgba(129,140,248,0.45)" stroke-width="2" />
+
+              <circle r="4" fill="#22d3ee">
+                <animateMotion dur="1.7s" repeatCount="indefinite"><mpath href="#crm-p1" /></animateMotion>
+              </circle>
+              <circle r="4" fill="#34d399">
+                <animateMotion dur="2s" begin="0.4s" repeatCount="indefinite"><mpath href="#crm-p2" /></animateMotion>
+              </circle>
+              <circle r="4" fill="#818cf8">
+                <animateMotion dur="2.1s" begin="0.8s" repeatCount="indefinite"><mpath href="#crm-p3" /></animateMotion>
+              </circle>
+
+              <rect x="15" y="54" width="140" height="56" rx="10" fill="#0d0d12" stroke="rgba(34,211,238,0.45)" />
+              <text x="85" y="78" text-anchor="middle" fill="#a5f3fc" font-size="11" font-weight="600">Pipeline Board</text>
+              <text x="85" y="94" text-anchor="middle" fill="#71717a" font-size="9">Next.js + RBAC UI</text>
+
+              <rect x="240" y="50" width="155" height="64" rx="12" fill="#101318" stroke="#22d3ee" stroke-width="1.5" />
+              <text x="317" y="76" text-anchor="middle" fill="#f4f4f5" font-size="11" font-weight="700">Auth &amp; RLS Guard</text>
+              <text x="317" y="94" text-anchor="middle" fill="#34d399" font-size="9">Role Policy Validation</text>
+
+              <rect x="485" y="22" width="140" height="46" rx="10" fill="#0d0d12" stroke="rgba(52,211,153,0.45)" />
+              <text x="555" y="42" text-anchor="middle" fill="#a7f3d0" font-size="11" font-weight="600">Relational Core</text>
+              <text x="555" y="57" text-anchor="middle" fill="#71717a" font-size="9">Deals, Contacts, Tasks</text>
+
+              <rect x="485" y="96" width="140" height="46" rx="10" fill="#0d0d12" stroke="rgba(129,140,248,0.45)" />
+              <text x="555" y="116" text-anchor="middle" fill="#c7d2fe" font-size="11" font-weight="600">Audit &amp; KPI Logs</text>
+              <text x="555" y="131" text-anchor="middle" fill="#71717a" font-size="9">DB Trigger History</text>
+            </svg>
+          `
+        }
+      };
+
+      const archModal = document.getElementById('architecture-modal');
+      const archModalTitle = document.getElementById('arch-modal-title');
+      const archModalCategory = document.getElementById('arch-modal-category');
+      const archModalSvgContainer = document.getElementById('arch-modal-svg-container');
+      const archModalProblem = document.getElementById('arch-modal-problem');
+      const archModalDecisions = document.getElementById('arch-modal-decisions');
+      const archModalStack = document.getElementById('arch-modal-stack');
+      const archModalGithubLink = document.getElementById('arch-modal-github-link');
+      const closeArchModalBtn = document.getElementById('close-arch-modal-btn');
+
+      function openArchitectureModal(projectId) {
+        const project = PROJECTS_DATA[projectId];
+        if (!project) return;
+
+        closeCommandPalette();
+
+        archModalTitle.textContent = project.title;
+        archModalCategory.textContent = project.category;
+        archModalSvgContainer.innerHTML = project.svgTopology;
+        archModalProblem.textContent = project.problem;
+        archModalGithubLink.href = project.githubUrl;
+
+        archModalDecisions.innerHTML = project.decisions
+          .map(
+            (d) => `
+            <li class="flex items-start gap-2.5">
+              <span class="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400"></span>
+              <span class="leading-relaxed">${escapeHtml(d)}</span>
+            </li>
+          `
+          )
+          .join('');
+
+        archModalStack.innerHTML = project.stack
+          .map(
+            (tech) => `
+            <span class="rounded-lg border border-white/[0.1] bg-white/[0.04] px-2.5 py-1 text-zinc-200">
+              ${escapeHtml(tech)}
+            </span>
+          `
+          )
+          .join('');
+
+        archModal.classList.add('is-open');
+        document.body.classList.add('overflow-hidden');
+        closeArchModalBtn.focus();
+      }
+
+      function closeArchitectureModal() {
+        if (!archModal.classList.contains('is-open')) return;
+        archModal.classList.remove('is-open');
+        document.body.classList.remove('overflow-hidden');
+      }
+
+      // ===================================================================
+      // 10. ENHANCED CTRL+K COMMAND PALETTE WITH SLIDING HIGHLIGHT
+      // ===================================================================
+      const DEVELOPER_EMAIL = 'dedey627@gmail.com';
+      const GITHUB_PROFILE_URL = 'https://github.com/MasYusuf06';
+
+      const cmdModal = document.getElementById('command-palette-modal');
+      const cmdSearchInput = document.getElementById('cmd-search-input');
+      const cmdResultsList = document.getElementById('cmd-results-list');
+      const cmdActiveHighlight = document.getElementById('cmd-active-highlight');
+      const openCmdBtn = document.getElementById('open-cmd-btn');
+      const openCmdFooterBtn = document.getElementById('open-cmd-footer-btn');
+      const closeCmdBtn = document.getElementById('close-cmd-btn');
+
+      let filteredCommands = [];
+      let activeCommandIndex = 0;
+
+      const COMMANDS = [
+        // Featured Systems Architecture Modals
+        {
+          id: 'arch-studymate',
+          group: 'Project Architectures',
+          label: 'Open Architecture: StudyMate AI',
+          hint: 'Multimodal AI Learning Assistant (Gemini API + Next.js)',
+          keywords: 'studymate ai multimodal learning assistant architecture gemini',
+          badge: 'SYS_01',
+          action: () => openArchitectureModal('studymate-ai')
+        },
+        {
+          id: 'arch-9router',
+          group: 'Project Architectures',
+          label: 'Open Architecture: CatatKu',
+          hint: 'Local AI API Gateway & Smart Fallback Router (gacor-dev / free-agent)',
+          keywords: '9router gateway fallback router gacor-dev free-agent architecture',
+          badge: 'SYS_02',
+          action: () => openArchitectureModal('9router')
+        },
+        {
+          id: 'arch-aics',
+          group: 'Project Architectures',
+          label: 'Open Architecture: Dashboard Customer Service dengan AI Chat',
+          hint: 'Real-time Omnichannel Support & AI Auto-Triage',
+          keywords: 'dashboard customer service ai chat realtime triage support',
+          badge: 'SYS_03',
+          action: () => openArchitectureModal('ai-cs-dashboard')
+        },
+        {
+          id: 'arch-crm',
+          group: 'Project Architectures',
+          label: 'Open Architecture: Aplikasi CRM',
+          hint: 'End-to-End Customer & Pipeline Management (Supabase + PostgreSQL + RLS)',
+          keywords: 'operational crm system relational db role based auth pipeline',
+          badge: 'SYS_04',
+          action: () => openArchitectureModal('operational-crm')
+        },
+
+        // Interactive Terminal & Workspace Controls
+        {
+          id: 'term-whoami',
+          group: 'Workbench & Controls',
+          label: 'Run Terminal: whoami',
+          hint: 'Execute whoami inside interactive terminal.sh',
+          keywords: 'run terminal whoami bio info semester 5',
+          badge: 'EXEC',
+          action: () => {
+            closeCommandPalette();
+            const wb = document.getElementById('workbench-widget');
+            if (wb) wb.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            if (runTerminalCommandFn) runTerminalCommandFn('whoami');
+          }
+        },
+        {
+          id: 'toggle-spider',
+          group: 'Workbench & Controls',
+          label: 'Toggle Spider Cursor FX',
+          hint: 'Enable or pause procedural wireframe spider canvas',
+          keywords: 'toggle spider cursor fx animation wireframe canvas',
+          badge: 'FX',
+          action: () => {
+            closeCommandPalette();
+            toggleSpiderFx();
+          }
+        },
+        {
+          id: 'toggle-grid',
+          group: 'Workbench & Controls',
+          label: 'Toggle Dot Grid',
+          hint: 'Show or hide micro dot-grid background layer',
+          keywords: 'toggle dot grid background pattern',
+          badge: 'UI',
+          action: () => {
+            closeCommandPalette();
+            toggleDotGrid();
+          }
+        },
+
+        // Navigation & Quick Actions
+        {
+          id: 'jump-projects',
+          group: 'Navigation & Actions',
+          label: 'Jump to Projects',
+          hint: 'Scroll to Featured Production Systems (#projects)',
+          keywords: 'jump projects systems portfolio',
+          badge: '#projects',
+          action: () => {
+            closeCommandPalette();
+            const el = document.getElementById('projects');
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+          }
+        },
+        {
+          id: 'copy-email',
+          group: 'Navigation & Actions',
+          label: 'Copy Email (dedey627@gmail.com)',
+          hint: 'Copy contact address to clipboard',
+          keywords: 'copy email contact clipboard dedey627@gmail.com',
+          badge: 'COPY',
+          action: () => {
+            closeCommandPalette();
+            copyTextToClipboard(DEVELOPER_EMAIL, 'Email copied to clipboard', DEVELOPER_EMAIL);
+          }
+        },
+        {
+          id: 'open-github',
+          group: 'Navigation & Actions',
+          label: 'Open GitHub (@MasYusuf06)',
+          hint: 'github.com/MasYusuf06',
+          keywords: 'open github profile repository masyusuf06',
+          badge: 'LINK',
+          action: () => {
+            closeCommandPalette();
+            window.open(GITHUB_PROFILE_URL, '_blank', 'noopener,noreferrer');
+          }
+        }
+      ];
+
+      function updateCommandHighlight(shouldScroll = false) {
+        const buttons = cmdResultsList.querySelectorAll('.cmd-item-btn');
+        if (buttons.length === 0 || !buttons[activeCommandIndex]) {
+          cmdActiveHighlight.style.opacity = '0';
+          return;
+        }
+
+        const activeBtn = buttons[activeCommandIndex];
+        cmdActiveHighlight.style.opacity = '1';
+        cmdActiveHighlight.style.height = `${activeBtn.offsetHeight}px`;
+        cmdActiveHighlight.style.transform = `translate3d(0, ${activeBtn.offsetTop}px, 0)`;
+
+        buttons.forEach((btn, idx) => {
+          btn.setAttribute('aria-selected', String(idx === activeCommandIndex));
+          if (idx === activeCommandIndex) {
+            btn.classList.add('text-zinc-50');
+            btn.classList.remove('text-zinc-300');
+          } else {
+            btn.classList.remove('text-zinc-50');
+            btn.classList.add('text-zinc-300');
+          }
+        });
+
+        if (shouldScroll) {
+          activeBtn.scrollIntoView({ block: 'nearest' });
+        }
+      }
+
+      function renderCommandList(query = '') {
+        const q = query.trim().toLowerCase();
+        filteredCommands = COMMANDS.filter((cmd) => {
+          if (!q) return true;
+          return (
+            cmd.label.toLowerCase().includes(q) ||
+            cmd.hint.toLowerCase().includes(q) ||
+            cmd.group.toLowerCase().includes(q) ||
+            cmd.keywords.toLowerCase().includes(q)
+          );
+        });
+
+        activeCommandIndex = 0;
+
+        if (filteredCommands.length === 0) {
+          cmdActiveHighlight.style.opacity = '0';
+          cmdResultsList.innerHTML = `
+            <div class="py-10 text-center space-y-1">
+              <p class="text-sm text-zinc-400">No commands match "<span class="text-zinc-200">${escapeHtml(query)}</span>"</p>
+              <p class="font-mono text-xs text-zinc-500">Try: StudyMate, CatatKu, Spider, Grid, whoami, or GitHub</p>
+            </div>
+          `;
+          return;
+        }
+
+        let currentGroup = '';
+        let html = '';
+
+        filteredCommands.forEach((cmd, idx) => {
+          if (cmd.group !== currentGroup) {
+            currentGroup = cmd.group;
+            html += `
+              <div class="px-3 pt-2.5 pb-1 font-mono text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
+                ${escapeHtml(currentGroup)}
+              </div>
+            `;
+          }
+
+          html += `
+            <button
+              type="button"
+              role="option"
+              aria-selected="${idx === 0}"
+              data-cmd-index="${idx}"
+              class="cmd-item-btn w-full flex items-center justify-between gap-3 rounded-xl px-3 py-2.5 text-left text-zinc-300 transition-colors cursor-pointer"
+            >
+              <div class="min-w-0">
+                <div class="text-xs sm:text-sm font-medium truncate">${escapeHtml(cmd.label)}</div>
+                <div class="font-mono text-[11px] text-zinc-500 truncate">${escapeHtml(cmd.hint)}</div>
+              </div>
+              <span class="shrink-0 rounded border border-white/[0.1] bg-[#070709]/80 px-1.5 py-0.5 font-mono text-[10px] text-emerald-300">
+                ${escapeHtml(cmd.badge)}
+              </span>
+            </button>
+          `;
+        });
+
+        cmdResultsList.innerHTML = html;
+
+        const itemBtns = cmdResultsList.querySelectorAll('.cmd-item-btn');
+        itemBtns.forEach((btn) => {
+          btn.addEventListener('click', () => {
+            const idx = Number(btn.getAttribute('data-cmd-index'));
+            executeCommand(idx);
+          });
+          btn.addEventListener('mouseenter', () => {
+            activeCommandIndex = Number(btn.getAttribute('data-cmd-index'));
+            updateCommandHighlight(false);
+          });
+        });
+
+        requestAnimationFrame(() => updateCommandHighlight(false));
+      }
+
+      function executeCommand(index) {
+        const cmd = filteredCommands[index];
+        if (cmd && typeof cmd.action === 'function') {
+          cmd.action();
+        }
+      }
+
+      function openCommandPalette() {
+        closeArchitectureModal();
+        cmdModal.classList.add('is-open');
+        document.body.classList.add('overflow-hidden');
+        cmdSearchInput.value = '';
+        renderCommandList('');
+        setTimeout(() => cmdSearchInput.focus(), 20);
+      }
+
+      function closeCommandPalette() {
+        if (!cmdModal.classList.contains('is-open')) return;
+        cmdModal.classList.remove('is-open');
+        document.body.classList.remove('overflow-hidden');
+      }
+
+      // ===================================================================
+      // 11. SHARED UTILITIES: TOASTS, CLIPBOARD & WORKSPACE LAYER TOGGLES
+      // ===================================================================
+      const toastContainer = document.getElementById('toast-container');
+      const dotGridBg = document.getElementById('dot-grid-bg');
+      let isDotGridVisible = true;
+
+      function escapeHtml(str) {
+        const div = document.createElement('div');
+        div.textContent = str;
+        return div.innerHTML;
+      }
+
+      function showToast(title, subtitle = '') {
+        try {
+          const toast = document.createElement('div');
+          toast.className =
+            'toast-enter pointer-events-auto flex items-start gap-3 rounded-xl border border-white/[0.12] bg-[#0e0e13]/95 px-4 py-3 shadow-2xl backdrop-blur-xl';
+
+          toast.innerHTML = `
+            <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
+              <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+            </span>
+            <div class="text-xs">
+              <p class="font-semibold text-zinc-100">${escapeHtml(title)}</p>
+              ${subtitle ? `<p class="mt-0.5 font-mono text-[11px] text-zinc-400">${escapeHtml(subtitle)}</p>` : ''}
+            </div>
+          `;
+
+          toastContainer.appendChild(toast);
+
+          setTimeout(() => {
+            toast.style.opacity = '0';
+            toast.style.transform = 'translate3d(0, 8px, 0)';
+            toast.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
+            setTimeout(() => {
+              if (toast.parentNode) toast.parentNode.removeChild(toast);
+            }, 220);
+          }, 2800);
+        } catch (err) {
+          console.error('Toast render error:', err);
+        }
+      }
+
+      function copyTextToClipboard(text, toastTitle, toastSubtitle) {
+        try {
+          const textarea = document.createElement('textarea');
+          textarea.value = text;
+          textarea.setAttribute('readonly', '');
+          textarea.style.position = 'fixed';
+          textarea.style.left = '-9999px';
+          document.body.appendChild(textarea);
+          textarea.select();
+          textarea.setSelectionRange(0, textarea.value.length);
+
+          const ok = document.execCommand('copy');
+          document.body.removeChild(textarea);
+
+          if (ok) {
+            showToast(toastTitle, toastSubtitle);
+          } else {
+            showToast(toastTitle, text);
+          }
+        } catch (err) {
+          console.error('Copy error:', err);
+          showToast(toastTitle, text);
+        }
+      }
+
+      function toggleSpiderFx() {
+        isSpiderFxEnabled = !isSpiderFxEnabled;
+        const headerBtn = document.getElementById('toggle-spider-header-btn');
+        const headerStatus = document.getElementById('spider-header-status');
+        const footerStatus = document.getElementById('spider-footer-status');
+        const dot = document.getElementById('spider-indicator-dot');
+
+        if (isSpiderFxEnabled) {
+          startSpiderAnimation();
+          if (headerBtn) headerBtn.setAttribute('aria-pressed', 'true');
+          if (headerStatus) {
+            headerStatus.textContent = 'ON';
+            headerStatus.className = 'font-semibold text-emerald-400';
+          }
+          if (footerStatus) {
+            footerStatus.textContent = 'ON';
+            footerStatus.className = 'text-emerald-400';
+          }
+          if (dot) dot.className = 'h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]';
+          showToast('Spider Cursor FX enabled', 'wireframe-kinematics: active');
+        } else {
+          stopSpiderAnimation();
+          if (headerBtn) headerBtn.setAttribute('aria-pressed', 'false');
+          if (headerStatus) {
+            headerStatus.textContent = 'OFF';
+            headerStatus.className = 'font-semibold text-zinc-500';
+          }
+          if (footerStatus) {
+            footerStatus.textContent = 'OFF';
+            footerStatus.className = 'text-zinc-500';
+          }
+          if (dot) dot.className = 'h-1.5 w-1.5 rounded-full bg-zinc-600';
+          showToast('Spider Cursor FX paused', 'wireframe-kinematics: idle');
+        }
+      }
+
+      function toggleDotGrid() {
+        isDotGridVisible = !isDotGridVisible;
+        const headerBtn = document.getElementById('toggle-grid-header-btn');
+        const headerStatus = document.getElementById('grid-header-status');
+        const mobileStatus = document.getElementById('grid-mobile-status');
+        const footerStatus = document.getElementById('grid-footer-status');
+        const dot = document.getElementById('grid-indicator-dot');
+
+        if (isDotGridVisible) {
+          dotGridBg.classList.remove('opacity-0');
+          dotGridBg.classList.add('opacity-90');
+          if (headerBtn) headerBtn.setAttribute('aria-pressed', 'true');
+          if (headerStatus) {
+            headerStatus.textContent = 'ON';
+            headerStatus.className = 'font-semibold text-cyan-400';
+          }
+          if (mobileStatus) {
+            mobileStatus.textContent = 'ON';
+            mobileStatus.className = 'text-cyan-400';
+          }
+          if (footerStatus) {
+            footerStatus.textContent = 'ON';
+            footerStatus.className = 'text-cyan-400';
+          }
+          if (dot) dot.className = 'h-1.5 w-1.5 rounded-full bg-cyan-400 shadow-[0_0_8px_#22d3ee]';
+          showToast('Micro dot-grid enabled', 'surface-grid: visible');
+        } else {
+          dotGridBg.classList.remove('opacity-90');
+          dotGridBg.classList.add('opacity-0');
+          if (headerBtn) headerBtn.setAttribute('aria-pressed', 'false');
+          if (headerStatus) {
+            headerStatus.textContent = 'OFF';
+            headerStatus.className = 'font-semibold text-zinc-500';
+          }
+          if (mobileStatus) {
+            mobileStatus.textContent = 'OFF';
+            mobileStatus.className = 'text-zinc-500';
+          }
+          if (footerStatus) {
+            footerStatus.textContent = 'OFF';
+            footerStatus.className = 'text-zinc-500';
+          }
+          if (dot) dot.className = 'h-1.5 w-1.5 rounded-full bg-zinc-600';
+          showToast('Micro dot-grid hidden', 'surface-grid: hidden');
+        }
+      }
+
+      // ===================================================================
+      // 12. BOOTSTRAP ON LOAD
+      // ===================================================================
+      window.addEventListener('load', () => {
+        const yearEl = document.getElementById('current-year');
+        if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+
+        // Start Procedural Spider Canvas
+        w = spiderCanvas.width = window.innerWidth;
+        h = spiderCanvas.height = window.innerHeight;
+        populateAnchorField(w, h);
+        startSpiderAnimation();
+
+        // Kinetic Text Scramble on Hero Heading & Badge
+        const heroNameEl = document.getElementById('hero-scramble-name');
+        const heroBadgeEl = document.getElementById('hero-scramble-badge');
+        if (heroNameEl) {
+          const nameScrambler = new TextScramble(heroNameEl);
+          setTimeout(() => nameScrambler.setText('Yusuf Dede Yonaldy'), 180);
+          heroNameEl.addEventListener('mouseenter', () => nameScrambler.setText('Yusuf Dede Yonaldy'));
+        }
+        if (heroBadgeEl) {
+          const badgeScrambler = new TextScramble(heroBadgeEl);
+          setTimeout(() => badgeScrambler.setText('INFORMATION_SYSTEMS // SEM_05'), 100);
+        }
+
+        // Hover Scramble on Brand Title
+        document.querySelectorAll('.scramble-hover').forEach((el) => {
+          const scrambler = new TextScramble(el);
+          const original = el.getAttribute('data-scramble') || el.innerText;
+          el.addEventListener('mouseenter', () => scrambler.setText(original));
+        });
+
+        // Initialize Interactive Modules
+        initSpotlightAndTilt();
+        initScrollEffects();
+        initTopNavPill();
+        initWorkbenchWidget();
+        initKineticMarquee();
+        initProjectFilters();
+
+        // Wire Layer Toggles
+        const spiderHeaderBtn = document.getElementById('toggle-spider-header-btn');
+        const spiderFooterBtn = document.getElementById('toggle-spider-footer-btn');
+        if (spiderHeaderBtn) spiderHeaderBtn.addEventListener('click', toggleSpiderFx);
+        if (spiderFooterBtn) spiderFooterBtn.addEventListener('click', toggleSpiderFx);
+
+        const gridHeaderBtn = document.getElementById('toggle-grid-header-btn');
+        const gridMobileBtn = document.getElementById('toggle-grid-mobile-btn');
+        const gridFooterBtn = document.getElementById('toggle-grid-footer-btn');
+        if (gridHeaderBtn) gridHeaderBtn.addEventListener('click', toggleDotGrid);
+        if (gridMobileBtn) gridMobileBtn.addEventListener('click', toggleDotGrid);
+        if (gridFooterBtn) gridFooterBtn.addEventListener('click', toggleDotGrid);
+
+        // Wire Copy Email Buttons
+        const copyHeroBtn = document.getElementById('copy-email-hero-btn');
+        const copyFooterBtn = document.getElementById('copy-email-footer-btn');
+        if (copyHeroBtn) {
+          copyHeroBtn.addEventListener('click', () =>
+            copyTextToClipboard(DEVELOPER_EMAIL, 'Email copied to clipboard', DEVELOPER_EMAIL)
+          );
+        }
+        if (copyFooterBtn) {
+          copyFooterBtn.addEventListener('click', () =>
+            copyTextToClipboard(DEVELOPER_EMAIL, 'Email copied to clipboard', DEVELOPER_EMAIL)
+          );
+        }
+
+        // Wire Project Cards -> Animated SVG Architecture Modal
+        document.querySelectorAll('.project-card').forEach((card) => {
+          const id = card.getAttribute('data-project-id');
+          card.addEventListener('click', () => openArchitectureModal(id));
+          card.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              openArchitectureModal(id);
+            }
+          });
+        });
+
+        closeArchModalBtn.addEventListener('click', closeArchitectureModal);
+        archModal.addEventListener('click', (e) => {
+          if (e.target === archModal) closeArchitectureModal();
+        });
+
+        // Wire Command Palette Triggers & Keyboard Navigation
+        if (openCmdBtn) openCmdBtn.addEventListener('click', openCommandPalette);
+        if (openCmdFooterBtn) openCmdFooterBtn.addEventListener('click', openCommandPalette);
+        if (closeCmdBtn) closeCmdBtn.addEventListener('click', closeCommandPalette);
+
+        cmdModal.addEventListener('click', (e) => {
+          if (e.target === cmdModal) closeCommandPalette();
+        });
+
+        cmdSearchInput.addEventListener('input', (e) => renderCommandList(e.target.value));
+
+        cmdSearchInput.addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            if (filteredCommands.length > 0) {
+              activeCommandIndex = (activeCommandIndex + 1) % filteredCommands.length;
+              updateCommandHighlight(true);
+            }
+          } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            if (filteredCommands.length > 0) {
+              activeCommandIndex = (activeCommandIndex - 1 + filteredCommands.length) % filteredCommands.length;
+              updateCommandHighlight(true);
+            }
+          } else if (e.key === 'Enter') {
+            e.preventDefault();
+            executeCommand(activeCommandIndex);
+          } else if (e.key === 'Escape') {
+            e.preventDefault();
+            closeCommandPalette();
+          }
+        });
+
+        // Global Shortcuts: Ctrl+K / Cmd+K & Escape
+        document.addEventListener('keydown', (e) => {
+          if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+            e.preventDefault();
+            if (cmdModal.classList.contains('is-open')) {
+              closeCommandPalette();
+            } else {
+              openCommandPalette();
+            }
+          } else if (e.key === 'Escape') {
+            if (cmdModal.classList.contains('is-open')) {
+              closeCommandPalette();
+            } else if (archModal.classList.contains('is-open')) {
+              closeArchitectureModal();
+            }
+          }
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
