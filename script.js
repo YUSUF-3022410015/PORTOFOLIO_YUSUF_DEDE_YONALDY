@@ -268,8 +268,8 @@
       // ===================================================================
       // PART B: DEVELOPER WORKSPACE DATA & UI INTERACTIVITY
       // ===================================================================
-      const DEVELOPER_EMAIL = 'yusuf.yonaldy@dev.id';
-      const GITHUB_PROFILE_URL = 'https://github.com/MasYusuf06';
+      const DEVELOPER_EMAIL = 'dedey627@gmail.com';
+      const GITHUB_PROFILE_URL = 'https://github.com/YUSUF-3022410015';
 
       const PROJECTS_DATA = {
         "studymate-ai": { id: "studymate-ai", title: "StudyMate AI", subtitle: "Asisten Belajar Multimodal", category: "EdTech AI", problem: "StudyMate AI dibuat untuk menyelesaikan kebutuhan utama pada domainnya: Website publik untuk membantu siswa memahami materi dan soal melalui teks, foto soal, mode belajar, dan ringkasan materi.", asciiPipeline: "INPUT / USER  -->  APPLICATION  -->  DATA / SERVICE  -->  OUTPUT / REPORT", flowNodes: [{ step: "01. Domain", title: "Core Feature", desc: "Website publik untuk membantu siswa memahami materi dan soal melalui teks, foto soal, mode belajar, dan ringkasan materi." }, { step: "02. Application", title: "Web Interface", desc: "Alur aplikasi dan validasi disusun sesuai kebutuhan pengguna." }, { step: "03. Delivery", title: "Deployment / Data", desc: "Teknologi dan penyimpanan mengikuti dokumentasi proyek." }], architecture: "StudyMate AI didokumentasikan sebagai sistem yang menggabungkan antarmuka web, lapisan pemrosesan, penyimpanan data, dan fitur utama sesuai kebutuhan proyek.", highlights: ["• Next.js digunakan pada implementasi proyek.", "• TypeScript digunakan pada implementasi proyek.", "• Gemini API digunakan pada implementasi proyek."], stack: ["Next.js", "TypeScript", "Gemini API", "IndexedDB", "Vercel"], githubUrl: "https://studymateaivercelapp-bro-yusuf.vercel.app" },
@@ -630,9 +630,9 @@
         {
           id: 'action-github',
           group: 'Quick Actions',
-          label: 'Open GitHub Profile (@MasYusuf06)',
-          hint: 'github.com/MasYusuf06',
-          keywords: 'github repository source code masyusuf06',
+          label: 'Open GitHub Profile (@YUSUF-3022410015)',
+          hint: 'github.com/YUSUF-3022410015',
+          keywords: 'github repository source code yusuf-3022410015',
           icon: 'external',
           action: () => {
             closeCommandPalette();
