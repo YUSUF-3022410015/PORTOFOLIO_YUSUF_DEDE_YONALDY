@@ -478,7 +478,7 @@ body.monograph-carbon .mono-controls select,body.monograph-carbon .mono-controls
         </a>
       </nav>
 
-      <!-- Right: Spider FX Toggle, Dot Grid Toggle & Magnetic Ctrl+K Trigger -->
+      <!-- Right: Spider FX Toggle and Dot Grid Toggle -->
       <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
 
         <!-- Spider FX Toggle Pill -->
@@ -508,21 +508,6 @@ body.monograph-carbon .mono-controls select,body.monograph-carbon .mono-controls
           <span id="grid-header-status" class="font-semibold text-cyan-400">ON</span>
         </button>
 
-        <!-- Magnetic Command Palette Button -->
-        <button
-          id="open-cmd-btn"
-          type="button"
-          aria-label="Open Command Palette"
-          class="magnetic-btn group flex items-center gap-2 rounded-lg border border-white/[0.12] bg-white/[0.05] px-2.5 sm:px-3 py-1.5 text-xs text-zinc-300 hover:border-emerald-400/50 hover:bg-white/[0.09] hover:text-white transition-colors cursor-pointer"
-        >
-          <svg class="h-3.5 w-3.5 text-zinc-400 group-hover:text-emerald-400 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m1.85-5.15a7 7 0 11-14 0 7 7 0 0114 0z" />
-          </svg>
-          <span class="hidden md:inline font-medium">Command</span>
-          <kbd class="inline-flex items-center rounded border border-white/[0.12] bg-[#070709]/90 px-1.5 py-0.5 font-mono text-[10px] font-semibold text-emerald-300">
-            Ctrl K
-          </kbd>
-        </button>
       </div>
     </div>
 
@@ -546,10 +531,8 @@ body.monograph-carbon .mono-controls select,body.monograph-carbon .mono-controls
   <!-- =====================================================================
        MAIN WORKSPACE CONTENT (z-10)
        ===================================================================== -->
-  <div class="mono-controls" aria-label="Monograph controls">
-    <span class="mono-label">MONOGRAPH_LAYER</span>
+  <div class="mono-controls" aria-label="Language controls">
     <select id="language-select" aria-label="Language"><option value="id">ID</option><option value="en">EN</option></select>
-    <button id="theme-toggle" type="button">PAPER / CARBON</button>
   </div>
 
   <main id="top" class="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 pt-10 sm:pt-14 pb-24 space-y-28">
@@ -599,12 +582,6 @@ body.monograph-carbon .mono-controls select,body.monograph-carbon .mono-controls
 
         </div>
 
-        <!-- Tactile Hint Line -->
-        <div class="hero-enter hero-delay-5 flex flex-wrap items-center gap-2 font-mono text-xs text-zinc-500">
-          <span class="text-emerald-400">~</span>
-          <span>Guide the wireframe spiders with your cursor, or hit</span>
-          <kbd class="rounded border border-white/[0.12] bg-white/[0.04] px-1.5 py-0.5 text-[11px] text-zinc-300">Ctrl+K</kbd>
-        </div>
       </div>
 
       <!-- Right Column: Draggable 3D Identity Lanyard -->
@@ -1179,10 +1156,6 @@ body.monograph-carbon .mono-controls select,body.monograph-carbon .mono-controls
           <button id="toggle-grid-footer-btn" type="button" class="hover:text-zinc-300 transition-colors cursor-pointer">
             Dot Grid: <span id="grid-footer-status" class="text-cyan-400">ON</span>
           </button>
-          <span>•</span>
-          <button id="open-cmd-footer-btn" type="button" class="hover:text-zinc-300 transition-colors cursor-pointer">
-            Command Palette [Ctrl+K]
-          </button>
         </div>
       </div>
     </footer>
@@ -1308,6 +1281,7 @@ body.monograph-carbon .mono-controls select,body.monograph-carbon .mono-controls
        ===================================================================== -->
   <div
     id="command-palette-modal"
+    hidden
     role="dialog"
     aria-modal="true"
     aria-label="Command Palette"
@@ -3091,10 +3065,6 @@ body.monograph-carbon .mono-controls select,body.monograph-carbon .mono-controls
 (() => {
   const body = document.body;
   const language = document.getElementById('language-select');
-  const theme = document.getElementById('theme-toggle');
-
-  theme?.addEventListener('click', () => body.classList.toggle('monograph-carbon'));
-
   const card = document.getElementById('identity-card');
   const stage = document.getElementById('identity-lanyard');
   const rig = document.getElementById('lanyard-card-rig');
@@ -3167,5 +3137,204 @@ body.monograph-carbon .mono-controls select,body.monograph-carbon .mono-controls
   applyLanguage(language?.value || 'id');
 })();
 </script>
+  <script id="complete-language-system">
+  (() => {
+    const select = document.getElementById('language-select');
+    const translations = [
+      ['#top-nav-container a:nth-of-type(1)', 'Beranda', 'Workbench'],
+      ['#top-nav-container a:nth-of-type(2)', 'Sistem', 'Systems'],
+      ['#top-nav-container a:nth-of-type(3)', 'Ekosistem', 'Ecosystem'],
+      ['#top-nav-container a:nth-of-type(4)', 'Kontak', 'Connect'],
+      ['#toggle-spider-header-btn .hidden.sm\\:inline', 'Efek Laba-laba:', 'Spider FX:'],
+      ['#toggle-grid-header-btn span:nth-of-type(2)', 'Grid Titik:', 'Dot Grid:'],
+      ['.flex.lg\\:hidden a[href="#projects"]', 'Sistem', 'Systems'],
+      ['.flex.lg\\:hidden a[href="#stack"]', 'Stack', 'Stack'],
+      ['.flex.lg\\:hidden a[href="#contact"]', 'Kontak', 'Connect'],
+      ['.identity-stage-header .identity-reset', 'ATUR ULANG', 'RESET'],
+      ['#hero-heading > span:nth-child(2)', 'Membangun sistem full-stack yang tangguh dan infrastruktur AI multi-LLM.', 'Architecting resilient full-stack systems & multi-LLM AI infrastructure.'],
+      ['a[href="#projects"] span:first-child', 'Jelajahi Sistem', 'Explore Systems'],
+      ['#stack-heading', 'Ekosistem Rekayasa Kinetik', 'Kinetic Engineering Ecosystem'],
+      ['#stack > div:first-child > p', 'Arahkan ke modul untuk menghentikan aliran dan melihat perannya.', 'Hover any module to pause stream & inspect architectural role.'],
+      ['#stack-tooltip-text', 'Arahkan ke teknologi untuk melihat perannya dalam sistem produksi Yusuf.', "Hover any technology badge above to view how it powers Yusuf's production systems."],
+      ['#projects-heading', 'Arsitektur Produksi dan Sistem AI', 'Production Architectures & AI Systems'],
+      ['#project-filter-bar [data-filter="all"]', 'Semua Sistem', 'All Systems'],
+      ['#project-filter-bar [data-filter="ai-routing"]', 'AI dan Routing', 'AI & Routing'],
+      ['#project-filter-bar [data-filter="fullstack-web"]', 'Web Full-Stack', 'Full-Stack Web'],
+      ['#principles-heading', 'Cara Sistem Dimodelkan dan Dikirim', 'How Systems Are Modeled & Shipped'],
+      ['#principles-heading ~ span', 'Ketelitian Sistem Informasi × Kecepatan AI', 'Information Systems Rigor × AI Speed'],
+      ['#contact h2', 'Mari membangun sistem web dan AI yang tangguh bersama.', "Let's build resilient web & AI systems together."],
+      ['#contact h2 + p', 'Tersedia untuk posisi rekayasa perangkat lunak full-stack, integrasi gateway/agent AI, dan kolaborasi produk teknis.', 'Available for full-stack software engineering roles, AI gateway/agent integrations, and technical product collaborations.'],
+      ['#contact .text-emerald-400 span:last-child', 'SIAP BERKOLABORASI', 'READY_FOR_COLLABORATION'],
+      ['#toggle-spider-footer-btn', 'Efek Laba-laba: ON', 'Spider FX: ON'],
+      ['#toggle-grid-footer-btn', 'Grid Titik: ON', 'Dot Grid: ON'],
+      ['#arch-modal-category', 'Arsitektur', 'Architecture'],
+      ['#close-arch-modal-btn', 'Tutup modal arsitektur sistem', 'Close System Architecture Modal'],
+      ['#arch-modal-svg-container', 'Diagram alur data', 'Data-flow diagram'],
+      ['#arch-modal-problem', 'Pernyataan masalah', 'Problem statement'],
+      ['#arch-modal-github-link span', 'Lihat Sumber di GitHub', 'Inspect Source on GitHub'],
+      ['#architecture-modal section:nth-of-type(1) > div:first-child > span:first-child', '01 // TOPOLOGI ALUR DATA LANGSUNG', '01 // LIVE_DATA_FLOW_TOPOLOGY'],
+      ['#architecture-modal section:nth-of-type(1) > div:first-child > span:last-child span:last-child', 'paket sedang dialirkan', 'packets streaming'],
+      ['#architecture-modal section:nth-of-type(2) > div', '02 // PERNYATAAN_MASALAH', '02 // PROBLEM_STATEMENT'],
+      ['#architecture-modal section:nth-of-type(3) > div', '03 // KEPUTUSAN_REKAYASA_UTAMA', '03 // KEY_ENGINEERING_DECISIONS'],
+      ['#architecture-modal section:nth-of-type(4) > div', '04 // SPESIFIKASI_TECH_STACK', '04 // TECH_STACK_SPECIFICATION'],
+      ['#architecture-modal footer span', 'Tekan Esc untuk kembali ke workspace', 'Press Esc to return to workspace']
+    ];
+
+    const projectTranslations = {
+      'studymate-ai': {
+        category: ['AI Edukasi Multimodal', 'Multimodal EdTech AI'],
+        title: ['StudyMate AI', 'StudyMate AI'],
+        subtitle: ['Asisten Belajar AI Multimodal', 'Multimodal AI Learning Assistant'],
+        description: ['Menggabungkan PDF kuliah, diagram tulisan tangan, dan catatan belajar menjadi kerangka konsep, kuis active-recall adaptif, serta tanya jawab berbasis sitasi.', 'Synthesizes lecture PDFs, handwritten diagrams, and study notes into structured conceptual outlines, adaptive active-recall quizzes, and citation-grounded Q&A.']
+      },
+      '9router': {
+        category: ['Gateway API AI Lokal', 'Local AI API Gateway'],
+        title: ['CatatKu', 'CatatKu'],
+        subtitle: ['Router Fallback LLM Cerdas dan Combo Kustom', 'Smart LLM Fallback Router & Custom Combos'],
+        description: ['Gateway API AI lokal yang kompatibel dengan OpenAI untuk mengatur combo model dengan fallback HTTP 429 instan pada LLM cloud dan lokal.', 'Local OpenAI-compatible AI API gateway orchestrating custom model combos with instant HTTP 429 fallback across cloud and local LLMs.']
+      },
+      'ai-cs-dashboard': {
+        category: ['Dukungan Omnichannel Real-time', 'Realtime Omnichannel Support'],
+        title: ['Dashboard Layanan Pelanggan dengan AI Chat', 'Customer Service Dashboard with AI Chat'],
+        subtitle: ['Dukungan Real-time dan Auto-Triage AI', 'Real-time Support & AI Auto-Triage'],
+        description: ['Workspace dukungan real-time yang menggabungkan agen triase AI, deteksi sentimen, penyelesaian berbasis knowledge base, dan pengalihan ke operator manusia.', 'Real-time support workspace combining an automated AI triage agent with sentiment detection, instant knowledge-base resolution, and one-click human operator handoff.']
+      },
+      'operational-crm': {
+        category: ['Sistem Informasi Perusahaan', 'Enterprise Information System'],
+        title: ['Aplikasi CRM', 'CRM Application'],
+        subtitle: ['Aplikasi pengelolaan pelanggan dan pipeline', 'Customer and pipeline management application'],
+        description: ['Sistem relasional untuk mengelola pelanggan dan operasional dengan skema PostgreSQL ternormalisasi, kontrol akses berbasis peran, keamanan tingkat baris, dan audit trail yang tidak dapat diubah.', 'Relational customer relationship and operations suite featuring normalized PostgreSQL schemas, strict role-based auth and row-level security, and immutable audit trails.']
+      }
+    };
+
+    function setText(selector, id, en, language) {
+      document.querySelectorAll(selector).forEach((element) => {
+        element.dataset.idText = id;
+        element.dataset.enText = en;
+        element.textContent = language === 'en' ? en : id;
+      });
+    }
+
+    function applyCompleteLanguage(language) {
+      document.documentElement.lang = language;
+      document.title = language === 'en' ? 'Yusuf Dede Yonaldy | Full-Stack AI Developer' : 'Yusuf Dede Yonaldy | Pengembang AI Full-Stack';
+      translations.forEach(([selector, id, en]) => setText(selector, id, en, language));
+      Object.entries(projectTranslations).forEach(([projectId, values]) => {
+        const card = document.querySelector(`[data-project-id="${projectId}"]`);
+        if (!card) return;
+        const elements = card.querySelectorAll('h3, p.text-xs, p.text-sm');
+        if (elements[0]) elements[0].textContent = language === 'en' ? values.title[1] : values.title[0];
+        if (elements[1]) elements[1].textContent = language === 'en' ? values.subtitle[1] : values.subtitle[0];
+        const description = card.querySelector('p.text-sm.text-zinc-400');
+        if (description) description.textContent = language === 'en' ? values.description[1] : values.description[0];
+        const category = card.querySelector('.text-emerald-400, .text-cyan-400');
+        if (category && category.parentElement) category.parentElement.lastElementChild.textContent = language === 'en' ? values.category[1] : values.category[0];
+      });
+      if (select && select.value !== language) select.value = language;
+    }
+
+    select?.addEventListener('change', (event) => applyCompleteLanguage(event.target.value));
+    if (select) select.value = 'id';
+    applyCompleteLanguage('id');
+  })();
+  </script>
+  <script id="full-ui-language-override">
+  (() => {
+    const select = document.getElementById('language-select');
+    const pairs = {
+      'Available for collaboration': 'Tersedia untuk kolaborasi',
+      '01 // STACK_AND_INFRASTRUCTURE': '01 // STACK_DAN_INFRASTRUKTUR',
+      '02 // FEATURED_SYSTEMS': '02 // SISTEM_UNGGULAN',
+      '03 // SYSTEM_DYNAMICS_APPROACH': '03 // PENDEKATAN_SYSTEM_DYNAMICS',
+      'MULTIMODAL_INGEST': 'PENGOLAHAN_MULTIMODAL',
+      'POSTGRESQL_RLS // RBAC_ACTIVE': 'POSTGRESQL_RLS // RBAC_AKTIF',
+      'AUDIT_SYNCED': 'AUDIT_TERSINKRON',
+      'Workbench': 'Beranda', 'Systems': 'Sistem', 'Ecosystem': 'Ekosistem', 'Connect': 'Kontak',
+      'Spider FX:': 'Efek Laba-laba:', 'Spider:': 'Laba-laba:', 'Dot Grid:': 'Grid Titik:', 'Grid:': 'Grid:',
+      'ON': 'AKTIF', 'OFF': 'NONAKTIF',
+      'Architecting resilient full-stack systems & multi-LLM AI infrastructure.': 'Membangun sistem full-stack yang tangguh dan infrastruktur AI multi-LLM.',
+      'Explore Systems': 'Jelajahi Sistem', 'RESET': 'ATUR ULANG',
+      'Kinetic Engineering Ecosystem': 'Ekosistem Rekayasa Kinetik',
+      'Hover any module to pause stream & inspect architectural role.': 'Arahkan ke modul untuk menghentikan aliran dan melihat perannya.',
+      "Hover any technology badge above to view how it powers Yusuf's production systems.": 'Arahkan ke lencana teknologi untuk melihat perannya dalam sistem produksi Yusuf.',
+      '10 core modules': '10 modul inti',
+      'Production Architectures & AI Systems': 'Arsitektur Produksi dan Sistem AI',
+      'All Systems': 'Semua Sistem', 'AI & Routing': 'AI dan Routing', 'Full-Stack Web': 'Web Full-Stack',
+      'Multimodal EdTech AI': 'AI Edukasi Multimodal', 'Multimodal AI Learning Assistant': 'Asisten Belajar AI Multimodal',
+      'Local AI API Gateway': 'Gateway API AI Lokal', 'Smart LLM Fallback Router & Custom Combos': 'Router Fallback LLM Cerdas dan Combo Kustom',
+      'Realtime Omnichannel Support': 'Dukungan Omnichannel Real-time', 'Real-time Support & AI Auto-Triage': 'Dukungan Real-time dan Auto-Triage AI',
+      'Enterprise Information System': 'Sistem Informasi Perusahaan', 'Customer and pipeline management application': 'Aplikasi pengelolaan pelanggan dan pipeline',
+      'Inspect Flow': 'Lihat Alur',
+      'Synthesizes lecture PDFs, handwritten diagrams, and study notes into structured conceptual outlines, adaptive active-recall quizzes, and citation-grounded Q&A.': 'Menggabungkan PDF kuliah, diagram tulisan tangan, dan catatan belajar menjadi kerangka konsep, kuis active-recall adaptif, serta tanya jawab berbasis sitasi.',
+      'Local OpenAI-compatible AI API gateway orchestrating custom model combos (': 'Gateway API AI lokal yang kompatibel dengan OpenAI untuk mengatur combo model (',
+      'Real-time support workspace combining an automated AI triage agent with sentiment detection, instant knowledge-base resolution, and one-click human operator handoff.': 'Workspace dukungan real-time yang menggabungkan agen triase AI, deteksi sentimen, penyelesaian berbasis knowledge base, dan pengalihan ke operator manusia.',
+      'Relational customer relationship and operations suite featuring normalized PostgreSQL schemas, strict Role-Based Auth & Row-Level Security, and immutable audit trails.': 'Sistem relasional untuk mengelola pelanggan dan operasional dengan skema PostgreSQL ternormalisasi, kontrol akses berbasis peran, keamanan tingkat baris, dan audit trail yang tidak dapat diubah.',
+      'How Systems Are Modeled & Shipped': 'Cara Sistem Dimodelkan dan Dikirim',
+      'Information Systems Rigor × AI Speed': 'Ketelitian Sistem Informasi × Kecepatan AI',
+      'Relational Schemas & Guardrails': 'Skema Relasional dan Pengamanan',
+      'Every application begins with normalized entity-relationship modeling, deterministic state transitions, and database-enforced access control.': 'Setiap aplikasi dimulai dengan pemodelan entity-relationship ternormalisasi, transisi status deterministik, dan kontrol akses yang ditegakkan database.',
+      'Offline-first Local Data': 'Data Lokal Offline-first',
+      'Eliminating single-provider bottlenecks by routing inference across priority combos with automatic quota detection and sub-second failover.': 'Menghilangkan ketergantungan pada satu penyedia dengan mengarahkan inferensi melalui combo prioritas, deteksi kuota otomatis, dan failover kurang dari satu detik.',
+      'Responsive Web Interfaces': 'Antarmuka Web Responsif',
+      'Designing low-latency interfaces where real-time streams, command palettes, and responsive micro-interactions make complex workflows effortless.': 'Merancang antarmuka berlatensi rendah dengan aliran real-time dan interaksi mikro responsif agar alur kerja kompleks terasa mudah.',
+      'READY_FOR_COLLABORATION': 'SIAP BERKOLABORASI', "Let's build resilient web & AI systems together.": 'Mari membangun sistem web dan AI yang tangguh bersama.',
+      'Available for full-stack software engineering roles, AI gateway/agent integrations, and technical product collaborations.': 'Tersedia untuk posisi rekayasa perangkat lunak full-stack, integrasi gateway/agent AI, dan kolaborasi produk teknis.',
+      'WhatsApp': 'WhatsApp', 'Information Systems (Sem 5)': 'Sistem Informasi (Semester 5)',
+      'Architecture': 'Arsitektur', 'Close System Architecture Modal': 'Tutup modal arsitektur sistem',
+      'packets streaming': 'paket sedang dialirkan', 'Problem statement': 'Pernyataan masalah',
+      'Inspect Source on GitHub': 'Lihat Sumber di GitHub', 'Press': 'Tekan', 'to return to workspace': 'untuk kembali ke workspace',
+      '01 // LIVE_DATA_FLOW_TOPOLOGY': '01 // TOPOLOGI_ALUR_DATA_LANGSUNG', '02 // PROBLEM_STATEMENT': '02 // PERNYATAAN_MASALAH',
+      '03 // KEY_ENGINEERING_DECISIONS': '03 // KEPUTUSAN_REKAYASA_UTAMA', '04 // TECH_STACK_SPECIFICATION': '04 // SPESIFIKASI_TECH_STACK',
+      'Copy Email': 'Salin Email', 'Copy Email (dedey627@gmail.com)': 'Salin Email (dedey627@gmail.com)',
+      'Language': 'Bahasa', 'Language controls': 'Kontrol bahasa', 'Filter projects by category': 'Filter proyek berdasarkan kategori',
+      'Inspect System Architecture for ': 'Lihat arsitektur sistem ', 'Dashboard Customer Service dengan AI Chat': 'Dashboard Layanan Pelanggan dengan AI Chat',
+      'Customer Chat': 'Chat Pelanggan', 'Omnichannel Widget': 'Widget Omnichannel', 'AI Auto-Triage': 'Auto-Triage AI',
+      'Agent Cockpit': 'Panel Operator', '1-Click Human Handoff': 'Pengalihan ke Operator Sekali Klik',
+      'Pipeline Board': 'Papan Pipeline', 'Role Policy Validation': 'Validasi Kebijakan Peran', 'Relational Core': 'Inti Relasional',
+      'Deals, Contacts, Tasks': 'Deal, Kontak, Tugas', 'Audit & KPI Logs': 'Log Audit dan KPI', 'DB Trigger History': 'Riwayat Trigger Database',
+      'Quiz & Outline': 'Kuis dan Kerangka', 'PDF + Notes': 'PDF dan Catatan', 'Text & Slides': 'Teks dan Slide', 'Notes & Diagrams': 'Catatan dan Diagram',
+      'Adaptive Quiz UI': 'UI Kuis Adaptif', 'Streaming Next.js': 'Streaming Next.js', 'Supabase Store': 'Penyimpanan Supabase',
+      'Decks & Progress': 'Materi dan Progres', 'App / Hermes CLI': 'Aplikasi / Hermes CLI', 'Primary Priority': 'Prioritas Utama',
+      'Zero-Cost Fallback': 'Fallback Tanpa Biaya', 'Offline Air-Gap': 'Offline Tanpa Jaringan', 'WebSocket Event Bus': 'Bus Event WebSocket',
+      'KB RAG + Sentiment': 'RAG Knowledge Base + Sentimen', 'Local Ollama': 'Ollama Lokal', 'Combo + 429 Failover': 'Combo + Failover 429',
+      'Customer support queues become bottlenecked by repetitive FAQ tickets while static bots fail to smoothly transfer nuanced issues to human agents.': 'Antrean dukungan pelanggan terhambat tiket FAQ berulang, sementara bot statis gagal mengalihkan masalah rumit ke operator manusia.',
+      'Students struggle to consolidate dense lecture PDFs, handwritten notes, and whiteboard diagrams into structured study guides and active-recall practice tests without losing source accuracy.': 'Mahasiswa kesulitan menggabungkan PDF kuliah, catatan tulisan tangan, dan diagram papan tulis menjadi panduan belajar terstruktur serta latihan active-recall tanpa kehilangan akurasi sumber.',
+      'Relying on a single LLM endpoint exposes developer tools and web apps to abrupt HTTP 429 rate limits, token quota exhaustion, and latency spikes.': 'Ketergantungan pada satu endpoint LLM membuat alat pengembang dan aplikasi web rentan terhadap batas HTTP 429, kuota token habis, dan lonjakan latensi.',
+      'Disconnected spreadsheets cause lost sales leads, unclear team ownership, and zero audit visibility across operational deal stages.': 'Spreadsheet yang terpisah menyebabkan prospek penjualan hilang, kepemilikan tugas tidak jelas, dan audit tahap deal tidak terlihat.'
+    };
+    const reverse = Object.fromEntries(Object.entries(pairs).map(([en, id]) => [id, en]));
+    const original = new Map();
+    const translate = (language) => {
+      document.documentElement.lang = language;
+      document.querySelectorAll('*').forEach((element) => {
+        for (const attribute of ['aria-label', 'title', 'placeholder']) {
+          if (element.hasAttribute(attribute)) {
+            const value = element.getAttribute(attribute);
+            const base = original.get(element + attribute) || value;
+            original.set(element + attribute, base);
+            const translated = language === 'id' ? pairs[base] : reverse[base];
+            if (translated) element.setAttribute(attribute, translated);
+          }
+        }
+      });
+      const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+      const nodes = [];
+      while (walker.nextNode()) nodes.push(walker.currentNode);
+      nodes.forEach((node) => {
+        const value = node.nodeValue;
+        const trimmed = value.trim();
+        if (!trimmed || !pairs[trimmed] && !reverse[trimmed]) return;
+        const base = node.dataset?.baseText || trimmed;
+        if (node.dataset) node.dataset.baseText = base;
+        const translated = language === 'id' ? pairs[base] : reverse[base];
+        if (translated) node.nodeValue = value.replace(trimmed, translated);
+      });
+    };
+    const apply = () => translate(select?.value === 'en' ? 'en' : 'id');
+    select?.addEventListener('change', apply);
+    window.addEventListener('load', apply);
+    apply();
+  })();
+  </script>
 </body>
 </html>
