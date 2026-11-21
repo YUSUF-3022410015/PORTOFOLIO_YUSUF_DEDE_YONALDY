@@ -46,6 +46,10 @@
       box-sizing: border-box;
     }
 
+    html, body {
+      overflow-x: hidden;
+    }
+
     body {
       background-color: var(--bg-obsidian);
       color: #f4f4f5;
@@ -216,17 +220,32 @@
       -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
     }
 
-    .marquee-track-left {
-      display: flex;
-      width: max-content;
-      animation: marqueeLeft 34s linear infinite;
-      will-change: transform;
+    @keyframes stackTrainLeft {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
     }
+    @keyframes stackTrainRight {
+      from { transform: translateX(-50%); }
+      to { transform: translateX(0); }
+    }
+    .marquee-track-left,
     .marquee-track-right {
       display: flex;
       width: max-content;
-      animation: marqueeRight 38s linear infinite;
+      gap: .75rem;
       will-change: transform;
+    }
+    .marquee-track-left { animation: stackTrainLeft 24s linear infinite; }
+    .marquee-track-right { animation: stackTrainRight 28s linear infinite; }
+    .marquee-badge {
+      justify-content: center;
+      flex: 0 0 132px;
+      white-space: nowrap;
+    }
+    .marquee-wrapper:hover .marquee-track-left,
+    .marquee-wrapper:hover .marquee-track-right { animation-play-state: paused; }
+    @media (prefers-reduced-motion: reduce) {
+      .marquee-track-left, .marquee-track-right { animation: none; }
     }
     .marquee-wrapper:hover .marquee-track-left,
     .marquee-wrapper:hover .marquee-track-right {
@@ -300,8 +319,51 @@
       }
     }
   </style>
+<style id="monograph-collaboration">
+:root{--mono-paper:#f4f2ec;--mono-ink:#111215;--mono-orange:#e84a1b;--mono-rule:rgba(17,18,21,.14)}
+body.monograph-collab{background:#0c0d10;color:#ececee}
+body.monograph-collab:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;background-image:linear-gradient(rgba(236,236,238,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(236,236,238,.035) 1px,transparent 1px);background-size:32px 32px;mask-image:linear-gradient(to bottom,rgba(0,0,0,.65),transparent 75%)}
+body.monograph-collab .mono-panel{border:1px solid rgba(236,236,238,.16);background:rgba(19,21,27,.94);box-shadow:0 18px 42px -25px rgba(0,0,0,.75)}
+body.monograph-collab .mono-panel p{color:#c4c7d0}
+body.monograph-collab .mono-label{font:600 11px/1.2 monospace;letter-spacing:.14em;text-transform:uppercase;color:#ff7144}
+body.monograph-collab .mono-photo{width:112px;height:112px;object-fit:cover;border:2px solid #ff5a26;filter:grayscale(.08);box-shadow:8px 8px 0 rgba(255,90,38,.18)}
+body.monograph-collab .mono-controls{position:fixed;right:16px;bottom:16px;z-index:45;display:flex;gap:8px;align-items:center}
+body.monograph-collab .mono-controls select,body.monograph-collab .mono-controls button{border:1px solid rgba(236,236,238,.25);background:#13151b;color:#ececee;padding:8px 10px;font:600 11px monospace;cursor:pointer}
+body.monograph-carbon{background:#0c0d10;color:#ececee}
+body.monograph-carbon:before{background-image:linear-gradient(rgba(236,236,238,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(236,236,238,.035) 1px,transparent 1px)}
+body.monograph-carbon .mono-panel{border-color:rgba(236,236,238,.16);background:rgba(19,21,27,.94);color:#ececee}
+body.monograph-carbon .mono-controls select,body.monograph-carbon .mono-controls button{background:#13151b;color:#ececee;border-color:rgba(236,236,238,.25)}
+
+
+/* Minimal identity interaction: one card, one useful gesture. */
+.identity-stage{padding:0;overflow:visible;background:transparent!important;border:0!important;box-shadow:none!important}
+.identity-stage-header{display:flex;justify-content:space-between;align-items:center;padding:0 0 10px}
+.identity-reset{border:1px solid rgba(236,236,238,.22);background:rgba(255,255,255,.04);color:#c4c7d0;padding:5px 8px;font:600 10px monospace;cursor:pointer}
+.identity-lanyard{position:relative;min-height:510px;display:flex;justify-content:center;perspective:1200px;cursor:grab;user-select:none;touch-action:none;overflow:visible}
+.identity-lanyard.is-dragging{cursor:grabbing}
+.lanyard-anchor{position:absolute;top:8px;left:50%;z-index:30;width:100%;height:38px;transform:translateX(-50%);border:1px solid rgba(236,236,238,.24);border-radius:8px;background:#14161d;box-shadow:0 8px 18px #0005}
+.lanyard-anchor:before,.lanyard-anchor:after{content:"";position:absolute;top:14px;width:12px;height:12px;border:2px solid #8f98a6;border-radius:50%;background:#0c0d10}.lanyard-anchor:before{left:28px}.lanyard-anchor:after{right:28px}
+.lanyard-ring{position:absolute;top:34px;left:50%;z-index:30;width:22px;height:28px;transform:translateX(-50%);border:3px solid #9aa3b1;border-radius:50%;background:transparent}
+.lanyard-straps{position:absolute;top:0;left:50%;z-index:10;width:520px;height:510px;transform:translateX(-50%);pointer-events:none;overflow:visible}
+.lanyard-card-rig{position:absolute;top:48px;left:50%;z-index:20;transform:translateX(-50%);transform-origin:50% 0;will-change:transform}
+.lanyard-clasp{position:relative;z-index:30;width:56px;height:66px;margin:auto;filter:drop-shadow(0 4px 5px #0008)}
+.lanyard-clasp:before{content:"";position:absolute;top:0;left:14px;width:28px;height:24px;border:3px solid #c1c8d2;border-radius:4px 4px 12px 12px;background:linear-gradient(135deg,#f2f4f7,#596270)}
+.lanyard-clasp:after{content:"";position:absolute;top:19px;left:17px;width:22px;height:40px;border:4px solid #aeb7c4;border-top:0;border-radius:0 0 16px 16px}
+.lanyard-clasp span{position:absolute;top:21px;left:24px;width:9px;height:9px;border:2px solid #ff5a26;border-radius:50%;z-index:2}
+.identity-card{position:relative;width:280px;height:390px;transform-style:preserve-3d;will-change:transform;outline:none}
+.identity-card:focus-visible{box-shadow:0 0 0 3px rgba(255,90,38,.45)}
+.id-card-spin-body{position:relative;width:100%;height:100%;transform-style:preserve-3d;will-change:transform}
+.id-card-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border:1px solid #aeb3bc;border-radius:18px;overflow:hidden;background:#fffefa;color:#15171b;box-shadow:0 28px 55px -18px #0008,0 0 0 1px #ffffff,inset 0 1px 0 #fff}
+.id-card-front{padding:18px 18px 16px;text-align:center}.id-card-back{transform:rotateY(180deg);padding:18px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:space-between}
+.id-card-code{display:flex;justify-content:space-between;color:#e84a1b;font:700 9px monospace;letter-spacing:.08em}.id-card-slot{width:58px;height:11px;margin:12px auto;border:2px solid #9ca3af;border-radius:999px;background:#e5e7eb;box-shadow:inset 0 2px 3px #0002}
+.id-card-front img{width:100%;height:245px;object-fit:cover;object-position:50% 25%;border:2px solid #d33;border-radius:14px;display:block}.id-card-front h3,.id-card-back h3{margin:12px 0 5px;font:700 17px/1.15 'Plus Jakarta Sans',sans-serif;letter-spacing:.02em}.id-card-front p,.id-card-back p{margin:0;color:#d33;font:700 11px monospace;letter-spacing:.16em}.id-card-front small,.id-card-back small{display:block;margin-top:8px;color:#68707d;font:600 9px monospace;letter-spacing:.08em}
+.id-card-back-mark{display:grid;place-items:center;width:58px;height:58px;border:1px solid #b5bbc5;border-radius:50%;color:#e84a1b;font:700 20px 'Plus Jakarta Sans'}.id-card-back-line{width:66px;height:4px;border-radius:4px;background:#b5bbc5}
+.identity-hint{text-align:center;color:#8e94a2;font:11px monospace;margin:0 0 10px}.identity-links{display:flex;justify-content:center;gap:18px;font:600 11px monospace}.identity-links a{color:#ff9b7d;text-decoration:underline}
+@media (max-width:640px){.identity-lanyard{min-height:470px}.identity-card{width:248px;height:348px}.id-card-front img{height:214px}.id-card-front h3,.id-card-back h3{font-size:14px}}
+
+</style>
 </head>
-<body class="bg-[#070709] text-zinc-100 font-sans antialiased selection:bg-emerald-500/25 selection:text-emerald-300 relative min-h-screen">
+<body class="bg-[#070709] text-zinc-100 font-sans antialiased selection:bg-emerald-500/25 selection:text-emerald-300 relative min-h-screen monograph-collab">
 
   <!-- =====================================================================
        HAIRLINE GRADIENT SCROLL-PROGRESS BAR (FIXED TOP z-50)
@@ -484,6 +546,12 @@
   <!-- =====================================================================
        MAIN WORKSPACE CONTENT (z-10)
        ===================================================================== -->
+  <div class="mono-controls" aria-label="Monograph controls">
+    <span class="mono-label">MONOGRAPH_LAYER</span>
+    <select id="language-select" aria-label="Language"><option value="id">ID</option><option value="en">EN</option></select>
+    <button id="theme-toggle" type="button">PAPER / CARBON</button>
+  </div>
+
   <main id="top" class="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 pt-10 sm:pt-14 pb-24 space-y-28">
 
     <!-- ===================================================================
@@ -497,7 +565,7 @@
         <!-- Identity Context Pill -->
         <div class="hero-enter hero-delay-1 inline-flex flex-wrap items-center gap-2 rounded-full border border-white/[0.1] bg-white/[0.03] px-3.5 py-1.5 font-mono text-xs text-zinc-300 backdrop-blur-md">
           <span class="h-2 w-2 rounded-full bg-emerald-400"></span>
-          <span id="hero-scramble-badge" class="text-emerald-300 font-medium">INFORMATION_SYSTEMS // SEM_05</span>
+          <span id="hero-scramble-badge" class="text-emerald-300 font-medium">INFORMATION_SYSTEMS // SEM_05 // VIBE_CODER // HERMES + 9ROUTER</span>
         </div>
 
         <!-- Main Heading with Kinetic Scramble -->
@@ -512,8 +580,10 @@
 
         <!-- Bio Summary -->
         <p class="hero-enter hero-delay-3 text-sm sm:text-base text-zinc-400 leading-relaxed max-w-xl">
-          Semester 5 <span class="text-zinc-200 font-medium">Information Systems</span> builder combining <span class="text-zinc-200 font-medium">System Dynamics</span> thinking with full-stack engineering—crafting fault-tolerant API gateways, multimodal study engines, and real-time operational platforms.
+          Mahasiswa semester 5 <span class="text-zinc-200 font-medium">Sistem Informasi</span> dan vibe coder yang membangun dengan bantuan AI agent <span class="text-zinc-200 font-medium">HERMES</span> serta gateway <span class="text-zinc-200 font-medium">9router</span>. Menggabungkan pemikiran <span class="text-zinc-200 font-medium">System Dynamics</span> dengan engineering full-stack untuk membuat API gateway, aplikasi multimodal, dan platform operasional real-time.
         </p>
+
+
 
         <!-- Magnetic CTA Buttons -->
         <div class="hero-enter hero-delay-4 flex flex-wrap items-center gap-3 pt-1">
@@ -527,29 +597,6 @@
             </svg>
           </a>
 
-          <button
-            id="copy-email-hero-btn"
-            type="button"
-            class="magnetic-btn inline-flex items-center justify-center gap-2 rounded-xl border border-white/[0.1] bg-white/[0.04] px-4 py-2.5 text-sm font-medium text-zinc-200 hover:border-emerald-400/40 hover:bg-white/[0.08] transition-colors cursor-pointer"
-          >
-            <svg class="h-4 w-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-            </svg>
-            <span>Copy Email</span>
-          </button>
-
-          <a
-            href="https://github.com/YUSUF-3022410015"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="GitHub Profile"
-            class="magnetic-btn inline-flex items-center justify-center gap-2 rounded-xl border border-white/[0.1] bg-white/[0.03] px-3.5 py-2.5 text-sm font-medium text-zinc-300 hover:border-white/[0.22] hover:text-white transition-colors"
-          >
-            <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
-            </svg>
-            <span>GitHub</span>
-          </a>
         </div>
 
         <!-- Tactile Hint Line -->
@@ -560,208 +607,41 @@
         </div>
       </div>
 
-      <!-- Right Column: Interactive Tabbed Workbench Widget -->
+      <!-- Right Column: Draggable 3D Identity Lanyard -->
       <div id="workbench-widget" class="hero-enter hero-delay-3 lg:col-span-6 min-w-0">
-        <div class="spotlight-card rounded-2xl shadow-2xl overflow-hidden">
-
-          <!-- Workbench Window Chrome + Sliding Pill Tabs -->
-          <div class="relative z-10 flex flex-wrap items-center justify-between gap-2 border-b border-white/[0.08] bg-white/[0.02] px-4 py-3">
-            <!-- Window Dots -->
-            <div class="flex items-center gap-1.5">
-              <span class="h-2.5 w-2.5 rounded-full bg-rose-500/70"></span>
-              <span class="h-2.5 w-2.5 rounded-full bg-amber-400/70"></span>
-              <span class="h-2.5 w-2.5 rounded-full bg-emerald-400/80"></span>
-            </div>
-
-            <!-- Sliding Pill Tab Switcher -->
-            <div
-              id="wb-tab-bar"
-              role="tablist"
-              aria-label="Developer Workbench Tabs"
-              class="relative flex items-center rounded-lg border border-white/[0.08] bg-[#070709]/80 p-0.5 font-mono text-xs"
-            >
-              <!-- Sliding Pill Indicator -->
-              <div
-                id="wb-tab-pill"
-                aria-hidden="true"
-                class="absolute top-0.5 bottom-0.5 left-0.5 rounded-md bg-white/[0.1] border border-white/[0.1] transition-all duration-300 ease-out pointer-events-none"
-              ></div>
-
-              <button
-                type="button"
-                role="tab"
-                aria-selected="true"
-                data-wb-tab="terminal"
-                class="wb-tab-btn relative z-10 rounded-md px-2.5 py-1 text-emerald-300 font-medium transition-colors cursor-pointer"
-              >
-                terminal.sh
-              </button>
-              <button
-                type="button"
-                role="tab"
-                aria-selected="false"
-                data-wb-tab="profile"
-                class="wb-tab-btn relative z-10 rounded-md px-2.5 py-1 text-zinc-400 hover:text-zinc-200 transition-colors cursor-pointer"
-              >
-                profile.json
-              </button>
-              <button
-                type="button"
-                role="tab"
-                aria-selected="false"
-                data-wb-tab="telemetry"
-                class="wb-tab-btn relative z-10 rounded-md px-2.5 py-1 text-zinc-400 hover:text-zinc-200 transition-colors cursor-pointer"
-              >
-                telemetry
-              </button>
-            </div>
+        <div class="identity-stage" aria-label="Kartu identitas Yusuf Dede Yonaldy">
+          <div class="identity-stage-header">
+            <span></span>
+            <button id="identity-reset" type="button" class="identity-reset">RESET</button>
           </div>
-
-          <!-- TAB 1: INTERACTIVE TERMINAL (terminal.sh) -->
-          <div id="wb-panel-terminal" role="tabpanel" class="relative z-10 p-4 sm:p-5 space-y-3 font-mono text-xs">
-            <!-- Quick Preset Command Chips -->
-            <div class="flex flex-wrap items-center gap-1.5 pb-1">
-              <span class="text-[11px] text-zinc-500 mr-1">presets:</span>
-              <button type="button" data-term-cmd="whoami" class="term-preset-btn rounded-md border border-white/[0.08] bg-white/[0.03] px-2 py-0.5 text-[11px] text-emerald-300 hover:border-emerald-400/40 hover:bg-emerald-500/10 transition-colors cursor-pointer">
-                whoami
-              </button>
-              <button type="button" data-term-cmd="stack --core" class="term-preset-btn rounded-md border border-white/[0.08] bg-white/[0.03] px-2 py-0.5 text-[11px] text-cyan-300 hover:border-cyan-400/40 hover:bg-cyan-500/10 transition-colors cursor-pointer">
-                stack --core
-              </button>
-              <button type="button" data-term-cmd="projects --list" class="term-preset-btn rounded-md border border-white/[0.08] bg-white/[0.03] px-2 py-0.5 text-[11px] text-zinc-300 hover:border-white/25 hover:bg-white/[0.07] transition-colors cursor-pointer">
-                projects --list
-              </button>
-              <button type="button" data-term-cmd="ping --status" class="term-preset-btn rounded-md border border-white/[0.08] bg-white/[0.03] px-2 py-0.5 text-[11px] text-zinc-300 hover:border-white/25 hover:bg-white/[0.07] transition-colors cursor-pointer">
-                ping --status
-              </button>
-            </div>
-
-            <!-- Scrollable Terminal Output Feed -->
-            <div
-              id="terminal-output"
-              class="h-[225px] overflow-y-auto rounded-xl border border-white/[0.06] bg-[#050507]/90 p-3.5 space-y-2.5 leading-relaxed text-zinc-300"
-            >
-              <!-- Populated on load with initial whoami boot output -->
-            </div>
-
-            <!-- Interactive Command Prompt Input -->
-            <form id="terminal-form" class="flex items-center gap-2 rounded-xl border border-white/[0.08] bg-[#050507] px-3 py-2 focus-within:border-emerald-400/50 transition-colors">
-              <span class="text-emerald-400 font-semibold select-none">yusuf@dev:~$</span>
-              <input
-                id="terminal-input"
-                type="text"
-                autocomplete="off"
-                spellcheck="false"
-                placeholder="Type command (whoami, stack --core, projects --list, clear)..."
-                aria-label="Interactive terminal input"
-                class="w-full bg-transparent text-xs text-zinc-100 placeholder-zinc-600 focus:outline-none"
-              />
-              <button
-                type="submit"
-                class="rounded bg-white/[0.06] px-2 py-0.5 text-[10px] text-zinc-400 hover:text-emerald-300 transition-colors cursor-pointer"
-              >
-                RUN
-              </button>
-            </form>
-          </div>
-
-          <!-- TAB 2: SYNTAX-HIGHLIGHTED profile.json -->
-          <div id="wb-panel-profile" role="tabpanel" class="hidden relative z-10 p-4 sm:p-5 space-y-3 font-mono text-xs">
-            <div class="flex items-center justify-between">
-              <div class="inline-flex items-center gap-2 text-[11px] text-emerald-300">
-                <span class="h-2 w-2 rounded-full bg-emerald-400 animate-ping"></span>
-                <span>status: "Available for collaboration"</span>
-              </div>
-              <button
-                id="copy-json-btn"
-                type="button"
-                class="inline-flex items-center gap-1.5 rounded-lg border border-white/[0.1] bg-white/[0.04] px-2.5 py-1 text-[11px] text-zinc-200 hover:border-emerald-400/50 hover:text-emerald-300 transition-colors cursor-pointer"
-              >
-                <svg class="h-3.5 w-3.5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                </svg>
-                <span>Copy JSON</span>
-              </button>
-            </div>
-
-            <div class="h-[268px] overflow-auto rounded-xl border border-white/[0.06] bg-[#050507]/90 p-3.5 leading-relaxed">
-              <pre id="profile-json-code" class="text-zinc-300"><code><span class="text-zinc-500">{</span>
-  <span class="text-cyan-300">"name"</span><span class="text-zinc-500">:</span> <span class="text-emerald-300">"Yusuf Dede Yonaldy"</span><span class="text-zinc-500">,</span>
-  <span class="text-cyan-300">"handle"</span><span class="text-zinc-500">:</span> <span class="text-emerald-300">"@YUSUF-3022410015"</span><span class="text-zinc-500">,</span>
-  <span class="text-cyan-300">"education"</span><span class="text-zinc-500">: {</span>
-    <span class="text-cyan-300">"major"</span><span class="text-zinc-500">:</span> <span class="text-emerald-300">"Information Systems"</span><span class="text-zinc-500">,</span>
-    <span class="text-cyan-300">"semester"</span><span class="text-zinc-500">:</span> <span class="text-amber-300">5</span><span class="text-zinc-500">,</span>
-    <span class="text-cyan-300">"focus"</span><span class="text-zinc-500">:</span> <span class="text-emerald-300">"Full-Stack Web &amp; AI Systems"</span>
-  <span class="text-zinc-500">},</span>
-  <span class="text-cyan-300">"coreStack"</span><span class="text-zinc-500">: [</span>
-    <span class="text-emerald-300">"Next.js"</span><span class="text-zinc-500">,</span> <span class="text-emerald-300">"TypeScript"</span><span class="text-zinc-500">,</span> <span class="text-emerald-300">"Supabase"</span><span class="text-zinc-500">,</span>
-    <span class="text-emerald-300">"CatatKu"</span><span class="text-zinc-500">,</span> <span class="text-emerald-300">"Hermes CLI"</span><span class="text-zinc-500">,</span> <span class="text-emerald-300">"System Dynamics"</span>
-  <span class="text-zinc-500">],</span>
-  <span class="text-cyan-300">"availability"</span><span class="text-zinc-500">:</span> <span class="text-emerald-300">"Available for collaboration"</span><span class="text-zinc-500">,</span>
-  <span class="text-cyan-300">"timezone"</span><span class="text-zinc-500">:</span> <span class="text-emerald-300">"UTC+7 (WIB)"</span>
-<span class="text-zinc-500">}</span></code></pre>
-            </div>
-          </div>
-
-          <!-- TAB 3: LIVE TELEMETRY & SPARKLINE -->
-          <div id="wb-panel-telemetry" role="tabpanel" class="hidden relative z-10 p-4 sm:p-5 space-y-3.5 font-mono text-xs">
-            <!-- Top Metric Tiles -->
-            <div class="grid grid-cols-2 gap-2.5">
-              <div class="rounded-xl border border-white/[0.06] bg-[#050507]/90 p-3">
-                <div class="text-[10px] uppercase tracking-wider text-zinc-500">Local Time (UTC+7 / WIB)</div>
-                <div id="wib-live-clock" class="mt-1 text-base sm:text-lg font-bold text-cyan-300 tabular-nums">
-                  18:00:00 WIB
-                </div>
-              </div>
-              <div class="rounded-xl border border-white/[0.06] bg-[#050507]/90 p-3">
-                <div class="text-[10px] uppercase tracking-wider text-zinc-500">CatatKu Gateway Latency</div>
-                <div class="mt-1 flex items-baseline gap-2">
-                  <span id="telemetry-latency-val" class="text-base sm:text-lg font-bold text-emerald-300 tabular-nums">14.2 ms</span>
-                  <span class="text-[10px] text-emerald-400">OPTIMAL</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Animated SVG Latency / Throughput Sparkline -->
-            <div class="rounded-xl border border-white/[0.06] bg-[#050507]/90 p-3 space-y-2">
-              <div class="flex items-center justify-between text-[11px]">
-                <span class="text-zinc-400">Inference &amp; Edge Throughput Sparkline</span>
-                <span id="telemetry-rps-val" class="text-cyan-300 tabular-nums">128 req/m</span>
-              </div>
-              <svg id="telemetry-sparkline-svg" viewBox="0 0 360 74" class="w-full h-16 overflow-visible">
-                <defs>
-                  <linearGradient id="sparkGrad" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="#34d399" stop-opacity="0.35" />
-                    <stop offset="100%" stop-color="#34d399" stop-opacity="0.0" />
-                  </linearGradient>
-                </defs>
-                <!-- Subtle Horizontal Grid Lines -->
-                <line x1="0" y1="18" x2="360" y2="18" stroke="rgba(255,255,255,0.05)" stroke-dasharray="3 3" />
-                <line x1="0" y1="42" x2="360" y2="42" stroke="rgba(255,255,255,0.05)" stroke-dasharray="3 3" />
-                <line x1="0" y1="66" x2="360" y2="66" stroke="rgba(255,255,255,0.05)" />
-                <!-- Area & Line Updated Live via JS -->
-                <path id="sparkline-area" fill="url(#sparkGrad)" d="" />
-                <path id="sparkline-line" fill="none" stroke="#34d399" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="" />
-                <circle id="sparkline-dot" cx="356" cy="36" r="3.5" fill="#22d3ee" />
-              </svg>
-            </div>
-
-            <!-- Active Stack Health Badges -->
-            <div class="grid grid-cols-3 gap-2 text-[11px]">
-              <div class="flex items-center justify-between rounded-lg border border-white/[0.06] bg-white/[0.02] px-2.5 py-1.5">
-                <span class="text-zinc-400">CatatKu</span>
-                <span class="text-emerald-400 font-semibold">● UP</span>
-              </div>
-              <div class="flex items-center justify-between rounded-lg border border-white/[0.06] bg-white/[0.02] px-2.5 py-1.5">
-                <span class="text-zinc-400">Supabase</span>
-                <span class="text-emerald-400 font-semibold">● 18ms</span>
-              </div>
-              <div class="flex items-center justify-between rounded-lg border border-white/[0.06] bg-white/[0.02] px-2.5 py-1.5">
-                <span class="text-zinc-400">Vercel</span>
-                <span class="text-cyan-400 font-semibold">● EDGE</span>
-              </div>
-            </div>
-          </div>
+          <div id="identity-lanyard" class="identity-lanyard">
+                      <div class="lanyard-anchor" aria-hidden="true"></div>
+                      <div class="lanyard-ring" aria-hidden="true"></div>
+                      <svg class="lanyard-straps" aria-hidden="true" viewBox="-260 0 520 540" preserveAspectRatio="none">
+                        <defs><pattern id="lanyard-weave" width="6" height="6" patternUnits="userSpaceOnUse"><rect width="6" height="6" fill="#16181d"/><path d="M0 3H6M3 0V6" stroke="rgba(255,255,255,.08)"/></pattern></defs>
+                        <polygon id="lanyard-strap-left" points="-118,16 -96,16 -4,66 -16,66" fill="url(#lanyard-weave)" stroke="#ff5a26"/>
+                        <polygon id="lanyard-strap-right" points="118,16 96,16 4,66 16,66" fill="url(#lanyard-weave)" stroke="#ff5a26"/>
+                      </svg>
+                      <div id="lanyard-card-rig" class="lanyard-card-rig">
+                        <div class="lanyard-clasp" aria-hidden="true"><span></span></div>
+                        <div id="identity-card" class="identity-card" tabindex="0" role="button" aria-label="Kartu identitas, tarik untuk memindahkan dan memutar">
+                          <div id="id-card-spin-body" class="id-card-spin-body">
+                            <article class="id-card-face id-card-front">
+                              <div class="id-card-slot" aria-hidden="true"></div>
+                              <img src="WhatsApp Image 2026-11-21 at 09.56.03.jpeg" alt="Foto Yusuf Dede Yonaldy" />
+                              <h3>YUSUF DEDE YONALDY</h3>
+                              <p>SISTEM INFORMASI</p>
+                            </article>
+                            <article class="id-card-face id-card-back">
+                              <div class="id-card-slot" aria-hidden="true"></div>
+                              <div class="id-card-back-mark">YDY</div>
+                              <h3>YUSUF DEDE YONALDY</h3>
+                              <p>SISTEM INFORMASI</p>
+                            </article>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
 
         </div>
       </div>
@@ -787,12 +667,20 @@
       <div class="marquee-wrapper relative space-y-3 py-2 overflow-hidden">
         <!-- Row 1: Leftward Stream -->
         <div id="marquee-row-1" class="marquee-track-left gap-3">
-          <!-- Populated & duplicated seamlessly via JS -->
+          <div class="marquee-badge flex items-center gap-2.5 rounded-xl border border-white/[0.08] bg-white/[0.03] px-4 py-2.5 font-mono text-xs sm:text-sm"><span class="h-2 w-2 rounded-full bg-zinc-200"></span><span class="text-zinc-100 font-medium">Next.js</span></div>
+          <div class="marquee-badge flex items-center gap-2.5 rounded-xl border border-white/[0.08] bg-white/[0.03] px-4 py-2.5 font-mono text-xs sm:text-sm"><span class="h-2 w-2 rounded-full bg-cyan-400"></span><span class="text-cyan-300 font-medium">TypeScript</span></div>
+          <div class="marquee-badge flex items-center gap-2.5 rounded-xl border border-white/[0.08] bg-white/[0.03] px-4 py-2.5 font-mono text-xs sm:text-sm"><span class="h-2 w-2 rounded-full bg-emerald-400"></span><span class="text-emerald-300 font-medium">Supabase</span></div>
+          <div class="marquee-badge flex items-center gap-2.5 rounded-xl border border-white/[0.08] bg-white/[0.03] px-4 py-2.5 font-mono text-xs sm:text-sm"><span class="h-2 w-2 rounded-full bg-white"></span><span class="text-zinc-100 font-medium">Vercel</span></div>
+          <div class="marquee-badge flex items-center gap-2.5 rounded-xl border border-white/[0.08] bg-white/[0.03] px-4 py-2.5 font-mono text-xs sm:text-sm"><span class="h-2 w-2 rounded-full bg-cyan-400"></span><span class="text-cyan-300 font-medium">CatatKu</span></div>
         </div>
 
         <!-- Row 2: Rightward Stream -->
         <div id="marquee-row-2" class="marquee-track-right gap-3">
-          <!-- Populated & duplicated seamlessly via JS -->
+          <div class="marquee-badge flex items-center gap-2.5 rounded-xl border border-white/[0.08] bg-white/[0.03] px-4 py-2.5 font-mono text-xs sm:text-sm"><span class="h-2 w-2 rounded-full bg-emerald-400"></span><span class="text-emerald-300 font-medium">Hermes CLI</span></div>
+          <div class="marquee-badge flex items-center gap-2.5 rounded-xl border border-white/[0.08] bg-white/[0.03] px-4 py-2.5 font-mono text-xs sm:text-sm"><span class="h-2 w-2 rounded-full bg-cyan-400"></span><span class="text-cyan-300 font-medium">Tailwind CSS</span></div>
+          <div class="marquee-badge flex items-center gap-2.5 rounded-xl border border-white/[0.08] bg-white/[0.03] px-4 py-2.5 font-mono text-xs sm:text-sm"><span class="h-2 w-2 rounded-full bg-indigo-400"></span><span class="text-indigo-300 font-medium">PostgreSQL</span></div>
+          <div class="marquee-badge flex items-center gap-2.5 rounded-xl border border-white/[0.08] bg-white/[0.03] px-4 py-2.5 font-mono text-xs sm:text-sm"><span class="h-2 w-2 rounded-full bg-amber-400"></span><span class="text-amber-300 font-medium">System Dynamics</span></div>
+          <div class="marquee-badge flex items-center gap-2.5 rounded-xl border border-white/[0.08] bg-white/[0.03] px-4 py-2.5 font-mono text-xs sm:text-sm"><span class="h-2 w-2 rounded-full bg-zinc-300"></span><span class="text-zinc-200 font-medium">GitHub</span></div>
         </div>
       </div>
 
@@ -807,6 +695,16 @@
         <span class="hidden sm:inline text-[11px] text-zinc-500 shrink-0">10 core modules</span>
       </div>
     </section>
+    <script>
+      window.addEventListener('DOMContentLoaded', () => {
+        for (const id of ['marquee-row-1', 'marquee-row-2']) {
+          const row = document.getElementById(id);
+          if (row && row.children.length === 5) {
+            row.append(...[...row.children].map((item) => item.cloneNode(true)));
+          }
+        }
+      });
+    </script>
 
     <!-- ===================================================================
          4. 4 FEATURED SYSTEMS WITH SLIDING PILL FILTER, 3D TILT & LIVE PREVIEWS
@@ -1246,6 +1144,15 @@
               </svg>
               <span>dedey627@gmail.com</span>
             </button>
+
+            <a
+              href="https://wa.me/6285733156228"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="magnetic-btn inline-flex items-center gap-2 rounded-xl border border-green-400/35 bg-green-500/10 px-4 py-2.5 font-mono text-xs sm:text-sm text-green-300 hover:bg-green-500/20 transition-colors"
+            >
+              <span>WhatsApp</span>
+            </a>
 
             <a
               href="https://github.com/YUSUF-3022410015"
@@ -2256,16 +2163,17 @@
 
         function buildRowItems(items) {
           // Duplicate array 3x so seamless infinite scroll covers ultra-wide screens
+          const safe = (value) => String(value).replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
           const repeated = [...items, ...items, ...items];
           return repeated
             .map(
               (item) => `
               <div
-                data-stack-desc="${escapeHtml(item.name + ' — ' + item.desc)}"
+                data-stack-desc="${safe(item.name + ' — ' + item.desc)}"
                 class="marquee-badge group flex items-center gap-2.5 rounded-xl border border-white/[0.08] bg-white/[0.03] px-4 py-2.5 font-mono text-xs sm:text-sm hover:border-emerald-400/45 hover:bg-white/[0.07] transition-all cursor-default select-none"
               >
                 <span class="h-2 w-2 rounded-full ${item.dot} group-hover:scale-125 transition-transform"></span>
-                <span class="${item.color} font-medium">${escapeHtml(item.name)}</span>
+                <span class="${item.color} font-medium">${safe(item.name)}</span>
               </div>
             `
             )
@@ -3064,7 +2972,7 @@
         }
         if (heroBadgeEl) {
           const badgeScrambler = new TextScramble(heroBadgeEl);
-          setTimeout(() => badgeScrambler.setText('INFORMATION_SYSTEMS // SEM_05'), 100);
+          setTimeout(() => badgeScrambler.setText('INFORMATION_SYSTEMS // SEM_05 // VIBE_CODER // HERMES + 9ROUTER'), 100);
         }
 
         // Hover Scramble on Brand Title
@@ -3179,5 +3087,85 @@
       });
     })();
   </script>
+<script id="monograph-collaboration-js">
+(() => {
+  const body = document.body;
+  const language = document.getElementById('language-select');
+  const theme = document.getElementById('theme-toggle');
+
+  theme?.addEventListener('click', () => body.classList.toggle('monograph-carbon'));
+
+  const card = document.getElementById('identity-card');
+  const stage = document.getElementById('identity-lanyard');
+  const rig = document.getElementById('lanyard-card-rig');
+  const spinBody = document.getElementById('id-card-spin-body');
+  const reset = document.getElementById('identity-reset');
+  const leftStrap = document.getElementById('lanyard-strap-left');
+  const rightStrap = document.getElementById('lanyard-strap-right');
+  let x = 0, y = 0, tilt = 0, spin = 0, spinVelocity = 0, drag = false, px = 0, py = 0;
+  const renderCard = () => {
+    if (!rig) return;
+    const pendulumTilt = Math.max(-28, Math.min(28, x * .14));
+    rig.style.transform = `translateX(-50%) translate3d(${x}px, ${y}px, 0) rotate(${pendulumTilt.toFixed(2)}deg)`;
+    if (spinBody) spinBody.style.transform = `rotateX(${tilt.toFixed(2)}deg) rotateY(${spin.toFixed(2)}deg)`;
+    const ringY = 66 + y;
+    leftStrap?.setAttribute('points', `-118,16 -96,16 ${(x - 4).toFixed(1)},${ringY.toFixed(1)} ${(x - 16).toFixed(1)},${ringY.toFixed(1)}`);
+    rightStrap?.setAttribute('points', `118,16 96,16 ${(x + 4).toFixed(1)},${ringY.toFixed(1)} ${(x + 16).toFixed(1)},${ringY.toFixed(1)}`);
+  };
+  const tick = () => {
+    if (!drag) {
+      x *= .965; y *= .965; spin += spinVelocity; spinVelocity *= .965;
+      if (Math.abs(x) < .05) x = 0; if (Math.abs(y) < .05) y = 0;
+      if (Math.abs(spinVelocity) < .25) spin += (Math.round(spin / 180) * 180 - spin) * .045;
+      tilt *= .9;
+    }
+    renderCard(); requestAnimationFrame(tick);
+  };
+  const begin = event => { if (event.target.closest('button,a')) return; drag = true; stage?.classList.add('is-dragging'); card?.setPointerCapture?.(event.pointerId); px = event.clientX; py = event.clientY; };
+  const move = event => {
+    if (!drag) return;
+    const dx = event.clientX - px, dy = event.clientY - py; px = event.clientX; py = event.clientY;
+    x = Math.max(-170, Math.min(170, x + dx * .92)); y = Math.max(-45, Math.min(150, y + dy * .92));
+    spinVelocity = dx * 1.15; tilt = Math.max(-14, Math.min(14, -y * .08)); event.preventDefault(); renderCard();
+  };
+  const end = event => { drag = false; stage?.classList.remove('is-dragging'); card?.releasePointerCapture?.(event.pointerId); };
+  card?.addEventListener('pointerdown', begin); card?.addEventListener('pointermove', move); card?.addEventListener('pointerup', end); card?.addEventListener('pointercancel', end);
+  reset?.addEventListener('click', () => { x = 0; y = 0; tilt = 0; spin = 0; spinVelocity = 0; renderCard(); });
+  renderCard(); requestAnimationFrame(tick);
+
+  const entries = [
+    ['.mono-label', 'LAPISAN_MONOGRAF', 'MONOGRAPH_LAYER'],
+    ['#hero-heading > span:nth-child(2)', 'Membangun sistem full-stack yang tangguh dan infrastruktur AI multi-LLM.', 'Architecting resilient full-stack systems & multi-LLM AI infrastructure.'],
+    ['.hero-enter.hero-delay-3.text-sm', 'Mahasiswa semester 5 Sistem Informasi dan vibe coder yang membangun dengan bantuan AI agent HERMES serta gateway 9router. Menggabungkan pemikiran System Dynamics dengan engineering full-stack untuk membuat API gateway, aplikasi multimodal, dan platform operasional real-time.', 'A fifth-semester Information Systems student and vibe coder building with the HERMES AI agent and 9router gateway. Combining System Dynamics thinking with full-stack engineering to create API gateways, multimodal applications, and real-time operational platforms.'],
+
+    // Removed: identity panel was deleted to avoid duplicated description.
+    ['.removed-mono-panel p', 'Saya mahasiswa Sistem Informasi semester 5 dan vibe coder. Saya membangun dengan bantuan AI agent HERMES dan gateway 9router, lalu tetap memeriksa dan menguji hasilnya.', 'I am a fifth-semester Information Systems student and vibe coder. I build with the HERMES AI agent and 9router gateway, then review and test the result.'],
+    ['a[href="#projects"] span:first-child', 'Jelajahi Sistem', 'Explore Systems'],
+    ['#copy-email-hero-btn span', 'Salin Email', 'Copy Email'],
+    ['#projects-heading', 'Sistem Unggulan', 'Featured Systems'],
+    ['#stack-heading', 'Stack dan Infrastruktur', 'Stack & Infrastructure'],
+    ['#principles-heading', 'Cara Sistem Dibangun', 'How Systems Are Built'],
+    ['#connect-heading', 'Mari Terhubung', 'Let’s Connect']
+  ];
+
+  entries.forEach(([selector, id, en]) => {
+    const element = document.querySelector(selector);
+    if (element) element.dataset.idText = id, element.dataset.enText = en;
+  });
+
+  const applyLanguage = value => {
+    document.documentElement.lang = value;
+    entries.forEach(([selector]) => {
+      document.querySelectorAll(selector).forEach(element => {
+        const text = value === 'en' ? element.dataset.enText : element.dataset.idText;
+        if (text) element.textContent = text;
+      });
+    });
+  };
+
+  language?.addEventListener('change', event => applyLanguage(event.target.value));
+  applyLanguage(language?.value || 'id');
+})();
+</script>
 </body>
 </html>
